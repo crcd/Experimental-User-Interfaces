@@ -15,6 +15,7 @@ public class RUISSelectable : MonoBehaviour {
 
     private bool rigidbodyWasKinematic;
     private RUISWandSelector selector;
+    private RUISWandSelector rotator;
     public bool isSelected { get { return selector != null; } }
 
     private Vector3 positionAtSelection;
@@ -93,6 +94,8 @@ public class RUISSelectable : MonoBehaviour {
     public virtual void OnSelection(RUISWandSelector selector)
     {
         this.selector = selector;
+        this.rotator = GameObject.Find("PSMoveWand-Rotate").GetComponent<RUISWandSelector>();
+        Debug.Log(this.rotator);
 
         positionAtSelection = transform.position;
         rotationAtSelection = transform.rotation;
@@ -180,22 +183,26 @@ public class RUISSelectable : MonoBehaviour {
                 break;
         }
 
-        switch (selector.rotationSelectionGrabType)
-        {
-            case RUISWandSelector.SelectionGrabType.SnapToWand:
-                newRotation = selector.transform.rotation;
-                break;
-            case RUISWandSelector.SelectionGrabType.RelativeToWand:
-                newRotation = rotationAtSelection;
-				// Tuukka: 
-				Quaternion selectorRotationChange = Quaternion.Inverse(selectorRotationAtSelection) * rotationAtSelection;
-				newRotation = selector.transform.rotation * selectorRotationChange;
-                break;
-            case RUISWandSelector.SelectionGrabType.AlongSelectionRay:
-                newRotation = Quaternion.LookRotation(selector.selectionRay.direction);
-                break;
-            case RUISWandSelector.SelectionGrabType.DoNotGrab:
-                break;
+        if (rotator) {
+
+            Debug.Log("roate");
+            switch (rotator.rotationSelectionGrabType)
+            {
+                case RUISWandSelector.SelectionGrabType.SnapToWand:
+                    newRotation = rotator.transform.rotation;
+                    break;
+                case RUISWandSelector.SelectionGrabType.RelativeToWand:
+                    newRotation = rotationAtSelection;
+                    // Tuukka: 
+                    Quaternion selectorRotationChange = Quaternion.Inverse(selectorRotationAtSelection) * rotationAtSelection;
+                    newRotation = rotator.transform.rotation * selectorRotationChange;
+                    break;
+                case RUISWandSelector.SelectionGrabType.AlongSelectionRay:
+                    newRotation = Quaternion.LookRotation(rotator.selectionRay.direction);
+                    break;
+                case RUISWandSelector.SelectionGrabType.DoNotGrab:
+                    break;
+            }
         }
 
         if (rigidbody && safePhysics)
