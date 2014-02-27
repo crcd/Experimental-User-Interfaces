@@ -152,6 +152,9 @@ GameObject:
   - 23: {fileID: 155299626}
   - 114: {fileID: 155299625}
   - 54: {fileID: 155299624}
+  - 114: {fileID: 155299630}
+  - 82: {fileID: 155299631}
+  - 114: {fileID: 155299632}
   m_Layer: 0
   m_Name: Crate
   m_TagString: Untagged
@@ -243,10 +246,93 @@ Transform:
   m_PrefabInternal: {fileID: 1204315611}
   m_GameObject: {fileID: 155299623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &155299630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 155299623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8865384efc094189a5c39bf9699c202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &155299631
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 155299623}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: b9f2d7af7682c462e934e07019cacf5e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!114 &155299632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 155299623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875f04294f8632e48857f03e86bc7063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerGameObject: {fileID: 1296318283}
+  repeatMode: 0
+  cutOffUponExit: 0
 --- !u!1001 &156566224
 Prefab:
   m_ObjectHideFlags: 0
@@ -945,7 +1031,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d320bda493ce95f42ac5600294e5560a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d320bda493ce95f42ac5600294e5560a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -997,8 +1083,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1296318283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: .300000012, z: 15}
+  m_LocalPosition: {x: 0, y: -0, z: .0726394653}
+  m_LocalScale: {x: 20, y: .300000012, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!23 &1296318285
@@ -1013,7 +1099,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c5e64798739134639a05d2196ed2e970, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1055,6 +1141,8 @@ GameObject:
   - 114: {fileID: 1304402248}
   - 114: {fileID: 1304402251}
   - 114: {fileID: 1304402250}
+  - 81: {fileID: 1304402252}
+  - 114: {fileID: 1304402253}
   m_Layer: 0
   m_Name: RUISCamera
   m_TagString: MainCamera
@@ -1198,6 +1286,27 @@ MonoBehaviour:
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+--- !u!81 &1304402252
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1304402244}
+  m_Enabled: 1
+--- !u!114 &1304402253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1304402244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875f04294f8632e48857f03e86bc7063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerGameObject: {fileID: 0}
+  repeatMode: 0
+  cutOffUponExit: 0
 --- !u!1 &1330507229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1481,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400020, guid: 6fad6e06135894d4da88e7273313f430, type: 2}
       propertyPath: NeckPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400020, guid: 6fad6e06135894d4da88e7273313f430, type: 2}
+      propertyPath: CallInPreRender
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
