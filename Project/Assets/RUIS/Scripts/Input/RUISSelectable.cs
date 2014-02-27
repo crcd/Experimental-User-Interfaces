@@ -16,6 +16,10 @@ public class RUISSelectable : MonoBehaviour {
     private bool rigidbodyWasKinematic;
     private RUISWandSelector selector;
     private RUISWandSelector rotator;
+
+    private RUISPSMoveWand selectorWand;
+    private RUISPSMoveWand rotatorWand;
+
     public bool isSelected { get { return selector != null; } }
 
     private Vector3 positionAtSelection;
@@ -93,6 +97,8 @@ public class RUISSelectable : MonoBehaviour {
 
     public virtual void OnSelection(RUISWandSelector selector)
     {
+        this.selectorWand = GameObject.Find("PSMoveWand-Translate").GetComponent<RUISPSMoveWand>();
+        this.rotatorWand = GameObject.Find("PSMoveWand-Rotate").GetComponent<RUISPSMoveWand>();
         this.selector = selector;
         this.rotator = GameObject.Find("PSMoveWand-Rotate").GetComponent<RUISWandSelector>();
         Debug.Log(this.rotator);
@@ -185,7 +191,6 @@ public class RUISSelectable : MonoBehaviour {
 
         if (rotator) {
 
-            Debug.Log("roate");
             switch (rotator.rotationSelectionGrabType)
             {
                 case RUISWandSelector.SelectionGrabType.SnapToWand:
@@ -203,6 +208,13 @@ public class RUISSelectable : MonoBehaviour {
                 case RUISWandSelector.SelectionGrabType.DoNotGrab:
                     break;
             }
+
+            if (rotatorWand.squareButtonDown) {
+                transform.localScale = transform.localScale * 1.05f;
+            }
+            if (rotatorWand.triangleButtonDown) {
+                transform.localScale = transform.localScale * 0.95f;
+            }
         }
 
         if (rigidbody && safePhysics)
@@ -215,6 +227,15 @@ public class RUISSelectable : MonoBehaviour {
             transform.position = newPosition;
             transform.rotation = newRotation;
         }
+        if (selectorWand.squareButtonDown) {
+            distanceFromSelectionRayOrigin += 0.25f;
+            //transform.position = transform.position + selector.transform.forward;
+        }
+        else if (selectorWand.triangleButtonDown) {
+            distanceFromSelectionRayOrigin -= 0.25f;
+            //transform.position = transform.position - selector.transform.forward;
+        }
+
     }
 
 
