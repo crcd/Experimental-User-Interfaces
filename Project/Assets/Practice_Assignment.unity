@@ -1188,7 +1188,6 @@ GameObject:
   - 114: {fileID: 1304402251}
   - 114: {fileID: 1304402250}
   - 81: {fileID: 1304402252}
-  - 114: {fileID: 1304402253}
   m_Layer: 0
   m_Name: RUISCamera
   m_TagString: MainCamera
@@ -1339,20 +1338,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1304402244}
   m_Enabled: 1
---- !u!114 &1304402253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1304402244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 875f04294f8632e48857f03e86bc7063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerGameObject: {fileID: 0}
-  repeatMode: 0
-  cutOffUponExit: 0
 --- !u!1 &1330507229
 GameObject:
   m_ObjectHideFlags: 0
