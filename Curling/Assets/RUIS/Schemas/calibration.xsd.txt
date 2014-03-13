@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ruisystem.net/m2k"
+	xmlns:tns="http://ruisystem.net/m2k"
+	elementFormDefault="unqualified" attributeFormDefault="unqualified">
+  <element name="m2k" type="tns:M2KType"></element>
+	
+  <complexType name="M2KType">
+   	<sequence>
+     <element name="translate" type="tns:TranslateType"/>
+     <element name="rotate" type="tns:RotateType"/>
+     <!--<element name="sensorAngles" type="tns:SensorAnglesType"/>-->
+	 <element name="kinectFloorNormal" type="tns:KinectFloorNormalType"/>
+	 <element name="kinectDistanceFromFloor" type="tns:KinectDistanceFromFloorType"/>
+   	</sequence>
+  </complexType>
+
+	<complexType name="TranslateType">
+		<attribute name="x" type="float" use="required" />
+		<attribute name="y" type="float" use="required" />
+		<attribute name="z" type="float" use="required" />
+	</complexType>
+	
+  <complexType name="RotateType">
+    <attribute name="r00" type="float" use="required"/>
+    <attribute name="r01" type="float" use="required"/>
+    <attribute name="r02" type="float" use="required"/>
+    <attribute name="r10" type="float" use="required"/>
+    <attribute name="r11" type="float" use="required"/>
+    <attribute name="r12" type="float" use="required"/>
+    <attribute name="r20" type="float" use="required"/>
+    <attribute name="r21" type="float" use="required"/>
+    <attribute name="r22" type="float" use="required"/>
+  </complexType>
+  
+  <!--<complexType name="SensorAnglesType">
+		<attribute name="MovePitchAngle" type="float" use="required" />
+		<attribute name="KinectPitchAngle" type="float" use="required" />
+		<attribute name="KinectRollAngle" type="float" use="required" />
+  </complexType>-->
+  
+  <complexType name="KinectFloorNormalType">
+		<attribute name="x" type="float" use="required" />
+		<attribute name="y" type="float" use="required" />
+		<attribute name="z" type="float" use="required" />
+  </complexType>
+  
+  <complexType name="KinectDistanceFromFloorType">
+		<attribute name="value" type="float" use="required" />
+  </complexType>
+
+</schema>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ruisystem.net/ruisInputManager"
+	  xmlns:tns="http://ruisystem.net/ruisInputManager"
+	  elementFormDefault="unqualified" attributeFormDefault="unqualified">
+    <element name="ruisInputManager" type="tns:ruisInputManagerType" />
+	
+	<complexType name="ruisInputManagerType">
+		<sequence>
+			<element name="PSMoveSettings" type="tns:PSMoveSettingsType"/>
+			<element name="KinectSettings" type="tns:KinectSettingsType"/>
+			<element name="RazerSettings" type="tns:RazerSettingsType"/>
+			<element name="OculusDriftSettings" type="tns:OculusDriftSettingsType"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="PSMoveSettingsType">
+		<sequence>
+			<element name="enabled" type="boolean"/>
+			<element name="ip" type="string"/>
+			<element name="port" type="int"/>
+			<element name="autoConnect" type="boolean"/>
+			<element name="enableInGameCalibration" type="boolean"/>
+			<element name="maxControllers" type="int"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="KinectSettingsType">
+		<sequence>
+			<element name="enabled" type="boolean"/>
+			<element name="maxPlayers" type="int"/>
+			<element name="floorDetection" type="boolean"/>
+			<element name="jumpGestureEnabled" type="boolean"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="RazerSettingsType">
+		<sequence>
+			<element name="enabled" type="boolean"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="OculusDriftSettingsType">
+		<sequence>
+			<element name="magnetometerDriftCorrection" type="string"/>
+			<element name="kinectDriftCorrectionIfAvailable" type="boolean"/>
+		</sequence>
+	</complexType>
+</schema>

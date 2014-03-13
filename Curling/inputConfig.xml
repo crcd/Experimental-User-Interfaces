@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns2:ruisInputManager xmlns:ns2="http://ruisystem.net/ruisInputManager">
+  <PSMoveSettings>
+    <enabled value="False" />
+    <ip value="127.0.0.1" />
+    <port value="7899" />
+    <autoConnect value="True" />
+    <enableInGameCalibration value="False" />
+    <maxControllers value="4" />
+  </PSMoveSettings>
+  <KinectSettings>
+    <enabled value="False" />
+    <maxPlayers value="1" />
+    <floorDetection value="True" />
+    <jumpGestureEnabled value="True" />
+  </KinectSettings>
+  <RazerSettings>
+    <enabled value="False" />
+  </RazerSettings>
+  <OculusDriftSettings>
+    <magnetometerDriftCorrection value="Off" />
+    <kinectDriftCorrectionIfAvailable value="False" />
+  </OculusDriftSettings>
+</ns2:ruisInputManager>
