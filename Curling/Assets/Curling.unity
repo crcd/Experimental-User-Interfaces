@@ -670,11 +670,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .15000236
+      value: .150000155
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 6.53369808
+      value: .364745617
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -864,6 +864,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a1a59ab8b3bbc6146a7d0c51f48e8103, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: a1a59ab8b3bbc6146a7d0c51f48e8103, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -1748,7 +1752,7 @@ Transform:
   m_PrefabInternal: {fileID: 534150839}
   m_GameObject: {fileID: 1235524090}
   m_LocalRotation: {x: -.707106888, y: 0, z: -0, w: .707106769}
-  m_LocalPosition: {x: 0, y: .15000236, z: 6.53369808}
+  m_LocalPosition: {x: 0, y: .150000155, z: .364745617}
   m_LocalScale: {x: 30.5, y: 30.5, z: 30.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2202,7 +2206,11 @@ Prefab:
         type: 2}
     - target: {fileID: 11400002, guid: a015d48613e415a4290649db741c9e3e, type: 2}
       propertyPath: angularVelocity
-      value: 20
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: a015d48613e415a4290649db741c9e3e, type: 2}
+      propertyPath: velocity
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
@@ -2427,7 +2435,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 7e2baee5779349340b6a78274c032bf7, type: 2}
       propertyPath: enablePSMove
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 7e2baee5779349340b6a78274c032bf7, type: 2}
       propertyPath: enableRazerHydra
@@ -2616,7 +2624,7 @@ MonoBehaviour:
   xmlSchema: {fileID: 4900000, guid: a07a36ac9f438794596e1ee51310972d, type: 3}
   filename: inputConfig.xml
   loadFromTextFileInEditor: 0
-  enablePSMove: 1
+  enablePSMove: 0
   PSMoveIP: 130.233.46.213
   PSMovePort: 7899
   connectToPSMoveOnStartup: 1
@@ -2805,8 +2813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84a0a511492e4690939ac2ea425e080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 7
-  angularVelocity: 20
+  velocity: 5
+  angularVelocity: 2
 --- !u!114 &1640074314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2845,7 +2853,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1671575237}
   m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
-  m_LocalPosition: {x: 0, y: 0, z: -.00491803326}
+  m_LocalPosition: {x: 0, y: -2.55991761e-08, z: -.00842183176}
   m_LocalScale: {x: .229508191, y: .00983606279, z: 1.57377005}
   m_Children: []
   m_Father: {fileID: 1130966881}
