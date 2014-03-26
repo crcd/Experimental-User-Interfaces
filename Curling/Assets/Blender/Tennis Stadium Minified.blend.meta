@@ -1,0 +1,104 @@
+fileFormatVersion: 2
+guid: cb08c2bd426a3ff4f8f7eabae12a452e
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Isle_Steps
+    100002: Levels
+    100004: Low_poly_seats
+    100006: Rails
+    100008: Rails_MeshPart0
+    100010: Rails_MeshPart1
+    100012: Stands
+    100014: Steps
+    100016: //RootNode
+    100018: Windows
+    400000: Isle_Steps
+    400002: Levels
+    400004: Low_poly_seats
+    400006: Rails
+    400008: Rails_MeshPart0
+    400010: Rails_MeshPart1
+    400012: Stands
+    400014: Steps
+    400016: //RootNode
+    400018: Windows
+    2300000: Isle_Steps
+    2300002: Levels
+    2300004: Low_poly_seats
+    2300006: Rails_MeshPart0
+    2300008: Rails_MeshPart1
+    2300010: Stands
+    2300012: Steps
+    2300014: Windows
+    3300000: Isle_Steps
+    3300002: Levels
+    3300004: Low_poly_seats
+    3300006: Rails_MeshPart0
+    3300008: Rails_MeshPart1
+    3300010: Stands
+    3300012: Steps
+    3300014: Windows
+    4300000: Low_poly_seats
+    4300002: Isle_Steps
+    4300004: Levels
+    4300006: Stands
+    4300008: Rails_MeshPart0
+    4300010: Rails_MeshPart1
+    4300012: Windows
+    4300014: Steps
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
