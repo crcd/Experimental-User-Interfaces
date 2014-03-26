@@ -6,8 +6,8 @@ PhysicMaterial:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Curling Sheet
-  dynamicFriction: .0500000007
-  staticFriction: .400000006
+  dynamicFriction: .0299999993
+  staticFriction: .200000003
   bounciness: .5
   frictionCombine: 0
   bounceCombine: 0
