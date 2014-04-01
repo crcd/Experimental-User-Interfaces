@@ -99,7 +99,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 19.8999996
   m_Drag: 0
-  m_AngularDrag: .300000012
+  m_AngularDrag: .100000001
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f3b06b37d124c8e9a602742d16c130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curve_amount: .5
+  curve_amount: .300000012
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84a0a511492e4690939ac2ea425e080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 2.79999995
+  velocity: 3
   angularVelocity: 1
 --- !u!135 &13500000
 SphereCollider:

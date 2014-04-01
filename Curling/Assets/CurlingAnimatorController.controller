@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BasicAnimatorController
+  m_Name: CurlingAnimatorController
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: Grounded
@@ -64,17 +64,31 @@ BlendTree:
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: 6ae37fffc89899641b3e04bc733f8edc, type: 3}
-    m_Threshold: .166666672
-    m_Position: {x: 0, y: .800000012}
+  - m_Motion: {fileID: 7400000, guid: a39192f8c50962c42949eda0489c84dc, type: 3}
+    m_Threshold: .0833333358
+    m_Position: {x: -.0299999993, y: 1.36000001}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: 6ae37fffc89899641b3e04bc733f8edc, type: 3}
-    m_Threshold: .333333343
-    m_Position: {x: 0, y: -1}
+  - m_Motion: {fileID: 7400000, guid: a39192f8c50962c42949eda0489c84dc, type: 3}
+    m_Threshold: .166666672
+    m_Position: {x: .0700000003, y: -1.54999995}
     m_TimeScale: -1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: a0e43a0a93b1faf4eada4141c2833042, type: 3}
+    m_Threshold: .25
+    m_Position: {x: -1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: 479260df9f5a2a44bab15249aad6006e, type: 3}
+    m_Threshold: .333333343
+    m_Position: {x: 1.00999999, y: -.0599999987}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
@@ -84,6 +98,19 @@ BlendTree:
   m_MaxThreshold: .333333343
   m_UseAutomaticThresholds: 1
   m_BlendType: 2
+--- !u!206 &20628949
+BlendTree:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Blend Tree
+  m_Childs: []
+  m_BlendParameter: Blend
+  m_BlendParameterY: Blend
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_BlendType: 0
 --- !u!1101 &110100000
 Transition:
   m_ObjectHideFlags: 3
@@ -228,6 +255,21 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
+--- !u!1102 &110200000
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Moving
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 0}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 60, y: 72, z: 0}
+  m_IKOnFeet: 1
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110210825
 State:
   m_ObjectHideFlags: 3
@@ -269,7 +311,7 @@ State:
   m_Motions:
   - {fileID: 20600000}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 48, y: 96, z: 0}
+  m_Position: {x: 60, y: 84, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
@@ -303,6 +345,21 @@ State:
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110290198
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Moving
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 0}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 60, y: 84, z: 0}
+  m_IKOnFeet: 1
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110296327
 State:
   m_ObjectHideFlags: 3
@@ -331,6 +388,9 @@ StateMachine:
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
+    data:
+      first: {fileID: 0}
+      second: []
     data:
       first: {fileID: 0}
       second: []

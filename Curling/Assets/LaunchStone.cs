@@ -4,7 +4,7 @@ using System.Collections;
 public class LaunchStone : MonoBehaviour {
 
 	private RUISPSMoveWand moveWand;
-	private FollowStoneCamera camera;
+	private FollowCamera camera;
 
 	private Rigidbody stoneBody;
 	public float velocity;
@@ -15,7 +15,7 @@ public class LaunchStone : MonoBehaviour {
 
 		moveWand = gameObject.GetComponent<RUISPSMoveWand> ();
 
-		camera = GameObject.Find("RUISCamera").GetComponent<FollowStoneCamera>();
+		camera = GameObject.Find("RUISCamera").GetComponent<FollowCamera>();
 
 		stoneBody = GameObject.Find("StoneRed").rigidbody;
 
