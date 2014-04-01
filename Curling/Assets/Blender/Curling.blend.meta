@@ -16,6 +16,8 @@ ModelImporter:
     100020: Stone_Red
     100022: Stone_Yellow
     100024: Swoosh
+    100026: Stone_Red_001
+    100028: Stone_Yellow_001
     400000: Bang
     400002: Broom
     400004: Carpet
@@ -29,6 +31,8 @@ ModelImporter:
     400020: Stone_Red
     400022: Stone_Yellow
     400024: Swoosh
+    400026: Stone_Red_001
+    400028: Stone_Yellow_001
     2300000: Bang
     2300002: Broom
     2300004: Carpet
@@ -40,6 +44,8 @@ ModelImporter:
     2300016: Stone_Red
     2300018: Stone_Yellow
     2300020: Swoosh
+    2300022: Stone_Red_001
+    2300024: Stone_Yellow_001
     3300000: Bang
     3300002: Broom
     3300004: Carpet
@@ -51,6 +57,8 @@ ModelImporter:
     3300016: Stone_Red
     3300018: Stone_Yellow
     3300020: Swoosh
+    3300022: Stone_Red_001
+    3300024: Stone_Yellow_001
     4300000: GameSheet
     4300002: GameBounds
     4300004: Broom
@@ -62,6 +70,8 @@ ModelImporter:
     4300016: Sheets
     4300018: Stone_Red
     4300020: Stone_Yellow
+    4300022: Stone_Yellow_001
+    4300024: Stone_Red_001
     7400000: Default Take
     9500000: //RootNode
   materials:

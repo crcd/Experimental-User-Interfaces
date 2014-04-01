@@ -6,11 +6,11 @@ PhysicMaterial:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Curling Stone
-  dynamicFriction: .0299999993
-  staticFriction: .0500000007
+  dynamicFriction: .0109999999
+  staticFriction: .200000003
   bounciness: .5
   frictionCombine: 0
-  bounceCombine: 0
+  bounceCombine: 2
   frictionDirection2: {x: 0, y: 0, z: 0}
   dynamicFriction2: 0
   staticFriction2: 0
