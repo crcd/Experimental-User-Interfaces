@@ -37,7 +37,11 @@ public class ThrowerController : MonoBehaviour {
 
     public void setStoneRotation (float stoneRotation) {
         if (this.stoneBody) {
-            this.stoneBody.rotation = new Quaternion (0, stoneRotation, 0, 0);
+            //Quaternion rotation = this.stoneBody.rotation;
+            this.stoneBody.transform.eulerAngles = new Vector3 (0, stoneRotation, 0);
+            //   .RotateAround (this.stoneBody.position, new Vector3(0,1,0), stoneRotation);
+            //rotation.y = stoneRotation;
+            //this.stoneBody.rotation = rotation;
         }
     }
 
