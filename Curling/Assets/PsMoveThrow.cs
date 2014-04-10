@@ -43,8 +43,13 @@ public class PsMoveThrow : MonoBehaviour {
         );
     }
 
+    float getRotation() {
+        return this.moveWand.localRotation.y;
+    }
+
     void Update () {
         if (this.throwerController) {
+            this.throwerController.setStoneRotation (this.getRotation ());
             if (this.wasPressed ()) {
                 this.throwerController.startSliding (this.getSlidingVelocity ());
                 this.throwInProgress = true;
