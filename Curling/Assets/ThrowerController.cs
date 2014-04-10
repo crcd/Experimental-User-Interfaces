@@ -4,7 +4,10 @@ using System.Collections;
 public class ThrowerController : MonoBehaviour {
     private Rigidbody stoneBody;
     private Rigidbody throwerBody;
-    public Vector3 stoneOffset;
+    public Vector3 stoneOffsetConfig;
+    public Vector3 sawingStartPosition;
+    public bool isSawingPositionSet = false;
+    private Vector3 stoneOffset;
 
     void Start () {
         this.throwerBody = rigidbody;
@@ -12,6 +15,7 @@ public class ThrowerController : MonoBehaviour {
 
     public void setStone (Rigidbody stoneBody) {
         this.stoneBody = stoneBody;
+        this.stoneOffset = this.stoneOffsetConfig;
     }
 
     public void throwStone (Vector3 additionalVelocity, float yRotation) {
@@ -37,11 +41,18 @@ public class ThrowerController : MonoBehaviour {
 
     public void setStoneRotation (float stoneRotation) {
         if (this.stoneBody) {
-            //Quaternion rotation = this.stoneBody.rotation;
             this.stoneBody.transform.eulerAngles = new Vector3 (0, stoneRotation, 0);
-            //   .RotateAround (this.stoneBody.position, new Vector3(0,1,0), stoneRotation);
-            //rotation.y = stoneRotation;
-            //this.stoneBody.rotation = rotation;
+        }
+    }
+
+    public void sawStone (Vector3 controllerPosition) {
+        if (this.stoneBody != null && this.sawingStartPosition != null) {
+            Vector3 newPosition = new Vector3 (
+                                      this.sawingStartPosition.x - controllerPosition.x,
+                                      0,
+                                      this.sawingStartPosition.z - controllerPosition.z
+                                  );
+            this.stoneOffset = this.stoneOffsetConfig - newPosition;
         }
     }
 
@@ -51,7 +62,8 @@ public class ThrowerController : MonoBehaviour {
                                   this.stoneBody.position.y,
                                   this.throwerBody.position.z + stoneOffset.z
                               );
-        this.stoneBody.position = newPosition;
+        this.stoneBody.MovePosition (newPosition);
+        //this.stoneBody.position = newPosition;
     }
 
     void Update () {

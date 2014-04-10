@@ -10,7 +10,7 @@ public class StoneSpawner : MonoBehaviour {
 
     void Start () {
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> (); 
-        this.spawnNewStone ();
+        //this.spawnNewStone ();
     }
 
     void Update () {
