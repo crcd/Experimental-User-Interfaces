@@ -3601,6 +3601,7 @@ GameObject:
   - 114: {fileID: 775410492}
   - 136: {fileID: 775410490}
   - 114: {fileID: 775410491}
+  - 114: {fileID: 775410497}
   m_Layer: 12
   m_Name: StoneYellow
   m_TagString: Untagged
@@ -3722,6 +3723,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 804235823}
   m_GameObject: {fileID: 775410488}
   m_Mesh: {fileID: 4300000, guid: 4270d7436bdb7e648834fdd2a250c6d6, type: 3}
+--- !u!114 &775410497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: a015d48613e415a4290649db741c9e3e,
+    type: 2}
+  m_PrefabInternal: {fileID: 804235823}
+  m_GameObject: {fileID: 775410488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c129f01c059b04a96870d1aefe7aa092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipStoneHitStone: {fileID: 8300000, guid: 0b442d479ce0d4340ac8665f564bb2ef, type: 3}
+  clipStoneCurl: {fileID: 8300000, guid: d835304c692a145f2a430e4d8e442f14, type: 3}
+  clipStoneHitWall: {fileID: 8300000, guid: 0b442d479ce0d4340ac8665f564bb2ef, type: 3}
+  stationary: 0
 --- !u!1 &787556970
 GameObject:
   m_ObjectHideFlags: 0
@@ -5892,7 +5909,7 @@ MonoBehaviour:
   turnRightKey: 101
   turnLeftKey: 113
   rotationScaler: 80
-  speed: 3
+  speed: 1.5
   runAdder: 1
   maxVelocityChange: 20
   usePSNavigationController: 1
@@ -6058,6 +6075,7 @@ GameObject:
   - 114: {fileID: 1304402251}
   - 114: {fileID: 1304402250}
   - 114: {fileID: 1304402252}
+  - 81: {fileID: 1304402253}
   m_Layer: 0
   m_Name: RUISCamera
   m_TagString: MainCamera
@@ -6219,6 +6237,13 @@ MonoBehaviour:
   lookAt: 0
   startFromPosition: 1
   objectToFollow: {fileID: 2091782320}
+--- !u!81 &1304402253
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1304402244}
+  m_Enabled: 1
 --- !u!1 &1319945181
 GameObject:
   m_ObjectHideFlags: 0
@@ -7366,7 +7391,7 @@ MonoBehaviour:
   xmlSchema: {fileID: 4900000, guid: a07a36ac9f438794596e1ee51310972d, type: 3}
   filename: inputConfig.xml
   loadFromTextFileInEditor: 0
-  enablePSMove: 1
+  enablePSMove: 0
   PSMoveIP: 130.233.186.126
   PSMovePort: 7899
   connectToPSMoveOnStartup: 1
@@ -7712,6 +7737,7 @@ GameObject:
   - 114: {fileID: 1640074314}
   - 136: {fileID: 1640074308}
   - 114: {fileID: 1640074313}
+  - 114: {fileID: 1640074315}
   m_Layer: 12
   m_Name: StoneRed
   m_TagString: Untagged
@@ -7833,6 +7859,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curve_amount: .300000012
+--- !u!114 &1640074315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: a015d48613e415a4290649db741c9e3e,
+    type: 2}
+  m_PrefabInternal: {fileID: 146294371}
+  m_GameObject: {fileID: 1640074306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c129f01c059b04a96870d1aefe7aa092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipStoneHitStone: {fileID: 8300000, guid: 0b442d479ce0d4340ac8665f564bb2ef, type: 3}
+  clipStoneCurl: {fileID: 8300000, guid: d835304c692a145f2a430e4d8e442f14, type: 3}
+  clipStoneHitWall: {fileID: 8300000, guid: 0b442d479ce0d4340ac8665f564bb2ef, type: 3}
+  stationary: 0
 --- !u!1 &1665758973
 GameObject:
   m_ObjectHideFlags: 0
@@ -9891,6 +9933,10 @@ Prefab:
       propertyPath: _linkedCamera
       value: 
       objectReference: {fileID: 1304402247}
+    - target: {fileID: 11400026, guid: 682e3370b0da04ea5926172910aafc89, type: 2}
+      propertyPath: enablePSMove
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 682e3370b0da04ea5926172910aafc89, type: 2}
   m_RootGameObject: {fileID: 1706231380}
