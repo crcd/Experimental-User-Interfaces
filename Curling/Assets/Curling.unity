@@ -727,7 +727,7 @@ GameObject:
   - 4: {fileID: 163216267}
   - 132: {fileID: 163216268}
   m_Layer: 0
-  m_Name: GUI Text
+  m_Name: GUI_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2789,6 +2789,50 @@ Prefab:
   m_RootGameObject: {fileID: 734574810}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &556633165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100002, guid: 165a3b0407abe4d5b9098a0675c3b514, type: 2}
+  m_PrefabInternal: {fileID: 2015952570}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 556633167}
+  - 114: {fileID: 556633166}
+  - 114: {fileID: 873072465}
+  m_Layer: 0
+  m_Name: GameLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &556633166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 165a3b0407abe4d5b9098a0675c3b514,
+    type: 2}
+  m_PrefabInternal: {fileID: 2015952570}
+  m_GameObject: {fileID: 556633165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12866bea29b3410dba578c8972440fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stone: {fileID: 100000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
+  yellowMesh: {fileID: 4300000, guid: 4270d7436bdb7e648834fdd2a250c6d6, type: 3}
+  redMesh: {fileID: 4300000, guid: d05c4bf54b4cf2746b14b9ed96991a4d, type: 3}
+--- !u!4 &556633167
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400002, guid: 165a3b0407abe4d5b9098a0675c3b514, type: 2}
+  m_PrefabInternal: {fileID: 2015952570}
+  m_GameObject: {fileID: 556633165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 873072466}
+  m_Father: {fileID: 0}
 --- !u!1 &570488616
 GameObject:
   m_ObjectHideFlags: 0
@@ -4189,9 +4233,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 873072466}
-  - 114: {fileID: 873072465}
   m_Layer: 0
-  m_Name: GameLogic
+  m_Name: CenterPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4203,15 +4246,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400000, guid: 165a3b0407abe4d5b9098a0675c3b514,
     type: 2}
   m_PrefabInternal: {fileID: 2015952570}
-  m_GameObject: {fileID: 873072464}
+  m_GameObject: {fileID: 556633165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e12866bea29b3410dba578c8972440fe, type: 3}
+  m_Script: {fileID: 11500000, guid: a406e8e8c0cb7409d967cf17ac11211a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stone: {fileID: 100000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
-  yellowMesh: {fileID: 4300000, guid: 4270d7436bdb7e648834fdd2a250c6d6, type: 3}
-  redMesh: {fileID: 4300000, guid: d05c4bf54b4cf2746b14b9ed96991a4d, type: 3}
 --- !u!4 &873072466
 Transform:
   m_ObjectHideFlags: 0
@@ -4222,7 +4262,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 556633167}
 --- !u!1 &874910181
 GameObject:
   m_ObjectHideFlags: 0
@@ -9296,6 +9336,10 @@ Prefab:
       propertyPath: m_Text
       value: vs
       objectReference: {fileID: 0}
+    - target: {fileID: 100032, guid: 011c323ed6779074e8191e0e68b6da2f, type: 2}
+      propertyPath: m_Name
+      value: GUI_Text
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 011c323ed6779074e8191e0e68b6da2f, type: 2}
   m_RootGameObject: {fileID: 526023458}
@@ -10252,7 +10296,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 165a3b0407abe4d5b9098a0675c3b514, type: 2}
-  m_RootGameObject: {fileID: 873072464}
+  m_RootGameObject: {fileID: 556633165}
   m_IsPrefabParent: 0
   m_IsExploded: 1
 --- !u!1 &2019630524
