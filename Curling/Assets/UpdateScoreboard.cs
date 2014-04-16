@@ -114,8 +114,7 @@ public class UpdateScoreboard : MonoBehaviour {
 			Debug.Log(i.ToString());
 			string stoneIDBlueTeam = "yellow_ball_blue" + i.ToString();
 			string stoneIDRedTeam = "yellow_ball_red" + i.ToString();
-			Debug.Log(stoneIDBlueTeam);
-			Debug.Log(stoneIDRedTeam);
+
 			GameObject selectedYellowBallBlueTeam = GameObject.Find (stoneIDBlueTeam);
 			GameObject selectedYellowBallRedTeam = GameObject.Find (stoneIDRedTeam);
 			selectedYellowBallBlueTeam.guiTexture.enabled = true;
