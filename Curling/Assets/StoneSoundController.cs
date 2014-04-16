@@ -33,7 +33,12 @@ public class StoneSoundController : MonoBehaviour {
 		// therefore we need to use the names.. StoneRed / StoneYellow..
 		// maybe we could test also part of the name..
 		if (collision.gameObject.name.Contains("Stone")) {
-			audioStoneHitStone.pitch = gameObject.rigidbody.velocity.z;
+			audioStoneHitStone.pitch = gameObject.rigidbody.velocity.sqrMagnitude;
+			if (audioStoneHitStone.pitch < 0.8) {
+				audioStoneHitStone.pitch = 0.8f;
+			} else if (audioStoneHitStone.pitch > 1.5) {
+				audioStoneHitStone.pitch = 1.5f;
+			}
 			audioStoneHitStone.Play ();
 		}
 
@@ -56,6 +61,11 @@ public class StoneSoundController : MonoBehaviour {
 	// Play one looping stone sound for each moving gameObject stone.
 	void Update () {
 		float x = Mathf.Abs (gameObject.rigidbody.velocity.z);
+		float xx = Mathf.Abs (gameObject.rigidbody.velocity.x);
+		if (xx > x) {
+			x = xx;
+		}
+		//float x = gameObject.rigidbody.velocity.sqrMagnitude;
 		if (x > 0.1) {
 			if (gameObject.GetComponent<StoneSoundController> ().stationary) {
 				audioStoneCurl.Play ();
