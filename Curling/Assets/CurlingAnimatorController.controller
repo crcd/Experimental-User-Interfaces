@@ -38,6 +38,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: Crouching
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -125,6 +131,68 @@ BlendTree:
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
   m_BlendType: 0
+--- !u!206 &20696397
+BlendTree:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Crouching
+  m_Childs:
+  - m_Motion: {fileID: 7400000, guid: d0d99812bab20764cbbbb736fb4ee4f4, type: 3}
+    m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: 23790588860a5c24385186ff59218d31, type: 3}
+    m_Threshold: .166666672
+    m_Position: {x: -1.5, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: 94bacbe1395a23f498126fc726c273cc, type: 3}
+    m_Threshold: .333333343
+    m_Position: {x: 1.5, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: e944b30f030ee4c40bb190fca1794ab7, type: 3}
+    m_Threshold: .5
+    m_Position: {x: 0, y: 2}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: 52657324ad2d30e47a4e7b9f01f36a98, type: 3}
+    m_Threshold: .666666687
+    m_Position: {x: 0, y: 1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: 52657324ad2d30e47a4e7b9f01f36a98, type: 3}
+    m_Threshold: .833333313
+    m_Position: {x: 0, y: -1}
+    m_TimeScale: -1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: e944b30f030ee4c40bb190fca1794ab7, type: 3}
+    m_Threshold: 1
+    m_Position: {x: 0, y: -2}
+    m_TimeScale: -1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  m_BlendParameter: ForwardSpeed
+  m_BlendParameterY: ForwardSpeed
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_BlendType: 2
 --- !u!1101 &110100000
 Transition:
   m_ObjectHideFlags: 3
@@ -193,6 +261,42 @@ Transition:
   - m_ConditionMode: 4
     m_ConditionEvent: SidewaysSpeed
     m_EventTreshold: .100000001
+    m_ExitTime: .75
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+--- !u!1101 &110135604
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110296397}
+  m_DstState: {fileID: 110236129}
+  m_TransitionDuration: .238636345
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: Crouching
+    m_EventTreshold: 0
+    m_ExitTime: .761363626
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+--- !u!1101 &110140524
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110236129}
+  m_DstState: {fileID: 110296397}
+  m_TransitionDuration: .24999997
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Crouching
+    m_EventTreshold: 0
     m_ExitTime: .75
   m_Atomic: 1
   m_Solo: 0
@@ -325,7 +429,7 @@ State:
   m_Motions:
   - {fileID: 20600000}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 60, y: 84, z: 0}
+  m_Position: {x: 60, y: 96, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
@@ -343,6 +447,21 @@ State:
   m_Position: {x: -24, y: 96, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 1
+  m_Tag: 
+--- !u!1102 &110274072
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Moving
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 0}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 108, y: 96, z: 0}
+  m_IKOnFeet: 1
+  m_Mirror: 0
   m_Tag: 
 --- !u!1102 &110276292
 State:
@@ -389,6 +508,21 @@ State:
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110296397
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Crouching
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 20696397}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 336, y: 96, z: 0}
+  m_IKOnFeet: 1
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1107 &110700000
 StateMachine:
   serializedVersion: 2
@@ -399,6 +533,7 @@ StateMachine:
   m_DefaultState: {fileID: 110236129}
   m_States:
   - {fileID: 110236129}
+  - {fileID: 110296397}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
@@ -407,7 +542,12 @@ StateMachine:
       second: []
     data:
       first: {fileID: 110236129}
-      second: []
+      second:
+      - {fileID: 110140524}
+    data:
+      first: {fileID: 110296397}
+      second:
+      - {fileID: 110135604}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 60, y: 36, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

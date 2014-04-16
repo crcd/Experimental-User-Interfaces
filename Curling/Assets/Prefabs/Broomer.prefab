@@ -4287,7 +4287,7 @@ MonoBehaviour:
   animator: {fileID: 9500004}
   locomotionControl: {fileID: 11400068}
   characterController: {fileID: 11400066}
-  animationCombiner: {fileID: 0}
+  animationCombiner: {fileID: 11400122}
 --- !u!114 &11400126
 MonoBehaviour:
   m_ObjectHideFlags: 1
