@@ -26,12 +26,14 @@ public class StoneSpawner : MonoBehaviour {
     private Rigidbody spawnYellowStone () {
         GameObject stone = this.spawnStone ();
         stone.GetComponent<MeshFilter> ().mesh = this.yellowMesh;
+        stone.tag = "YellowStone";
         return stone.rigidbody;
     }
 
     private Rigidbody spawnRedStone () {
         GameObject stone = this.spawnStone ();
         stone.GetComponent<MeshFilter> ().mesh = this.redMesh;
+        stone.tag = "RedStone";
         return stone.rigidbody;
     }
 
