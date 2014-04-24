@@ -51,7 +51,6 @@ public class PsMoveThrow : MonoBehaviour {
     void handleStoneObject () {
         this.throwerController.setStoneRotation (this.getRotation ());
         if (!this.throwerController.isSawingPositionSet || this.moveWand.squareButtonWasPressed) {
-            Debug.Log ("setSawingStart");
             this.throwerController.isSawingPositionSet = true;
             this.throwerController.sawingStartPosition = this.moveWand.localPosition;
         } else {
