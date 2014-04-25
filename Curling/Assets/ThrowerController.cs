@@ -17,7 +17,7 @@ public class ThrowerController : MonoBehaviour {
     void Start () {
         this.throwerBody = rigidbody;
 		this.throwerStartingPos = rigidbody.position;
-        this.ikCtrl = GameObject.Find ("baseMaleMain").GetComponent<IKCtrl> ();
+        this.ikCtrl = GameObject.Find ("baseMaleThrower").GetComponent<IKCtrl> ();
     }
 
     public void setStone (Rigidbody stoneBody) {
