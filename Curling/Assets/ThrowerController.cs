@@ -23,8 +23,8 @@ public class ThrowerController : MonoBehaviour {
     public void setStone (Rigidbody stoneBody) {
         this.stoneBody = stoneBody;
         this.stoneOffset = this.stoneOffsetConfig;
-        this.ikCtrl.rightHandObj = this.stoneBody.transform;
-        this.ikCtrl.ikActive = true;
+		this.ikCtrl.rightHandObj = stoneBody.transform;
+        this.ikCtrl.rightIKActive = true;
     }
 
     public void throwStone (Vector3 additionalVelocity, float yRotation) {
@@ -34,8 +34,8 @@ public class ThrowerController : MonoBehaviour {
             this.stoneBody = null;
         }
 		if (throwerSliding) throwerSliding = false;
-        this.ikCtrl.rightHandObj = null;
-        this.ikCtrl.ikActive = false;
+        // this.ikCtrl.rightHandObj = null; // IKCtrl has animation
+		this.ikCtrl.rightIKActive = false;
     }
 
     public void startSliding (Vector3 force) {
@@ -45,7 +45,7 @@ public class ThrowerController : MonoBehaviour {
         // this.throwerBody.velocity = velocity;
 		this.throwerSliding = true;
 		this.throwerSlidingForce = force;
-        this.throwerBody.AddForce(this.throwerSlidingForce, ForceMode.Impulse);
+        //this.throwerBody.AddForce(this.throwerSlidingForce, ForceMode.Impulse);
 
     }
 
@@ -91,8 +91,8 @@ public class ThrowerController : MonoBehaviour {
             this.keepStonePositionInHand ();
         }
 
-        //if (this.throwerBody && this.throwerSliding) {
-        //	this.throwerBody.AddForce(this.throwerSlidingForce, ForceMode.Impulse);
-        //}
+        if (this.throwerBody && this.throwerSliding) {
+        	this.throwerBody.AddForce(this.throwerSlidingForce, ForceMode.Impulse);
+        }
     }
 }

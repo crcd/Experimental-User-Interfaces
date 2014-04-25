@@ -277,6 +277,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &100032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400030}
+  - 119: {fileID: 11900000}
+  m_Layer: 0
+  m_Name: Blob Shadow Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &100034
 GameObject:
   m_ObjectHideFlags: 1
@@ -1422,6 +1438,17 @@ Transform:
   m_Children:
   - {fileID: 400034}
   m_Father: {fileID: 400004}
+--- !u!4 &400030
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100032}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400124}
 --- !u!4 &400032
 Transform:
   m_ObjectHideFlags: 1
@@ -1947,7 +1974,7 @@ Transform:
   m_GameObject: {fileID: 100126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.560000002, y: .649999976, z: -22.4099998}
-  m_LocalScale: {x: .800000012, y: .800000012, z: .800000012}
+  m_LocalScale: {x: .899999976, y: .899999976, z: .899999976}
   m_Children:
   - {fileID: 400086}
   - {fileID: 400134}
@@ -1955,6 +1982,7 @@ Transform:
   - {fileID: 400008}
   - {fileID: 400052}
   - {fileID: 400152}
+  - {fileID: 400030}
   m_Father: {fileID: 0}
 --- !u!4 &400126
 Transform:
@@ -3670,10 +3698,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8298202f1df4e60b547c2c0835fcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ikActive: 1
+  leftIKActive: 0
+  leftHandObj: {fileID: 0}
+  leftPositionOffset: {x: 0, y: 0, z: 0}
+  leftRotationOffset: {x: 0, y: 0, z: 0}
+  rightIKActive: 0
   rightHandObj: {fileID: 0}
-  positionOffset: {x: -.0189999994, y: .170000002, z: -.0149999997}
-  rotationOffset: {x: 64.3899994, y: 55.5200005, z: -15.6999998}
+  rightPositionOffset: {x: -.00499999989, y: .200000003, z: 0}
+  rightRotationOffset: {x: 75.7200012, y: 79.8099976, z: 0}
+  animLength: 60
 --- !u!114 &11400104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3832,7 +3865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a711bf8adc9403582279ec9d0b586c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slidingForce: {x: 0, y: 0, z: 400}
+  slidingForce: {x: 0, y: 0, z: 4}
   rotation: 0
   characterCrouch: {fileID: 11400088}
 --- !u!114 &11400124
@@ -4187,6 +4220,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NeckPosition: {x: 0, y: 0, z: 0}
   EyePosition: {x: 0, y: .0900000036, z: .159999996}
+--- !u!119 &11900000
+Projector:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100032}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: .100000001
+  m_FarClipPlane: 50
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 2
+  m_Material: {fileID: 2100000, guid: 78c0a732ad112a541100162a44295342, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -4315,7 +4366,7 @@ SphereCollider:
   m_GameObject: {fileID: 100004}
   m_Material: {fileID: 13400000, guid: 724cde22afe09414fa68716bf3d56fa3, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: .150000006
   m_Center: {x: 0, y: 0, z: 0}
@@ -4327,7 +4378,7 @@ SphereCollider:
   m_GameObject: {fileID: 100086}
   m_Material: {fileID: 13400000, guid: 724cde22afe09414fa68716bf3d56fa3, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: .150000006
   m_Center: {x: 0, y: 0, z: 0}
@@ -4339,7 +4390,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 100004}
   m_Material: {fileID: 13400000, guid: 724cde22afe09414fa68716bf3d56fa3, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: .0700000003
   m_Height: .319999993
   m_Direction: 1
@@ -4352,7 +4403,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 100086}
   m_Material: {fileID: 13400000, guid: 724cde22afe09414fa68716bf3d56fa3, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: .0700000003
   m_Height: .319999993
   m_Direction: 1
