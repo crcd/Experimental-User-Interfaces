@@ -64,7 +64,7 @@ public class RUISDisplayManager : MonoBehaviour {
             currentResolutionX += display.rawResolutionX;
         }
 
-        if (displays.Count > 1 || (displays.Count == 0 && !allowResolutionDialog))
+        if (displays.Count > 1 || (displays.Count == 1 && !allowResolutionDialog))
         {
             Screen.SetResolution(totalRawResolutionX, totalRawResolutionY, false);
         }

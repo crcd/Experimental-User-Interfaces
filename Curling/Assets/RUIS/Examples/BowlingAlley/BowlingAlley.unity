@@ -233,10 +233,9 @@ GameObject:
   - 114: {fileID: 99348090}
   - 114: {fileID: 99348089}
   - 92: {fileID: 99348086}
-  - 81: {fileID: 99348085}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,12 +268,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .100000001
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -282,14 +281,6 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
---- !u!81 &99348085
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 8100002, guid: 6fad6e06135894d4da88e7273313f430,
-    type: 2}
-  m_PrefabInternal: {fileID: 1872485072}
-  m_GameObject: {fileID: 99348082}
-  m_Enabled: 0
 --- !u!92 &99348086
 Behaviour:
   m_ObjectHideFlags: 0
@@ -541,10 +532,9 @@ GameObject:
   - 114: {fileID: 127038072}
   - 114: {fileID: 127038071}
   - 92: {fileID: 127038068}
-  - 81: {fileID: 127038067}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -577,12 +567,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .100000001
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -590,14 +580,6 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
---- !u!81 &127038067
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 8100000, guid: 6fad6e06135894d4da88e7273313f430,
-    type: 2}
-  m_PrefabInternal: {fileID: 1872485072}
-  m_GameObject: {fileID: 127038064}
-  m_Enabled: 0
 --- !u!92 &127038068
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2513,7 +2495,6 @@ MonoBehaviour:
   enableRazerHydra: 0
   moveControllers: []
   riftMagnetometerMode: 0
-  oculusID: 0
   jumpGestureEnabled: 1
 --- !u!1 &1778756275
 GameObject:
@@ -3631,7 +3612,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3681,8 +3662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &2130508607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3695,6 +3675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
@@ -3702,11 +3684,15 @@ MonoBehaviour:
   FollowOrientation: {fileID: 0}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .100000001
+  farClipPlane: 1000
 --- !u!1 &2141231518
 GameObject:
   m_ObjectHideFlags: 0

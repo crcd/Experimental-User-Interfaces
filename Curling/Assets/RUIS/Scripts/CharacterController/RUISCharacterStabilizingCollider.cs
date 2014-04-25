@@ -16,6 +16,9 @@ public class RUISCharacterStabilizingCollider : MonoBehaviour
 {
     public RUISSkeletonController skeletonController;
 
+	private RUISCoordinateSystem coordinateSystem;
+	private float coordinateYOffset = 0;
+
     RUISSkeletonManager skeletonManager;
     int playerId = 0;
 
@@ -35,7 +38,8 @@ public class RUISCharacterStabilizingCollider : MonoBehaviour
 	private double[] measuredPos = {0, 0, 0};
 	private double[] pos = {0, 0, 0};
 	private float positionNoiseCovariance = 1500;
-	
+
+
     private float _colliderHeight;
     public float colliderHeight
     {
@@ -57,7 +61,7 @@ public class RUISCharacterStabilizingCollider : MonoBehaviour
 	        playerId = skeletonController.playerId;
 		else
 			Debug.LogError(   "The public variable 'Skeleton Controller' is not assigned! Using skeleton "
-							+ "#0 as the torso position source.");
+							+ "ID 0 as the pivot source.");
 		
 		if(gameObject.transform.parent != null)
 		{
@@ -66,6 +70,8 @@ public class RUISCharacterStabilizingCollider : MonoBehaviour
 		}
 
         capsuleCollider = GetComponent<CapsuleCollider>();
+		if(capsuleCollider == null)
+			Debug.LogError("GameObject " + gameObject.name + " must have a CapsuleCollider!");
         defaultColliderHeight = capsuleCollider.height;
         defaultColliderPosition = transform.localPosition;
 		
@@ -73,9 +79,19 @@ public class RUISCharacterStabilizingCollider : MonoBehaviour
 		positionKalman.initialize(3,3);
 		positionKalman.skipIdenticalMeasurements = true;
 	}
+
+	void Start()
+	{
+		coordinateSystem = FindObjectOfType(typeof(RUISCoordinateSystem)) as RUISCoordinateSystem;
+	}
 	
 	void FixedUpdate () 
 	{
+		if(coordinateSystem)
+		{
+			coordinateYOffset = coordinateSystem.positionOffset.y;
+		}
+
 		Vector3 torsoPos;
 		Vector3 newLocalPosition;
         if (!skeletonManager || !skeletonManager.skeletons[playerId].isTracking)
@@ -146,16 +162,17 @@ public class RUISCharacterStabilizingCollider : MonoBehaviour
 		    positionKalman.update(measuredPos);
 			pos = positionKalman.getState();
 			torsoPos.x = (float) pos[0];
-			torsoPos.y = (float) pos[1];
+			torsoPos.y = (float) pos[1] - coordinateYOffset;
 			torsoPos.z = (float) pos[2];
 
 			// Capsule collider is from floor up till torsoPos, therefore the capsule's center point is half of that
 			newLocalPosition = torsoPos;
-			newLocalPosition.y = torsoPos.y / 2; 
+			newLocalPosition.y = (torsoPos.y)/ 2 + coordinateYOffset; 
         }
 
 		// Updated collider height (from floor to torsoPos)
 		colliderHeight = Mathf.Lerp(capsuleCollider.height, torsoPos.y + colliderHeightTweaker, maxHeightChange * Time.fixedDeltaTime);
+
 		// Updated collider position
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, newLocalPosition, maxPositionChange * Time.fixedDeltaTime);
 	}

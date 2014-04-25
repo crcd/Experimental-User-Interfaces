@@ -516,7 +516,6 @@ MonoBehaviour:
   enableRazerHydra: 0
   moveControllers: []
   riftMagnetometerMode: 0
-  oculusID: 0
   jumpGestureEnabled: 1
 --- !u!114 &11400004
 MonoBehaviour:

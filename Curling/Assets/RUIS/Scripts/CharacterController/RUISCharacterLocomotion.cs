@@ -28,7 +28,7 @@ public class RUISCharacterLocomotion : MonoBehaviour
     public float maxVelocityChange = 20.0f;
 
     public bool usePSNavigationController = true;
-    public int PSNaviControllerID = 0;
+    public int PSNaviControllerID = 1;
 	public bool strafeInsteadTurning = false;
 
     public float jumpStrength = 10f;
@@ -154,11 +154,11 @@ public class RUISCharacterLocomotion : MonoBehaviour
 		// Check if jumping with PS Move Navigation controller
 		if (usePSNavigationController && moveWrapper && moveWrapper.isConnected)
         {
-            if (PSNaviControllerID < moveWrapper.navConnected.Length && PSNaviControllerID >= 0)
+            if (PSNaviControllerID <= moveWrapper.navConnected.Length && PSNaviControllerID >= 1)
             {
-                if (moveWrapper.navConnected[PSNaviControllerID])
+                if (moveWrapper.navConnected[PSNaviControllerID-1])
                 {
-                    if(moveWrapper.WasPressed(PSNaviControllerID, "NavL1"))
+                    if(moveWrapper.WasPressed(PSNaviControllerID-1, "NavL1"))
 					{
                     	shouldJump = true;
 					}
@@ -219,21 +219,21 @@ public class RUISCharacterLocomotion : MonoBehaviour
         catch (UnityException) { }
 
         // Check if moving with PS Move Navigation controller
-        if (PSNaviControllerID < 0)
+        if (PSNaviControllerID < 1)
         {
             Debug.LogError("PSNaviControllerID was set to " + PSNaviControllerID
                             + " which is incorrect value: It must be positive!");
         }
         else if (usePSNavigationController && moveWrapper && moveWrapper.isConnected)
         {
-            if (PSNaviControllerID < moveWrapper.navConnected.Length)
+            if (PSNaviControllerID <= moveWrapper.navConnected.Length)
             {
-                if (moveWrapper.navConnected[PSNaviControllerID])
+                if (moveWrapper.navConnected[PSNaviControllerID-1])
                 {
-                    int horiz = moveWrapper.valueNavAnalogX[PSNaviControllerID];
-                    int verti = moveWrapper.valueNavAnalogY[PSNaviControllerID];
+					int horiz = moveWrapper.valueNavAnalogX[PSNaviControllerID-1];
+					int verti = moveWrapper.valueNavAnalogY[PSNaviControllerID-1];
 					if(!airborne)
-	                    extraSpeed = ((float)moveWrapper.valueNavL2[PSNaviControllerID]) / 255f;
+						extraSpeed = ((float)moveWrapper.valueNavL2[PSNaviControllerID-1]) / 255f;
 					else
 						extraSpeed = 0;
                     if (Mathf.Abs(verti) > 20)
@@ -252,16 +252,16 @@ public class RUISCharacterLocomotion : MonoBehaviour
                         }
                     }
 					
-					if(moveWrapper.isNavButtonCross[PSNaviControllerID])
+					if(moveWrapper.isNavButtonCross[PSNaviControllerID-1])
 						turnMagnitude -= 1;
-					if(moveWrapper.isNavButtonCircle[PSNaviControllerID])
+					if(moveWrapper.isNavButtonCircle[PSNaviControllerID-1])
 						turnMagnitude += 1;
                 }
             }
             else
             {
                 Debug.LogError("PSNaviControllerID was set to " + PSNaviControllerID
-                                + " which is too big value: It must be below 7.");
+                                + " which is too big value: It must be below 8.");
             }
         }
 

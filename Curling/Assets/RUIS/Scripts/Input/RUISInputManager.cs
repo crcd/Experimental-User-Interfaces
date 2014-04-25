@@ -19,8 +19,7 @@ public class RUISInputManager : MonoBehaviour
     public enum RiftMagnetometer
     {
         Off = 0,
-        ManualCalibration = 1,
-        AutomaticCalibration = 2
+        AutomaticCalibration = 1
     };
 
     public TextAsset xmlSchema;
@@ -28,7 +27,7 @@ public class RUISInputManager : MonoBehaviour
 
     public bool loadFromTextFileInEditor = false;
 
-    public bool enablePSMove = true;
+    public bool enablePSMove = false;
     public string PSMoveIP = "127.0.0.1";
     public int PSMovePort = 7899;
     public bool connectToPSMoveOnStartup = true;
@@ -45,12 +44,12 @@ public class RUISInputManager : MonoBehaviour
 	public bool moveWand2 = false;
 	public bool moveWand3 = false;
 	
-    public bool enableKinect = true;
+	public bool enableKinect = false;
     public int maxNumberOfKinectPlayers = 2;
     public bool kinectFloorDetection = true;
 	public bool kinectDriftCorrectionPreferred = false;
 	
-    public bool enableRazerHydra = true;
+	public bool enableRazerHydra = false;
 	private SixenseInput sixense = null;
 	
 	private RUISCoordinateSystem coordinateSystem = null;
@@ -61,7 +60,6 @@ public class RUISInputManager : MonoBehaviour
     public RUISPSMoveWand[] moveControllers;
 
     public RiftMagnetometer riftMagnetometerMode = RiftMagnetometer.Off;
-    public int oculusID = 0;
 
     public bool jumpGestureEnabled = true;
 
@@ -195,30 +193,6 @@ public class RUISInputManager : MonoBehaviour
             foreach (RUISPSMoveWand controller in controllers)
             {
                 moveControllers[controller.controllerId] = controller;
-            }
-        }
-
-        OVRCameraController oculusCamController = FindObjectOfType(typeof(OVRCameraController)) as OVRCameraController;
-        if (oculusCamController && OVRDevice.IsSensorPresent(oculusID))
-        {
-            RUISOculusHUD ruisOculusHUD = FindObjectOfType(typeof(RUISOculusHUD)) as RUISOculusHUD;
-            if (riftMagnetometerMode == RiftMagnetometer.AutomaticCalibration)
-            {
-                if (ruisOculusHUD)
-                    ruisOculusHUD.StartAutoCalibration();
-                else
-                    Debug.LogError("Your settings indicate that you want to start automatic yaw drift correction "
-                                   + "process for Oculus Rift in the beginning of the scene, but no RUISOculusHUD "
-                                   + "script is found!");
-            }
-            if (riftMagnetometerMode == RiftMagnetometer.ManualCalibration)
-            {
-                if (ruisOculusHUD)
-                    ruisOculusHUD.StartManualCalibration();
-                else
-                    Debug.LogError("Your settings indicate that you want to start manual yaw drift correction "
-                                   + "process for Oculus Rift in the beginning of the scene, but no RUISOculusHUD "
-                                   + "script is found!");
             }
         }
     }
@@ -363,7 +337,8 @@ public class RUISInputManager : MonoBehaviour
 	
 	        OpenNI.Plane3D floor = sceneAnalyzer.Floor;
 	        Vector3 newFloorNormal = new Vector3(floor.Normal.X, floor.Normal.Y, floor.Normal.Z).normalized;
-	        Vector3 newFloorPosition = coordinateSystem.ConvertKinectPosition(floor.Point);
+			Vector3 newFloorPosition = (new Vector3(floor.Point.X, floor.Point.Y, floor.Point.Z))*RUISCoordinateSystem.kinectToUnityScale; 
+			//Vector3 newFloorPosition = coordinateSystem.ConvertKinectPosition(floor.Point);
 	        
 	        //Project the position of the kinect camera onto the floor
 	        //http://en.wikipedia.org/wiki/Point_on_plane_closest_to_origin

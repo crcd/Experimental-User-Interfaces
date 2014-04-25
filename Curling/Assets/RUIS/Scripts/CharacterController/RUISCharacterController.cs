@@ -89,6 +89,15 @@ public class RUISCharacterController : MonoBehaviour
 			colliderComponent = stabilizingCollider.gameObject.collider;
 			if(colliderComponent)
 			{
+				if(    characterPivotType == CharacterPivotType.KinectHead
+				    || characterPivotType == CharacterPivotType.KinectTorso)
+				{
+					RUISCoordinateSystem coordinateSystem = FindObjectOfType(typeof(RUISCoordinateSystem)) as RUISCoordinateSystem;
+					if(coordinateSystem && inputManager.enableKinect && !coordinateSystem.setKinectOriginToFloor)
+						Debug.LogWarning("It is best to enable 'setKinectOriginToFloor' from RUISCoordinateSystem " +
+						                 "when using Kinect and RUISCharacterController script.");
+				}
+
 				if(colliderComponent.material)
 					originalMaterial = colliderComponent.material;
 				else
@@ -133,6 +142,7 @@ public class RUISCharacterController : MonoBehaviour
 
         distanceToRaycast = stabilizingCollider ? stabilizingCollider.colliderHeight / 2 : 1.5f;
         distanceToRaycast += groundedErrorTweaker;
+		distanceToRaycast = Mathf.Max(distanceToRaycast, float.Epsilon);
 		
         tempGrounded = Physics.Raycast(raycastPosition, -transform.up, distanceToRaycast, groundLayers.value);
 		

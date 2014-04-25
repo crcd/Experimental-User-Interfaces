@@ -7,9 +7,20 @@ Authors     :   Peter Giokaris
 
 Copyright   :   Copyright 2013 Oculus VR, Inc. All Rights reserved.
 
-Use of this software is subject to the terms of the Oculus LLC license
-agreement provided at the time of installation or download, or which
+Licensed under the Oculus VR SDK License Version 2.0 (the "License"); 
+you may not use the Oculus VR SDK except in compliance with the License, 
+which is provided at the time of installation or download, or which 
 otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculusvr.com/licenses/LICENSE-2.0 
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK 
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 ************************************************************************************/
 using UnityEngine;
@@ -210,7 +221,12 @@ public class OVRMainMenu : MonoBehaviour
 				// We don't need a depth buffer on this texture
 				GUIRenderTexture = new RenderTexture(w, h, 0);	
 				GuiHelper.SetPixelResolution(w, h);
-				GuiHelper.SetDisplayResolution(OVRDevice.HResolution, OVRDevice.VResolution);
+				// NOTE: All GUI elements are being written with pixel values based
+				// from DK1 (1280x800). These should change to normalized locations so 
+				// that we can scale more cleanly with varying resolutions
+				//GuiHelper.SetDisplayResolution(OVRDevice.HResolution, 
+				//								 OVRDevice.VResolution);
+				GuiHelper.SetDisplayResolution(1280.0f, 800.0f);
 			}
 		}
 		
@@ -626,15 +642,11 @@ public class OVRMainMenu : MonoBehaviour
 			}
 		}
 		
-
-		
 		// We can turn on the render object so we can render the on-screen menu
 		if(GUIRenderObject != null)
 		{
 			if (ScenesVisible || ShowVRVars || Crosshair.IsCrosshairVisible() || 
-				RiftPresentTimeout > 0.0f || DeviceDetectionTimeout > 0.0f ||
-				((MagCal.Disabled () == false) && (MagCal.Ready () == false))
-				)
+				RiftPresentTimeout > 0.0f || DeviceDetectionTimeout > 0.0f )
 				GUIRenderObject.SetActive(true);
 			else
 				GUIRenderObject.SetActive(false);
@@ -734,62 +746,48 @@ public class OVRMainMenu : MonoBehaviour
 
 		int y   = VRVarsSY;
 		
-		if(ShowVRVars == false)
-		{
-			if((MagCal.Disabled () == false) && (MagCal.Ready () == false))
-			{
-				// Print out auto mag correction state
-				MagCal.GUIMagYawDriftCorrection(VRVarsSX, y, 
-												VRVarsWidthX, VRVarsWidthY,
-												ref GuiHelper);
-			}
-		}
-		else
-		{				
-			// Print out auto mag correction state
-			MagCal.GUIMagYawDriftCorrection(VRVarsSX, y, 
-											VRVarsWidthX, VRVarsWidthY,
-											ref GuiHelper);
+		// Print out auto mag correction state
+		MagCal.GUIMagYawDriftCorrection(VRVarsSX, y, 
+										VRVarsWidthX, VRVarsWidthY,
+										ref GuiHelper);
 			
-			// Draw FPS
+		// Draw FPS
+		GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
+							 ref strFPS, Color.green);
+		
+		// Don't draw these vars if CameraController is not present
+		if(CameraController != null)
+		{
 			GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
-								 ref strFPS, Color.green);
-		
-			// Don't draw these vars if CameraController is not present
-			if(CameraController != null)
-			{
-				GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
-								 ref strPrediction, Color.white);		
-				GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
-								 ref strIPD, Color.yellow);
-				GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
-								 ref strFOV, Color.white);
-			}
-		
-			// Don't draw these vars if PlayerController is not present
-			if(PlayerController != null)
-			{
-				GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
-									 ref strHeight, Color.yellow);
-				GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
-									 ref strSpeedRotationMultipler, Color.white);
-			}
-		
-			// Eventually remove distortion from being changed
-			/*
-			// Don't draw if CameraController is not present
-			if(CameraController != null)
-			{
-				// Distortion k values
-				y += StepY;
-				GUIStereoBox (VRVarsSX, y, VRVarsWidthX, VRVarsWidthY, 
-								 ref strDistortion, 
-								 Color.red);
-			}
-			*/
+							 ref strPrediction, Color.white);		
+			GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
+							 ref strIPD, Color.yellow);
+			GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
+							 ref strFOV, Color.white);
 		}
 		
-	
+		// Don't draw these vars if PlayerController is not present
+		if(PlayerController != null)
+		{
+			GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
+								 ref strHeight, Color.yellow);
+			GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
+								 ref strSpeedRotationMultipler, Color.white);
+		}
+		
+		// Eventually remove distortion from being changed
+		/*
+		// Don't draw if CameraController is not present
+		if(CameraController != null)
+		{
+			// Distortion k values
+			y += StepY;
+			GUIStereoBox (VRVarsSX, y, VRVarsWidthX, VRVarsWidthY, 
+							 ref strDistortion, 
+							 Color.red);
+		}
+		*/
+			
 	}
 	
 	// SNAPSHOT MANAGEMENT

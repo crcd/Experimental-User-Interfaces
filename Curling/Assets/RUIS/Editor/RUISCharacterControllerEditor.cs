@@ -17,6 +17,7 @@ public class RUISCharacterControllerEditor : Editor
 {
 	int maxPSMoveControllers = 4;
     SerializedProperty characterPivotType;
+	SerializedProperty kinectPlayerId;
     SerializedProperty moveControllerId;
     SerializedProperty ignorePitchAndRoll;
     SerializedProperty groundLayers;
@@ -29,6 +30,7 @@ public class RUISCharacterControllerEditor : Editor
     public void OnEnable()
     {
         characterPivotType = serializedObject.FindProperty("characterPivotType");
+		kinectPlayerId = serializedObject.FindProperty("kinectPlayerId");
         moveControllerId = serializedObject.FindProperty("moveControllerId");
         ignorePitchAndRoll = serializedObject.FindProperty("ignorePitchAndRoll");
         groundLayers = serializedObject.FindProperty("groundLayers");
@@ -52,6 +54,15 @@ public class RUISCharacterControllerEditor : Editor
         EditorGUI.indentLevel += 2;
         switch (characterPivotType.enumValueIndex)
         {
+			
+			case (int)RUISCharacterController.CharacterPivotType.KinectHead:
+				EditorGUILayout.LabelField(new GUIContent(	  "Kinect Player ID " + kinectPlayerId.intValue, "You can change this value from " 
+				                                          + typeof(RUISSkeletonController).ToString() + " script that is in one of the child objects."));
+				break;
+			case (int)RUISCharacterController.CharacterPivotType.KinectTorso:
+           		EditorGUILayout.LabelField(new GUIContent(	  "Kinect Player ID " + kinectPlayerId.intValue, "You can change this value from " 
+                          									+ typeof(RUISSkeletonController).ToString() + " script that is in one of the child objects."));
+				break;
             case (int)RUISCharacterController.CharacterPivotType.MoveController:
 			{
 				moveControllerId.intValue = Mathf.Clamp(moveControllerId.intValue, 0, maxPSMoveControllers - 1);
@@ -62,6 +73,7 @@ public class RUISCharacterControllerEditor : Editor
 																			+ "origin (torso center point etc.)."));
                 break;
 			}
+
         }
         EditorGUI.indentLevel -= 2;
 

@@ -5,7 +5,7 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 3
+  serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400006}
@@ -19,13 +19,13 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 3
+  serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
@@ -36,7 +36,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -72,12 +72,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -93,8 +96,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3e66bea1eda4643b02d382f5b6d970, type: 1}
+  m_Script: {fileID: 11500000, guid: 1e3e66bea1eda4643b02d382f5b6d970, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   holdLength: 2
   speedThreshold: .25
 --- !u!114 &11400002
@@ -105,10 +109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c5dba8c14fa8e6448b9a1a16d33fe05, type: 1}
+  m_Script: {fileID: 11500000, guid: 0c5dba8c14fa8e6448b9a1a16d33fe05, type: 3}
   m_Name: 
-  updateInterval: 5
-  bufferSize: 20
+  m_EditorClassIdentifier: 
+  bufferLength: .100000001
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,16 +121,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44e1a29ec3e30941be432fcdcea38f7, type: 1}
+  m_Script: {fileID: 11500000, guid: b44e1a29ec3e30941be432fcdcea38f7, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   selectionRayType: 1
   selectionRayLength: 200
   selectionRayStartDistance: 0
   headTransform: {fileID: 0}
   toggleSelection: 1
   grabWhileButtonDown: 0
+  ignoredLayers:
+    serializedVersion: 2
+    m_Bits: 0
   positionSelectionGrabType: 2
   rotationSelectionGrabType: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,12 +144,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1212d2f5dee044e4d81deccbb6efa05a, type: 1}
+  m_Script: {fileID: 11500000, guid: 1212d2f5dee044e4d81deccbb6efa05a, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   wandStart: 7
   wandEnd: 8
   gestureRecognizer: {fileID: 11400000}
-  skeletonManager: {fileID: 0}
   wandColor: {r: 1, g: 1, b: 1, a: 1}
   playerId: 0
   visualizerWidth: 32
@@ -165,6 +174,9 @@ LineRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
   m_Positions: []
   m_Parameters:
     startWidth: .00999999978

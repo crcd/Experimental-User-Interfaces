@@ -713,8 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &34413092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,18 +726,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 1063167415}
+  FollowOrientation: {fileID: 1325886367}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &34413093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,12 +790,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .150000006
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -821,7 +826,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 16777215
-  near: .100000001
+  near: .150000006
   far: 500
 --- !u!1 &38910654
 GameObject:
@@ -1016,7 +1021,7 @@ GameObject:
   - 114: {fileID: 46529460}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1105,12 +1110,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1851,7 +1856,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1926,8 +1931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &115874254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1940,6 +1944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
@@ -1947,11 +1953,15 @@ MonoBehaviour:
   FollowOrientation: {fileID: 0}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .100000001
+  farClipPlane: 1000
 --- !u!1 &116647071
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,6 +2508,10 @@ Prefab:
       propertyPath: toggleSelection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 4acc5b37e406a4e4981c055f4fd21ffa, type: 2}
+      propertyPath: selectedGameObjectsLayer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4acc5b37e406a4e4981c055f4fd21ffa, type: 2}
   m_RootGameObject: {fileID: 1586584267}
@@ -2874,6 +2888,10 @@ Prefab:
     - target: {fileID: 11400002, guid: 4acc5b37e406a4e4981c055f4fd21ffa, type: 2}
       propertyPath: bufferSize
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 4acc5b37e406a4e4981c055f4fd21ffa, type: 2}
+      propertyPath: selectedGameObjectsLayer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4acc5b37e406a4e4981c055f4fd21ffa, type: 2}
@@ -4043,7 +4061,7 @@ GameObject:
   - 114: {fileID: 276710734}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4076,12 +4094,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -5939,8 +5957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &447537733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5953,18 +5970,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 1760344526}
+  FollowOrientation: {fileID: 2043242363}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &447537734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6011,12 +6034,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .0500000007
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -6047,7 +6070,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  near: .100000001
+  near: .0500000007
   far: 500
 --- !u!1 &448878848
 GameObject:
@@ -6658,8 +6681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &476711098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6672,18 +6694,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 1995452953}
+  FollowOrientation: {fileID: 1325886367}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &476711099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6730,12 +6758,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .0500000007
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -6766,7 +6794,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 16777215
-  near: .100000001
+  near: .0500000007
   far: 500
 --- !u!1 &480469998
 GameObject:
@@ -7354,7 +7382,7 @@ GameObject:
   - 114: {fileID: 521076609}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7387,12 +7415,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -7848,8 +7876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &550543409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7862,18 +7889,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 16025834}
+  FollowOrientation: {fileID: 1325886367}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &550543410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7920,12 +7953,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .0500000007
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -7956,7 +7989,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 16777215
-  near: .100000001
+  near: .0500000007
   far: 500
 --- !u!1 &562292624
 GameObject:
@@ -9802,7 +9835,7 @@ GameObject:
   - 114: {fileID: 696664713}
   - 120: {fileID: 696664712}
   m_Layer: 0
-  m_Name: MoveController
+  m_Name: PSMoveWand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9876,7 +9909,7 @@ MonoBehaviour:
     m_Bits: 0
   positionSelectionGrabType: 2
   rotationSelectionGrabType: 1
-  selectedGameObjectsLayer: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &696664714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10405,8 +10438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &753089385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10419,18 +10451,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 1001893605}
+  FollowOrientation: {fileID: 2043242363}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &753089386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10477,12 +10515,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .150000006
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -10513,7 +10551,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 16777215
-  near: .100000001
+  near: .150000006
   far: 500
 --- !u!1 &760498926
 GameObject:
@@ -10657,6 +10695,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400012, guid: 7e2baee5779349340b6a78274c032bf7, type: 2}
       propertyPath: isObliqueFrustum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 7e2baee5779349340b6a78274c032bf7, type: 2}
+      propertyPath: enablePSMove
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -11368,6 +11410,70 @@ Prefab:
       propertyPath: enableOculusRift
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400074, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: onlyRazerOffset.y
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000004, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400034, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400036, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400066, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400122, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000020, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000018, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000016, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000002, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000010, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000008, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000014, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400040, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: selectedGameObjectsLayer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400088, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: selectedGameObjectsLayer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
   m_RootGameObject: {fileID: 2043242362}
@@ -11919,7 +12025,7 @@ GameObject:
   - 114: {fileID: 859857277}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12008,12 +12114,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -13159,7 +13265,7 @@ GameObject:
   - 114: {fileID: 945730645}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13192,12 +13298,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -13917,10 +14023,9 @@ GameObject:
   - 114: {fileID: 966551120}
   - 114: {fileID: 966551119}
   - 92: {fileID: 966551116}
-  - 81: {fileID: 966551115}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13953,12 +14058,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .100000001
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -13966,14 +14071,6 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
---- !u!81 &966551115
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 8100000, guid: 6fad6e06135894d4da88e7273313f430,
-    type: 2}
-  m_PrefabInternal: {fileID: 906430021}
-  m_GameObject: {fileID: 966551112}
-  m_Enabled: 0
 --- !u!92 &966551116
 Behaviour:
   m_ObjectHideFlags: 0
@@ -14524,7 +14621,7 @@ GameObject:
   - 114: {fileID: 1004861306}
   - 120: {fileID: 1004861305}
   m_Layer: 0
-  m_Name: RazerHydra
+  m_Name: RazerHydraWand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14598,7 +14695,7 @@ MonoBehaviour:
     m_Bits: 0
   positionSelectionGrabType: 2
   rotationSelectionGrabType: 1
-  selectedGameObjectsLayer: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &1004861307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16766,7 +16863,7 @@ GameObject:
   - 114: {fileID: 1158576543}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16855,12 +16952,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .150000006
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -17029,7 +17126,7 @@ GameObject:
   - 114: {fileID: 1172655099}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17118,12 +17215,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -19196,7 +19293,7 @@ GameObject:
   - 114: {fileID: 1325886369}
   - 114: {fileID: 1325886370}
   m_Layer: 0
-  m_Name: MecanimBlendedControllableCharacter
+  m_Name: MecanimBlendedCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19261,14 +19358,17 @@ MonoBehaviour:
   turnLeftKey: 113
   rotationScaler: 60
   speed: 2
-  gravity: 10
+  runAdder: 1
   maxVelocityChange: 20
   usePSNavigationController: 1
-  PSNaviControllerID: 0
+  PSNaviControllerID: 1
   strafeInsteadTurning: 1
   jumpStrength: 60
   jumpSpeedEffect: 0
-  aerialMobility: .100000001
+  aerialAcceleration: 20
+  aerialMobility: 1.5
+  aerialDrag: 4
+  desiredVelocity: {x: 0, y: 0, z: 0}
   useRazerHydra: 1
   razerHydraID: 2
 --- !u!114 &1325886370
@@ -19292,7 +19392,7 @@ MonoBehaviour:
   allowMultipleAssigners: 0
   applyKinectDriftCorrectionPreference: 1
   changePivotIfNoKinect: 1
-  onlyRazerOffset: {x: 0, y: .5, z: .300000012}
+  onlyRazerOffset: {x: 0, y: .200000003, z: .300000012}
   razerWandParent: {fileID: 1391465356}
 --- !u!54 &1325886371
 Rigidbody:
@@ -19772,7 +19872,7 @@ GameObject:
   - 114: {fileID: 1351951185}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19805,12 +19905,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .150000006
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -19889,7 +19989,7 @@ GameObject:
   - 114: {fileID: 1353052526}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19922,12 +20022,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .150000006
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -21707,8 +21807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &1449376592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21721,18 +21820,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 191672787}
+  FollowOrientation: {fileID: 2043242363}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &1449376593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21779,12 +21884,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .0500000007
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -21815,7 +21920,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 16777215
-  near: .100000001
+  near: .0500000007
   far: 500
 --- !u!1 &1458209991
 GameObject:
@@ -22010,7 +22115,7 @@ GameObject:
   - 114: {fileID: 1461927075}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22043,12 +22148,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .150000006
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -22759,7 +22864,7 @@ GameObject:
   - 114: {fileID: 1498337480}
   - 120: {fileID: 1498337479}
   m_Layer: 0
-  m_Name: MoveController
+  m_Name: PSMoveWand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22833,7 +22938,7 @@ MonoBehaviour:
     m_Bits: 0
   positionSelectionGrabType: 2
   rotationSelectionGrabType: 1
-  selectedGameObjectsLayer: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &1498337481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23436,7 +23541,6 @@ MonoBehaviour:
   enableRazerHydra: 0
   moveControllers: []
   riftMagnetometerMode: 0
-  oculusID: 0
   jumpGestureEnabled: 1
 --- !u!114 &1525314273
 MonoBehaviour:
@@ -23559,7 +23663,7 @@ GameObject:
   - 114: {fileID: 1544720376}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23648,12 +23752,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -23772,6 +23876,70 @@ Prefab:
     - target: {fileID: 11400066, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
       propertyPath: enableOculusRift
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400074, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: onlyRazerOffset.y
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400036, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400066, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400034, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000022, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400122, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000020, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000018, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000008, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000016, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000010, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000014, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000002, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: near clip plane
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400040, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: selectedGameObjectsLayer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400088, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
+      propertyPath: selectedGameObjectsLayer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2657edab8bf15334fb4b3866031359c1, type: 2}
@@ -24149,7 +24317,7 @@ MonoBehaviour:
     m_Bits: 0
   positionSelectionGrabType: 2
   rotationSelectionGrabType: 0
-  selectedGameObjectsLayer: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &1586584273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25104,7 +25272,7 @@ GameObject:
   - 114: {fileID: 1634678308}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25193,12 +25361,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -26178,7 +26346,7 @@ MonoBehaviour:
   updateJointRotations: 1
   useHierarchicalModel: 1
   scaleHierarchicalModelBones: 1
-  maxScaleFactor: .00999999978
+  maxScaleFactor: .5
   minimumConfidenceToUpdate: .5
   rotationDamping: 360
   torsoOffset: 0
@@ -26213,6 +26381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b084b3639de80d34780b29bf6ce7d6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationBlendStrength: 10
   animator: {fileID: 1689802949}
   locomotionControl: {fileID: 1325886369}
   characterController: {fileID: 1325886368}
@@ -26501,10 +26670,9 @@ GameObject:
   - 114: {fileID: 1697092118}
   - 114: {fileID: 1697092117}
   - 92: {fileID: 1697092114}
-  - 81: {fileID: 1697092113}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26537,12 +26705,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .100000001
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -26550,14 +26718,6 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
---- !u!81 &1697092113
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 8100002, guid: 6fad6e06135894d4da88e7273313f430,
-    type: 2}
-  m_PrefabInternal: {fileID: 906430021}
-  m_GameObject: {fileID: 1697092110}
-  m_Enabled: 0
 --- !u!92 &1697092114
 Behaviour:
   m_ObjectHideFlags: 0
@@ -27471,7 +27631,7 @@ GameObject:
   - 114: {fileID: 1760111227}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27504,12 +27664,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -28392,7 +28552,7 @@ GameObject:
   - 114: {fileID: 1835127668}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28481,12 +28641,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -28595,8 +28755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &1868254140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28609,18 +28768,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 599563820}
+  FollowOrientation: {fileID: 1325886367}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &1868254141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28667,12 +28832,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .0500000007
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -28703,7 +28868,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  near: .100000001
+  near: .0500000007
   far: 500
 --- !u!1 &1872820869
 GameObject:
@@ -29663,7 +29828,7 @@ GameObject:
   - 114: {fileID: 1946423854}
   - 120: {fileID: 1946423853}
   m_Layer: 0
-  m_Name: RazerHydra
+  m_Name: RazerHydraWand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29737,7 +29902,7 @@ MonoBehaviour:
     m_Bits: 0
   positionSelectionGrabType: 2
   rotationSelectionGrabType: 1
-  selectedGameObjectsLayer: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &1946423855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30400,7 +30565,7 @@ GameObject:
   - 114: {fileID: 1992086905}
   m_Layer: 0
   m_Name: CameraRight
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30489,12 +30654,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -30817,8 +30982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPredictionTime: .0500000007
-  InitialAccelGain: .0500000007
-  ResetTracker: 1
+  ResetTrackerOnLoad: 1
 --- !u!114 &2002391617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30831,18 +30995,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipd: .064000003
+  verticalFOV: 90
   CameraRootPosition: {x: 0, y: 0, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
   UsePlayerEyeHeight: 0
-  FollowOrientation: {fileID: 1100357006}
+  FollowOrientation: {fileID: 2043242363}
   TrackerRotatesY: 0
   PortraitMode: 0
+  EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
+  backgroundColor: {r: .192000002, g: .301999986, b: .474999994, a: 1}
+  nearClipPlane: .150000006
+  farClipPlane: 1000
 --- !u!114 &2002391618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30889,12 +31059,12 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: .100000001
+  near clip plane: .0500000007
   far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -30925,7 +31095,7 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 16777215
-  near: .100000001
+  near: .0500000007
   far: 500
 --- !u!1 &2011366655
 GameObject:
@@ -31650,7 +31820,7 @@ GameObject:
   - 114: {fileID: 2043242365}
   - 114: {fileID: 2043242364}
   m_Layer: 0
-  m_Name: MecanimBlendedControllableCharacter
+  m_Name: MecanimBlendedCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31695,7 +31865,7 @@ MonoBehaviour:
   allowMultipleAssigners: 0
   applyKinectDriftCorrectionPreference: 1
   changePivotIfNoKinect: 1
-  onlyRazerOffset: {x: 0, y: .5, z: .300000012}
+  onlyRazerOffset: {x: 0, y: .200000003, z: .300000012}
   razerWandParent: {fileID: 1298089162}
 --- !u!114 &2043242365
 MonoBehaviour:
@@ -31713,14 +31883,17 @@ MonoBehaviour:
   turnLeftKey: 113
   rotationScaler: 60
   speed: 2
-  gravity: 10
+  runAdder: 1
   maxVelocityChange: 20
   usePSNavigationController: 1
-  PSNaviControllerID: 0
+  PSNaviControllerID: 1
   strafeInsteadTurning: 1
   jumpStrength: 60
   jumpSpeedEffect: 0
-  aerialMobility: .100000001
+  aerialAcceleration: 20
+  aerialMobility: 1.5
+  aerialDrag: 4
+  desiredVelocity: {x: 0, y: 0, z: 0}
   useRazerHydra: 1
   razerHydraID: 2
 --- !u!114 &2043242366
@@ -31995,7 +32168,7 @@ MonoBehaviour:
     m_Bits: 0
   positionSelectionGrabType: 2
   rotationSelectionGrabType: 0
-  selectedGameObjectsLayer: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &2075998477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32783,7 +32956,7 @@ GameObject:
   - 114: {fileID: 2117462614}
   m_Layer: 0
   m_Name: CameraLeft
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32816,12 +32989,12 @@ Camera:
     y: 0
     width: .5
     height: 1
-  near clip plane: .300000012
+  near clip plane: .0500000007
   far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 100
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -33309,7 +33482,7 @@ MonoBehaviour:
   updateJointRotations: 1
   useHierarchicalModel: 1
   scaleHierarchicalModelBones: 1
-  maxScaleFactor: .00999999978
+  maxScaleFactor: .5
   minimumConfidenceToUpdate: .5
   rotationDamping: 360
   torsoOffset: 0
@@ -33344,6 +33517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b084b3639de80d34780b29bf6ce7d6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationBlendStrength: 10
   animator: {fileID: 2135021964}
   locomotionControl: {fileID: 2043242365}
   characterController: {fileID: 2043242366}

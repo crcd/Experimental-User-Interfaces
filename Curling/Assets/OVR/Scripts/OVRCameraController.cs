@@ -8,9 +8,20 @@ Authors     :   Peter Giokaris
 
 Copyright   :   Copyright 2013 Oculus VR, Inc. All Rights reserved.
 
-Use of this software is subject to the terms of the Oculus LLC license
-agreement provided at the time of installation or download, or which
+Licensed under the Oculus VR SDK License Version 2.0 (the "License"); 
+you may not use the Oculus VR SDK except in compliance with the License, 
+which is provided at the time of installation or download, or which 
 otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculusvr.com/licenses/LICENSE-2.0 
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK 
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 ************************************************************************************/
 using UnityEngine;
@@ -43,6 +54,7 @@ public class OVRCameraController : OVRComponent
 	// PUBLIC MEMBERS
 	
 	// IPD
+	[SerializeField]
 	private float  		ipd 		= 0.064f; 				// in millimeters
 	public 	float 		IPD
 	{
@@ -51,6 +63,7 @@ public class OVRCameraController : OVRComponent
 	}
 	
 	// VERTICAL FOV
+	[SerializeField]
 	private float  		verticalFOV = 90.0f;	 			// in degrees
 	public 	float		VerticalFOV
 	{
@@ -81,6 +94,8 @@ public class OVRCameraController : OVRComponent
 	public bool    		PortraitMode 	 = false; // We currently default to landscape mode for render
 	private bool 		PrevPortraitMode = false;
 	
+	// Use this to enable / disable Tracker orientation
+	public bool         EnableOrientation = true;
 	// Use this to turn on/off Prediction
 	public bool			PredictionOn 	= true;
 	// Use this to decide where tracker sampling should take place
@@ -96,6 +111,7 @@ public class OVRCameraController : OVRComponent
 	
 	// UNITY CAMERA FIELDS
 	// Set the background color for both cameras
+	[SerializeField]
 	private Color 		backgroundColor = new Color(0.192f, 0.302f, 0.475f, 1.0f);
 	public  Color       BackgroundColor
 	{
@@ -104,6 +120,7 @@ public class OVRCameraController : OVRComponent
 	}
 	
 	// Set the near and far clip plane for both cameras
+	[SerializeField]
 	private float 		nearClipPlane   = 0.15f;
 	public  float 		NearClipPlane
 	{
@@ -111,7 +128,8 @@ public class OVRCameraController : OVRComponent
 		set{nearClipPlane = value; UpdateCamerasDirtyFlag = true;}
 	}
 	
-	private float 		farClipPlane    = 1000.0f;     
+	[SerializeField]
+	private float 		farClipPlane    = 1000.0f;  
 	public  float 		FarClipPlane
 	{
 		get{return farClipPlane;}
@@ -244,7 +262,11 @@ public class OVRCameraController : OVRComponent
 		// Centre of lens correction
 		camera.GetComponent<OVRLensCorrection>()._Center.x = distOffset;
 		ConfigureCameraLensCorrection(ref camera);
-
+		
+		// Clip Planes
+   		camera.nearClipPlane = NearClipPlane;
+   		camera.farClipPlane = FarClipPlane;
+		
 		// Perspective offset for image
 		PerspOffset.x = perspOffset;
 		camera.GetComponent<OVRCamera>().SetPerspectiveOffset(ref PerspOffset);

@@ -131,8 +131,9 @@ public class RUISCharacterLocomotionEditor : Editor {
 		{
 	        EditorGUI.indentLevel += 2;
 			
-			PSNaviControllerID.intValue = Mathf.Clamp(PSNaviControllerID.intValue, 0, 6);
-	        EditorGUILayout.PropertyField(PSNaviControllerID, new GUIContent("Controller ID", "Between 0 and 6"));
+			PSNaviControllerID.intValue = Mathf.Clamp(PSNaviControllerID.intValue, 1, 7);
+	        EditorGUILayout.PropertyField(PSNaviControllerID, new GUIContent(  "Controller ID", "Between 1 and 7. Press and hold the PlayStation button to see "
+			                                                                 + "Controller Settings and change the ID from PlayStation."));
 			EditorGUILayout.PropertyField(strafeInsteadTurning, new GUIContent(  "Strafe, Don't Turn", "If enabled, then the analog stick's horizontal axis makes "
 			                                                                   + "the character strafe (sidestep) instead of turning."));
 	        

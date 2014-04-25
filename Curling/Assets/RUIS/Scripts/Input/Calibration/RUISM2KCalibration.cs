@@ -399,8 +399,9 @@ public class RUISM2KCalibration : MonoBehaviour {
 
         OpenNI.Plane3D floor = sceneAnalyzer.Floor;
         Vector3 newFloorNormal = new Vector3(floor.Normal.X, floor.Normal.Y, floor.Normal.Z).normalized;
-        Vector3 newFloorPosition = coordinateSystem.ConvertKinectPosition(floor.Point);
-        
+        //Vector3 newFloorPosition = coordinateSystem.ConvertKinectPosition(floor.Point);
+		Vector3 newFloorPosition = (new Vector3(floor.Point.X, floor.Point.Y, floor.Point.Z))*RUISCoordinateSystem.kinectToUnityScale; 
+
         /*OpenNI.SkeletonJointPosition torsoPosition;
         bool torsoSuccess = kinectSelection.GetPlayer(0).GetSkeletonJointPosition(OpenNI.SkeletonJoint.Torso, out torsoPosition);
 

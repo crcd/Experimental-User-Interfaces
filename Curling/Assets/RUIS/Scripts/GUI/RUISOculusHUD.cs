@@ -17,13 +17,11 @@ using System.Collections;
 
 public class RUISOculusHUD : MonoBehaviour 
 {
-	
-	public KeyCode autoCalibrateKey = KeyCode.F5;
-	public KeyCode manualCalibrateKey = KeyCode.F6;
-	public KeyCode showCompassKey = KeyCode.F8;
+	public bool showCalibrationStatus = false;
+	//public KeyCode toggleCalibrationKey = KeyCode.X; // This key is hardcoded in OVRMagCalibration.cs
 	
 	// Mag yaw-drift correction
-	private RUISMagCalibration magCal = new RUISMagCalibration();
+	private OVRMagCalibration magCal = new OVRMagCalibration();
 	
 	// Spacing for variables that users can change
 	private int    	VRVarsSX		= 553;
@@ -32,10 +30,9 @@ public class RUISOculusHUD : MonoBehaviour
 	private int    	VRVarsWidthY 	= 23;
 	
 	protected bool showMagStatus = false;
-	private bool delayedShow = false;
 	private float delayedShowTime = 2;
 	private float delayedShowDuration = 2;
-	private bool magCalWasDisabled = false;
+	//private bool magCalWasDisabled = false;
 	
 	// Replace the GUI with our own texture and 3D plane that
 	// is attached to the rendder camera for true 3D placement
@@ -52,9 +49,8 @@ public class RUISOculusHUD : MonoBehaviour
 	void Awake()
 	{
 		
-		magCal.autoCalibrationKey 	= autoCalibrateKey;
-		magCal.manualCalibrationKey = manualCalibrateKey;
-		magCal.showCompassKey 		= showCompassKey;
+//		magCal.autoCalibrationKey 	= autoCalibrateKey;
+//		magCal.showCompassKey 		= showCompassKey;
 	}
 	
 	// Use this for initialization
@@ -81,7 +77,7 @@ public class RUISOculusHUD : MonoBehaviour
 				int w = Screen.width;
 				int h = Screen.height;
 
-				if(CameraController.PortraitMode == true)
+				if(CameraController != null && CameraController.PortraitMode == true)
 				{
 					int t = h;
 					h = w;
@@ -124,23 +120,18 @@ public class RUISOculusHUD : MonoBehaviour
 		}
 		
 		// Mag Yaw-Drift correction
-		magCal.SetOVRCameraController(ref CameraController);
-	}
-	
-	/// <summary>
-	/// Starts Oculus Rift's automatic calibration process for yaw drift correction
-	/// </summary>
-	public void StartAutoCalibration()
-	{
-		magCal.StartAutoCalibration();
-	}
-	
-	/// <summary>
-	/// Starts Oculus Rift's manual calibration process for yaw drift correction
-	/// </summary>
-	public void StartManualCalibration()
-	{
-		magCal.StartManualCalibration();
+		if(CameraController != null)
+		{
+			magCal.SetOVRCameraController(ref CameraController);
+			magCal.SetInitialCalibarationState();
+		}
+
+		// Show Oculus magnetometer status at the beginning
+		if(showCalibrationStatus && OVRDevice.IsSensorPresent(0))
+		{
+			delayedShowTime = delayedShowDuration;
+			showMagStatus = true;
+		}
 	}
 	
 	void OnGUI()
@@ -169,8 +160,8 @@ public class RUISOculusHUD : MonoBehaviour
 		// We can turn on the render object so we can render the on-screen menu
 		if(GUIRenderObject != null)
 		{
-			if(		delayedShow || showMagStatus
-				 || ((magCal.Disabled () == false) && (magCal.Ready () == false)))
+			if(		showMagStatus
+				/* || ((magCal.Disabled () == false) && (magCal.Ready () == false)) */ )
 				GUIRenderObject.SetActive(true);
 			else
 				GUIRenderObject.SetActive(false);
@@ -178,7 +169,7 @@ public class RUISOculusHUD : MonoBehaviour
 		
 		// Set the GUI matrix to deal with portrait mode
 		Vector3 scale = Vector3.one;
-		if(CameraController.PortraitMode == true)
+		if(CameraController != null && CameraController.PortraitMode == true)
 		{
 			float h = OVRDevice.HResolution;
 			float v = OVRDevice.VResolution;
@@ -203,7 +194,7 @@ public class RUISOculusHUD : MonoBehaviour
 		// is removed from GUI)
 		GuiHelper.SetFontReplace(textFont);
 		
-		if(showMagStatus || delayedShow || (magCal.Disabled () == false) && (magCal.Ready () == false))
+		if(showMagStatus /*|| (magCal.Disabled () == false) && (magCal.Ready () == false) */ )
 		{
 			// Print out auto mag correction state
 			magCal.GUIMagYawDriftCorrection(VRVarsSX, VRVarsSY, VRVarsWidthX, VRVarsWidthY,
@@ -223,22 +214,20 @@ public class RUISOculusHUD : MonoBehaviour
 	{
 		// After aborting calibration or stopping yaw correction,
 		// we want to show the HUD for a few seconds
-		magCalWasDisabled = magCal.Disabled();
-		if(delayedShow)
+		// magCalWasDisabled = magCal.Disabled();
+		if(showMagStatus)
 		{
 			delayedShowTime -= Time.deltaTime;
 			if(delayedShowTime < 0)
-				delayedShow = false;
+				showMagStatus = false;
 		}
 		
 		magCal.UpdateMagYawDriftCorrection();
-		
-		// Below clause is true when aborting calibration or stopping
-		// yaw correction
-		if(!magCalWasDisabled && magCal.Disabled())
-		{
-			delayedShowTime = delayedShowDuration;
-			delayedShow = true;
-		}
+
+//		if(Input.GetKeyDown (toggleCalibrationKey) )
+//		{
+//			delayedShowTime = delayedShowDuration;
+//			showMagStatus = true;
+//		}
 	}
 }

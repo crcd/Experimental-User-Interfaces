@@ -342,6 +342,10 @@ public class RUISRazerWand : RUISWand {
 //    }
     public override Vector3 GetAngularVelocity()
     {
-        return angularVelocity;
+		// If the wand has a parent, we need to apply its transformation first
+		if (transform.parent)
+			return transform.parent.TransformDirection(angularVelocity);
+		else 
+			return angularVelocity;
     }
 }

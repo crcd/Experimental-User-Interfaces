@@ -7,9 +7,20 @@ Authors     :   Peter Giokaris
 
 Copyright   :   Copyright 2013 Oculus VR, Inc. All Rights reserved.
 
-Use of this software is subject to the terms of the Oculus LLC license
-agreement provided at the time of installation or download, or which
+Licensed under the Oculus VR SDK License Version 2.0 (the "License"); 
+you may not use the Oculus VR SDK except in compliance with the License, 
+which is provided at the time of installation or download, or which 
 otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculusvr.com/licenses/LICENSE-2.0 
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK 
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 ************************************************************************************/
 using UnityEngine;
@@ -82,13 +93,27 @@ public class OVRDevice : MonoBehaviour
 	[DllImport ("OculusPlugin")]
     private static extern bool OVR_SetSensorPredictionTime(int sensorID, float predictionTime);
 	[DllImport ("OculusPlugin")]
-    private static extern bool OVR_GetSensorAccelGain(int sensorID, ref float accelGain);
-	[DllImport ("OculusPlugin")]
-    private static extern bool OVR_SetSensorAccelGain(int sensorID, float accelGain);
-	[DllImport ("OculusPlugin")]
     private static extern bool OVR_EnableYawCorrection(int sensorID, float enable);
 	[DllImport ("OculusPlugin")]
     private static extern bool OVR_ResetSensorOrientation(int sensorID);	
+	
+	// Latest absolute sensor readings (note: in right-hand co-ordinates)
+	[DllImport ("OculusPlugin")]
+    private static extern bool OVR_GetAcceleration(int sensorID, 
+												   ref float x,
+												   ref float y,
+												   ref float z);
+	[DllImport ("OculusPlugin")]
+    private static extern bool OVR_GetAngularVelocity(int sensorID, 
+												   ref float x,
+												   ref float y,
+												   ref float z);
+	[DllImport ("OculusPlugin")]
+    private static extern bool OVR_GetMagnetometer(int sensorID, 
+												   ref float x,
+												   ref float y,
+												   ref float z);
+	
 	
 	// HMD FUNCTIONS
 	[DllImport ("OculusPlugin")]
@@ -131,43 +156,21 @@ public class OVRDevice : MonoBehaviour
 	
 	
 	// MAGNETOMETER YAW-DRIFT CORRECTION FUNCTIONS
-	// AUTOMATIC
-	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_BeginMagAutoCalibraton(int sensor);
-	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_StopMagAutoCalibraton(int sensor);
-	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_UpdateMagAutoCalibration(int sensor);
-	// MANUAL
-	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_BeginMagManualCalibration(int sensor);
-	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_StopMagManualCalibration(int sensor);
-	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_UpdateMagManualCalibration(int sensor);
-	[DllImport ("OculusPlugin")]
-	private static extern int OVR_MagManualCalibrationState(int sensor);
-	// SHARED
-	[DllImport ("OculusPlugin")]
-	private static extern int OVR_MagNumberOfSamples(int sensor);
 	[DllImport ("OculusPlugin")]
 	private static extern bool OVR_IsMagCalibrated(int sensor);
 	[DllImport ("OculusPlugin")]
 	private static extern bool OVR_EnableMagYawCorrection(int sensor, bool enable);
 	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_IsYawCorrectionEnabled(int sensor);
-	[DllImport ("OculusPlugin")]
-	private static extern bool OVR_IsMagYawCorrectionInProgress(int sensor);
-	
+	private static extern bool OVR_IsYawCorrectionEnabled(int sensor);	
 	
 	// Different orientations required for different trackers
 	enum SensorOrientation {Head, Other};
 	
 	// PUBLIC
 	public float InitialPredictionTime 							= 0.05f; // 50 ms
-	public float InitialAccelGain  								= 0.05f; // default value
-	public bool  ResetTracker									= true;  // if off, tracker will not reset when new scene
-																		 // is loaded
+	public bool  ResetTrackerOnLoad								= true;  // if off, tracker will not reset when new scene
+																	 	 // is loaded
+	
 	// STATIC
 	private static MessageList MsgList 							= new MessageList(0, 0, 0);
 	private static bool  OVRInit 								= false;
@@ -196,7 +199,6 @@ public class OVRDevice : MonoBehaviour
 	
 	// Copied from initialized public variables set in editor
 	private static float PredictionTime 						= 0.0f;
-	private static float AccelGain 								= 0.0f;
 	
 	// We will keep map sensors to different numbers to know which sensor is 
 	// attached to which device
@@ -258,13 +260,6 @@ public class OVRDevice : MonoBehaviour
             OVR_SetSensorPredictionTime(SensorList[0], PredictionTime);
 		else
 			SetPredictionTime(SensorList[0], InitialPredictionTime);	
-		
-		// AcelGain set, used to correct gyro with accel. 
-		// Default value is appropriate for typical use.
-		if(AccelGain > 0.0f)
-            OVR_SetSensorAccelGain(SensorList[0], AccelGain);
-		else
-			SetAccelGain(SensorList[0], InitialAccelGain);	
 	}
    
 	// Start (Note: make sure to always have a Start function for classes that have
@@ -328,7 +323,7 @@ public class OVRDevice : MonoBehaviour
 	void OnDestroy()
 	{
 		// We may want to turn this off so that values are maintained between level / scene loads
-		if(ResetTracker == true)
+		if(ResetTrackerOnLoad == true)
 		{
 			OVR_Destroy();
 			OVRInit = false;
@@ -397,6 +392,26 @@ public class OVRDevice : MonoBehaviour
         return OVR_ResetSensorOrientation(SensorList[sensor]);
 	}
 	
+	// Latest absolute sensor readings (note: in right-hand co-ordinates)
+	
+	// GetAcceleration
+	public static bool GetAcceleration(int sensor, ref float x, ref float y, ref float z)
+	{
+        return OVR_GetAcceleration(SensorList[sensor], ref x, ref y, ref z);
+	}
+
+	// GetAngularVelocity
+	public static bool GetAngularVelocity(int sensor, ref float x, ref float y, ref float z)
+	{
+        return OVR_GetAngularVelocity(SensorList[sensor], ref x, ref y, ref z);
+	}
+	
+	// GetMagnetometer
+	public static bool GetMagnetometer(int sensor, ref float x, ref float y, ref float z)
+	{
+        return OVR_GetMagnetometer(SensorList[sensor], ref x, ref y, ref z);
+	}
+	
 	// GetPredictionTime
 	public static float GetPredictionTime(int sensor)
 	{		
@@ -416,26 +431,7 @@ public class OVRDevice : MonoBehaviour
 		
 		return false;
 	}
-	
-	// GetAccelGain
-	public static float GetAccelGain(int sensor)
-	{		
-		return AccelGain;
-	}
-
-	// SetAccelGain
-	public static bool SetAccelGain(int sensor, float accelGain)
-	{
-		if ( (accelGain > 0.0f) &&
-             (OVR_SetSensorAccelGain(SensorList[sensor], accelGain) == true))
-		{
-			AccelGain = accelGain;
-			return true;
-		}
 		
-		return false;
-	}
-	
 	// GetDistortionCorrectionCoefficients
 	public static bool GetDistortionCorrectionCoefficients(ref float k0, 
 														   ref float k1, 
@@ -604,61 +600,6 @@ public class OVRDevice : MonoBehaviour
 	}
 	
 	// MAG YAW-DRIFT CORRECTION FUNCTIONS
-	
-	// AUTO MAG CALIBRATION FUNCTIONS
-	
-	// BeginMagAutoCalibraton
-	public static bool BeginMagAutoCalibration(int sensor)
-	{
-		return OVR_BeginMagAutoCalibraton(SensorList[sensor]);
-	}
-	
-	// StopMagAutoCalibraton
-	public static bool StopMagAutoCalibration(int sensor)
-	{
-		return OVR_StopMagAutoCalibraton(SensorList[sensor]);
-	}
-	
-	// UpdateMagAutoCalibration
-	public static bool UpdateMagAutoCalibration(int sensor)
-	{
-		return OVR_UpdateMagAutoCalibration(SensorList[sensor]);
-	}
-	
-	// MANUAL MAG CALIBRATION FUNCTIONS
-	
-	// BeginMagManualCalibration
-	public static bool BeginMagManualCalibration(int sensor)
-	{
-		return OVR_BeginMagManualCalibration(SensorList[sensor]);
-	}
-	
-	// StopMagManualCalibration
-	public static bool StopMagManualCalibration(int sensor)
-	{
-		return OVR_StopMagManualCalibration(SensorList[sensor]);
-	}
-	
-	// UpdateMagManualCalibration
-	public static bool UpdateMagManualCalibration(int sensor)
-	{
-		return OVR_UpdateMagManualCalibration(SensorList[sensor]);
-	}
-	
-	// OVR_MagManualCalibrationState
-	// 0 = Forward, 1 = Up, 2 = Left, 3 = Right, 4 = Upper-Right, 5 = FAIL, 6 = SUCCESS!
-	public static int MagManualCalibrationState(int sensor)
-	{
-		return OVR_MagManualCalibrationState(SensorList[sensor]);
-	}
-	
-	// SHARED MAG CALIBRATION FUNCTIONS
-	
-	// MagNumberOfSamples
-	public static int MagNumberOfSamples(int sensor)
-	{
-		return OVR_MagNumberOfSamples(SensorList[sensor]);
-	}
 
 	// IsMagCalibrated
 	public static bool IsMagCalibrated(int sensor)
@@ -676,12 +617,6 @@ public class OVRDevice : MonoBehaviour
 	public static bool IsYawCorrectionEnabled(int sensor)
 	{
 		return OVR_IsYawCorrectionEnabled(SensorList[sensor]);
-	}
-	
-	// IsMagYawCorrectionInProgress
-	public static bool IsMagYawCorrectionInProgress(int sensor)
-	{
-		return OVR_IsMagYawCorrectionInProgress(SensorList[sensor]);
 	}
 	
 	// InitSensorList:

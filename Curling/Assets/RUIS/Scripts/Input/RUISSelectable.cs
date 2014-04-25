@@ -134,7 +134,15 @@ public class RUISSelectable : MonoBehaviour {
         {
             rigidbody.AddForce(AverageBufferContent(velocityBuffer), ForceMode.VelocityChange);
 			if(selector) // Put this if-clause here just in case because once received NullReferenceException
-	            rigidbody.AddTorque(Mathf.Deg2Rad * selector.angularVelocity, ForceMode.VelocityChange);
+			{
+				if(selector.transform.parent)
+				{
+					rigidbody.AddTorque(selector.transform.parent.TransformDirection(
+										Mathf.Deg2Rad * selector.angularVelocity), ForceMode.VelocityChange);
+				}
+	            else
+					rigidbody.AddTorque(Mathf.Deg2Rad * selector.angularVelocity, ForceMode.VelocityChange);
+			}
         }
 
         if(selectionMaterial != null)

@@ -488,12 +488,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displaySchema: {fileID: 4900000, guid: 681992c4cf4e730438bbfa54a173d920, type: 3}
   xmlFilename: display.xml
+  loadFromFileInEditor: 0
   resolutionX: 1920
   resolutionY: 1080
   useDoubleTheSpace: 0
+  enableOculusRift: 0
   isStereo: 0
   eyeSeparation: .0599999987
-  isHMD: 0
   _linkedCamera: {fileID: 0}
   stereoType: 0
   isObliqueFrustum: 1
@@ -503,6 +504,7 @@ MonoBehaviour:
   displayUpInternal: {x: 0, y: 1, z: 0}
   width: 3
   height: 3
+  headTracker: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -516,12 +518,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displaySchema: {fileID: 4900000, guid: 681992c4cf4e730438bbfa54a173d920, type: 3}
   xmlFilename: display.xml
+  loadFromFileInEditor: 0
   resolutionX: 1920
   resolutionY: 1080
   useDoubleTheSpace: 0
+  enableOculusRift: 0
   isStereo: 0
   eyeSeparation: .0599999987
-  isHMD: 0
   _linkedCamera: {fileID: 0}
   stereoType: 0
   isObliqueFrustum: 1
@@ -531,6 +534,7 @@ MonoBehaviour:
   displayUpInternal: {x: 0, y: 1, z: 0}
   width: 3
   height: 3
+  headTracker: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -640,7 +644,7 @@ MonoBehaviour:
   totalResolutionY: 1080
   totalRawResolutionX: 5760
   totalRawResolutionY: 1080
-  fullScreen: 0
+  allowResolutionDialog: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,12 +707,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displaySchema: {fileID: 4900000, guid: 681992c4cf4e730438bbfa54a173d920, type: 3}
   xmlFilename: display.xml
+  loadFromFileInEditor: 0
   resolutionX: 1920
   resolutionY: 1080
   useDoubleTheSpace: 0
+  enableOculusRift: 0
   isStereo: 0
   eyeSeparation: .0599999987
-  isHMD: 0
   _linkedCamera: {fileID: 0}
   stereoType: 0
   isObliqueFrustum: 1
@@ -718,6 +723,7 @@ MonoBehaviour:
   displayUpInternal: {x: 0, y: 1, z: 0}
   width: 3
   height: 3
+  headTracker: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -752,7 +758,6 @@ MonoBehaviour:
   enableRazerHydra: 0
   moveControllers: []
   riftMagnetometerMode: 0
-  oculusID: 0
   jumpGestureEnabled: 1
 --- !u!114 &11400022
 MonoBehaviour:

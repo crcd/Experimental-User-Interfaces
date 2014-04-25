@@ -108,7 +108,7 @@ MonoBehaviour:
     m_Bits: 0
   positionSelectionGrabType: 0
   rotationSelectionGrabType: 1
-  selectedGameObjectsLayer: 0
+  selectedGameObjectsLayer: 11
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

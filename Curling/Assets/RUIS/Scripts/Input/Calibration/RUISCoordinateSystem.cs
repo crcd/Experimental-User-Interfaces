@@ -190,6 +190,11 @@ public class RUISCoordinateSystem : MonoBehaviour
     {
         kinectDistanceFromFloor = distance;
     }
+	
+	public float GetKinectDistanceFromFloor()
+	{
+		return kinectDistanceFromFloor;
+	}
 
     public void ResetKinectDistanceFromFloor()
     {
@@ -203,7 +208,8 @@ public class RUISCoordinateSystem : MonoBehaviour
 
         newPosition *= moveToUnityScale;
 
-        newPosition = moveToRUISTransform.MultiplyPoint3x4(newPosition);
+		if (applyMoveToKinect)
+        	newPosition = moveToRUISTransform.MultiplyPoint3x4(newPosition);
 
         newPosition = Quaternion.Euler(0, yawOffset, 0) * newPosition;
 
@@ -224,8 +230,9 @@ public class RUISCoordinateSystem : MonoBehaviour
         Vector3 newVelocity = new Vector3(velocity.x, velocity.y, -velocity.z);
 
         newVelocity *= moveToUnityScale;
-
-        newVelocity = moveToRUISTransform.MultiplyPoint3x4(newVelocity);
+		
+		if (applyMoveToKinect)
+        	newVelocity = moveToRUISTransform.MultiplyPoint3x4(newVelocity);
 
         newVelocity = Quaternion.Euler(0, yawOffset, 0) * newVelocity;
 
@@ -260,30 +267,44 @@ public class RUISCoordinateSystem : MonoBehaviour
         Vector3 newVelocity = angularVelocity;
         newVelocity.x = -newVelocity.x;
         newVelocity.y = -newVelocity.y;
-        newVelocity = moveToKinectRotation * newVelocity;
+		if (applyMoveToKinect)
+	        newVelocity = moveToKinectRotation * newVelocity;
         newVelocity = Quaternion.Euler(0, yawOffset, 0) * newVelocity;
         return newVelocity;
     }
 
-    public Vector3 ConvertKinectPosition(OpenNI.Point3D position)
-    {
-        //we have to flip the z axis to get into unity's coordinate system
-        Vector3 newPosition = Vector3.zero;
-        newPosition.x = position.X;
-        newPosition.y = position.Y;
-        newPosition.z = -position.Z;
+//    public Vector3 ConvertKinectPosition(OpenNI.Point3D position)
+//    {
+//        //we have to flip the z axis to get into unity's coordinate system
+//        Vector3 newPosition = Vector3.zero;
+//        newPosition.x = position.X;
+//        newPosition.y = position.Y;
+//        newPosition.z = -position.Z;
+//
+//        newPosition = kinectToUnityScale * (kinectFloorRotator * newPosition);
+//
+//        return newPosition;
+//    }
 
-        newPosition = kinectToUnityScale * (Quaternion.Euler(0, yawOffset, 0) * kinectFloorRotator * newPosition);
-
-        if (setKinectOriginToFloor)
-        {
-            newPosition.y += kinectDistanceFromFloor;
-        }
-
-        newPosition += positionOffset;
-
-        return newPosition;
-    }
+	public Vector3 ConvertKinectPosition(OpenNI.Point3D position)
+	{
+		//we have to flip the z axis to get into unity's coordinate system
+		Vector3 newPosition = Vector3.zero;
+		newPosition.x = position.X;
+		newPosition.y = position.Y;
+		newPosition.z = -position.Z;
+		
+		newPosition = kinectToUnityScale * (Quaternion.Euler(0, yawOffset, 0) * kinectFloorRotator * newPosition);
+		
+		if (setKinectOriginToFloor)
+		{
+			newPosition.y += kinectDistanceFromFloor;
+		}
+		
+		newPosition += positionOffset;
+		
+		return newPosition;
+	}
     
     public Quaternion ConvertKinectRotation(OpenNI.SkeletonJointOrientation rotation)
     {
@@ -297,7 +318,8 @@ public class RUISCoordinateSystem : MonoBehaviour
         newRotation.x = -newRotation.x;
         newRotation.y = -newRotation.y;
 
-        newRotation = Quaternion.Euler(0, yawOffset, 0) * newRotation;
+		newRotation = Quaternion.Euler(0, yawOffset, 0) * kinectFloorRotator * newRotation;
+		//newRotation = Quaternion.Euler(0, yawOffset, 0) * newRotation;
         //if (applyKinectToRUIS) result *= kinectYaw;
 
         return newRotation;

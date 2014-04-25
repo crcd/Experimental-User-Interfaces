@@ -87,7 +87,6 @@ public class RUISPSMoveWand : RUISWand {
             if (transform.parent)
             {
                 // If the wand has a parent, we need to apply its transformation first
-                // *** FIXME: If parent is scaled, then compound objects (Watering Bottle) get weird
                 rigidbody.MovePosition(transform.parent.TransformPoint(localPosition));
                 rigidbody.MoveRotation(transform.parent.rotation * localRotation);
             }
@@ -215,32 +214,32 @@ public class RUISPSMoveWand : RUISWand {
         }
     }
 	
-	// THIS NOW RETURNS WORLD VELOCITY WHILE OTHERS (E.G. position) RETURN LOCAL VALUES
+	// Returns velocity in wand's local coordinate system, unaffected my parent's scale
     public Vector3 velocity
     {
         get
         {
 			// If the wand has a parent, we need to apply its transformation first
-			if (transform.parent)
+			/* if (transform.parent)
 				return transform.parent.TransformDirection(
 											TransformVelocity(psMoveWrapper.velocity[controllerId]));
-			else 
+			else */
 				return TransformVelocity(psMoveWrapper.velocity[controllerId]);
 			// TUUKKA: TransformPosition??? This is the old version 
             //return TransformPosition(psMoveWrapper.velocity[controllerId]);
         }
     }
 	
-	// THIS NOW RETURNS WORLD ACCELERATION WHILE OTHERS (E.G. position) RETURN LOCAL VALUES
+	// Returns acceleration in wand's local coordinate system, unaffected my parent's scale
     public Vector3 acceleration
     {
         get
         {
 			// If the wand has a parent, we need to apply its transformation first
-			if (transform.parent)
+			/* if (transform.parent)
 				return transform.parent.TransformDirection(
 											TransformVelocity(psMoveWrapper.acceleration[controllerId]));
-			else 
+			else */
 				return TransformVelocity(psMoveWrapper.acceleration[controllerId]);
 			// TUUKKA: TransformPosition??? This is the old version 
             //return TransformPosition(psMoveWrapper.acceleration[controllerId]);
@@ -254,33 +253,36 @@ public class RUISPSMoveWand : RUISWand {
             return coordinateSystem.ConvertMoveRotation(psMoveWrapper.qOrientation[controllerId]);
         }
     }
-	// THIS NOW RETURNS WORLD angularVelocity WHILE OTHERS (E.G. position) RETURN LOCAL VALUES
+
+	// Returns angularVelocity in wand's local coordinate system, unaffected my parent's scale
     public Vector3 angularVelocity
     {
         get
         {	
 			// If the wand has a parent, we need to apply its transformation first
-			if (transform.parent)
+			/* if (transform.parent)
 				return transform.parent.TransformDirection(
 					coordinateSystem.ConvertMoveAngularVelocity(psMoveWrapper.angularVelocity[controllerId]));
-			else 
+			else */
             	return coordinateSystem.ConvertMoveAngularVelocity(psMoveWrapper.angularVelocity[controllerId]);
         }
-    }
-	// THIS NOW RETURNS WORLD angularAcceleration WHILE OTHERS (E.G. position) RETURN LOCAL VALUES
+	}
+
+	// Returns angularAcceleration in wand's local coordinate system, unaffected my parent's scale
     public Vector3 angularAcceleration
     {
         get
         {
 			// If the wand has a parent, we need to apply its transformation first
-			if (transform.parent)
+			/* if (transform.parent)
 				return transform.parent.TransformDirection(
 					coordinateSystem.ConvertMoveAngularVelocity(psMoveWrapper.angularAcceleration[controllerId]));
-			else 
+			else */
             	return coordinateSystem.ConvertMoveAngularVelocity(psMoveWrapper.angularAcceleration[controllerId]);
         }
     }
-
+	
+	// Returns handlePosition in wand's local coordinate system, unaffected my parent's scale
     public Vector3 handlePosition
     {
         get
@@ -288,18 +290,22 @@ public class RUISPSMoveWand : RUISWand {
             return TransformPosition(psMoveWrapper.handlePosition[controllerId]);
         }
     }
+	
+	// Returns handleVelocity in wand's local coordinate system, unaffected my parent's scale
     public Vector3 handleVelocity
     {
         get
         {
-            return TransformPosition(psMoveWrapper.handleVelocity[controllerId]);
+			return TransformVelocity(psMoveWrapper.handleVelocity[controllerId]);
         }
-    }
+	}
+
+	// Returns handleAcceleration in wand's local coordinate system, unaffected my parent's scale
     public Vector3 handleAcceleration
     {
         get
         {
-            return TransformPosition(psMoveWrapper.handleAcceleration[controllerId]);
+			return TransformVelocity(psMoveWrapper.handleAcceleration[controllerId]);
         }
     }
 
@@ -343,7 +349,8 @@ public class RUISPSMoveWand : RUISWand {
     {
         return coordinateSystem.ConvertMovePosition(value);
     }
-
+	
+	// Returns angularVelocity in wand's local coordinate system
     public override Vector3 GetAngularVelocity()
     {
         return angularVelocity;

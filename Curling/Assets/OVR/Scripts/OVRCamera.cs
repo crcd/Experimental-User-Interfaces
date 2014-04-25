@@ -7,9 +7,20 @@ Authors     :   Peter Giokaris
 
 Copyright   :   Copyright 2013 Oculus VR, Inc. All Rights reserved.
 
-Use of this software is subject to the terms of the Oculus LLC license
-agreement provided at the time of installation or download, or which
+Licensed under the Oculus VR SDK License Version 2.0 (the "License"); 
+you may not use the Oculus VR SDK except in compliance with the License, 
+which is provided at the time of installation or download, or which 
 otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculusvr.com/licenses/LICENSE-2.0 
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK 
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 ************************************************************************************/
 using UnityEngine;
@@ -98,7 +109,7 @@ public class OVRCamera : OVRComponent
 		// Set CameraTextureScale (increases the size of the texture we are rendering into
 		// for a better pixel match when post processing the image through lens distortion)
 		
-		//CameraTextureScale = OVRDevice.DistortionScale();
+		// CameraTextureScale = OVRDevice.DistortionScale();
 
 		// If CameraTextureScale is not 1.0f, create a new texture and assign to target texture
 		// Otherwise, fall back to normal camera rendering
@@ -106,10 +117,14 @@ public class OVRCamera : OVRComponent
 		{
 			int w = (int)(Screen.width / 2.0f * CameraTextureScale);
 			int h = (int)(Screen.height * CameraTextureScale);
-			CameraTexture = new RenderTexture(  w, h, 24);
+			
+			if ( camera.hdr )
+				CameraTexture = new RenderTexture(  w, h, 24, RenderTextureFormat.ARGBFloat );	
+			else
+				CameraTexture = new RenderTexture(  w, h, 24 );
 			
 			// Use MSAA settings in QualitySettings for new RenderTexture
-			CameraTexture.antiAliasing = QualitySettings.antiAliasing;
+			CameraTexture.antiAliasing = ( QualitySettings.antiAliasing == 0 ) ? 1 : QualitySettings.antiAliasing;
 		}
 	}
 
@@ -145,7 +160,7 @@ public class OVRCamera : OVRComponent
 		if(CameraTexture != null)
 		{
 			Graphics.SetRenderTarget(CameraTexture);
-			GL.Clear (true, true, gameObject.camera.backgroundColor);
+			GL.Clear (true, true, camera.backgroundColor);
 		}
 	}
 	
@@ -201,7 +216,7 @@ public class OVRCamera : OVRComponent
 		Vector3    dir = Vector3.forward;		
 		
 		// Main camera has a depth of 0, so it will be rendered first
-		if(gameObject.camera.depth == 0.0f)
+		if(camera.depth == 0.0f)
 		{			
 			// If desired, update parent transform y rotation here
 			// This is useful if we want to track the current location of
@@ -211,10 +226,10 @@ public class OVRCamera : OVRComponent
 			if(CameraController.TrackerRotatesY == true)
 			{
 				
-				Vector3 a = gameObject.camera.transform.rotation.eulerAngles;
+				Vector3 a = camera.transform.rotation.eulerAngles;
 				a.x = 0; 
 				a.z = 0;
-				gameObject.transform.parent.transform.eulerAngles = a;
+				transform.parent.transform.eulerAngles = a;
 			}
 			/*
 			else
@@ -232,12 +247,15 @@ public class OVRCamera : OVRComponent
 			*/	
 			// Read shared data from CameraController	
 			if(CameraController != null)
-			{				
-				// Read sensor here (prediction on or off)
-				if(CameraController.PredictionOn == false)
-					OVRDevice.GetOrientation(0, ref CameraOrientation);
-				else
-					OVRDevice.GetPredictedOrientation(0, ref CameraOrientation);				
+			{		
+				if(CameraController.EnableOrientation == true)
+				{
+					// Read sensor here (prediction on or off)
+					if(CameraController.PredictionOn == false)
+						OVRDevice.GetOrientation(0, ref CameraOrientation);
+					else
+						OVRDevice.GetPredictedOrientation(0, ref CameraOrientation);
+				}
 			}
 			
 			// This needs to go as close to reading Rift orientation inputs
@@ -263,15 +281,15 @@ public class OVRCamera : OVRComponent
 		
 		// * * *
 		// Update camera rotation
-		gameObject.camera.transform.rotation = q;
+		camera.transform.rotation = q;
 		
 		// * * *
 		// Update camera position (first add Offset to parent transform)
-		gameObject.camera.transform.position = 
-		gameObject.camera.transform.parent.transform.position + NeckPosition;
+		camera.transform.position = 
+		camera.transform.parent.transform.position + NeckPosition;
 	
 		// Adjust neck by taking eye position and transforming through q
-		gameObject.camera.transform.position += q * EyePosition;		
+		camera.transform.position += q * EyePosition;		
 	}
 
 	// LatencyTest
@@ -323,7 +341,7 @@ public class OVRCamera : OVRComponent
 		// NOTE: Unity skyboxes do not currently use the projection matrix, so
 		// if one wants to use a skybox with the Rift it must be implemented 
 		// manually		
-		gameObject.camera.ResetProjectionMatrix();
+		camera.ResetProjectionMatrix();
 		Matrix4x4 om = Matrix4x4.identity;
     	om.SetColumn (3, new Vector4 (offset.x, offset.y, 0.0f, 1));
 
@@ -336,11 +354,11 @@ public class OVRCamera : OVRComponent
 			Vector3 s    = Vector3.one;
     		Matrix4x4 pm = Matrix4x4.TRS(t, r, s);
 			
-			gameObject.camera.projectionMatrix = pm * om * gameObject.camera.projectionMatrix;
+			camera.projectionMatrix = pm * om * camera.projectionMatrix;
 		}
 		else
 		{
-			gameObject.camera.projectionMatrix = om * gameObject.camera.projectionMatrix;
+			camera.projectionMatrix = om * camera.projectionMatrix;
 		}
 		
 	}

@@ -127,7 +127,7 @@ public class RUISSkeletonManager : MonoBehaviour {
             return;
         }
 
-        Vector3 newRootPosition = coordinateSystem.ConvertKinectPosition(data.Position.Position);
+		Vector3 newRootPosition = coordinateSystem.ConvertKinectPosition(data.Position.Position);
         newRootPosition = Vector3.Scale(newRootPosition, rootSpeedScaling);
         skeletons[player].root.position = newRootPosition;
         skeletons[player].root.positionConfidence = data.Position.Confidence;
@@ -144,7 +144,7 @@ public class RUISSkeletonManager : MonoBehaviour {
             return;
         }
 
-        jointData.position = coordinateSystem.ConvertKinectPosition(data.Position.Position);
+		jointData.position = coordinateSystem.ConvertKinectPosition(data.Position.Position);
         jointData.positionConfidence = data.Position.Confidence;
         jointData.rotation = coordinateSystem.ConvertKinectRotation(data.Orientation);
         jointData.rotationConfidence = data.Orientation.Confidence;
