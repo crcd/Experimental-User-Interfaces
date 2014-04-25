@@ -649,6 +649,8 @@ GameObject:
   - 114: {fileID: 11400068}
   - 114: {fileID: 11400070}
   - 95: {fileID: 9500000}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Broomer
   m_TagString: Untagged
@@ -1667,7 +1669,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100086}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -1.26649594, y: 1.17999995, z: -10}
+  m_LocalPosition: {x: -1.26649725, y: 1.17999995, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400136}
@@ -2676,6 +2678,30 @@ MonoBehaviour:
   rightPositionOffset: {x: 0, y: 0, z: 0}
   rightRotationOffset: {x: 0, y: 0, z: 0}
   animLength: 60
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100086}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78db93579baba4e4ba8df294f452131d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9500004}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055aa950f844dfb43a9b6f5355b48d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoneOffset: {x: -1, y: 0, z: 1.5}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3316,7 +3342,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 575cb7dc5eb8ea94e8f0ab6fde7e92f2, type: 3}
   m_Name: 
@@ -3340,7 +3366,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 271509f11e7230745aef7a35e8321bf4, type: 3}
   m_Name: 
