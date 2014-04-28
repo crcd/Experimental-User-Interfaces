@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(RUISCharacterLocomotion))]
 public class BroomerController : MonoBehaviour {
 	private Rigidbody stoneBody;
 	private Rigidbody broomerBody;
@@ -8,12 +9,19 @@ public class BroomerController : MonoBehaviour {
 	private Vector3 broomerStartingPos;
 	private bool broomerSliding;
 	private IKCtrl ikCtrl;
+
+//	private Vector3 targetVelocity;
+//	private Vector3 velocity;
+//	private Vector3 velocityChange;
+
+	private RUISCharacterLocomotion charLocomotion;
 	
 	
 	void Start () {
 		this.broomerBody = rigidbody;
 		this.broomerStartingPos = rigidbody.position;
 		this.ikCtrl = GameObject.Find ("baseMaleBroomer").GetComponent<IKCtrl> ();
+		this.charLocomotion = gameObject.GetComponent<RUISCharacterLocomotion> ();
 	}
 	
 	public void setStone (Rigidbody stoneBody) {
@@ -21,15 +29,31 @@ public class BroomerController : MonoBehaviour {
 	}
 	
 	private void followStone () {
-		
-		Vector3 newPosition = new Vector3 (
-			this.stoneBody.position.x + this.stoneOffset.x,
-			this.broomerBody.position.y,
-			this.stoneBody.position.z + this.stoneOffset.z
-			);
 
-		this.broomerBody.position = newPosition;
-		this.broomerBody.velocity = new Vector3 (0, 0, 0);
+		this.charLocomotion.SetFixedTargetVelocity (new Vector3(
+			this.stoneBody.velocity.x,
+			0,
+			this.stoneBody.velocity.z
+		));
+	
+
+//		targetVelocity = this.stoneBody.velocity;
+//		velocity = rigidbody.velocity;
+//		velocityChange = (targetVelocity - velocity);
+//		velocityChange.y = 0;
+		//velocityChange = Vector3.ClampMagnitude(velocityChange, Time.fixedDeltaTime * maxVelocityChange);
+
+//		broomerBody.AddForce(velocityChange, ForceMode.VelocityChange);
+
+		
+//		Vector3 newPosition = new Vector3 (
+//			this.stoneBody.position.x + this.stoneOffset.x,
+//			this.broomerBody.position.y,
+//			this.stoneBody.position.z + this.stoneOffset.z
+//			);
+//
+//		this.broomerBody.position = newPosition;
+//		this.broomerBody.velocity = new Vector3 (0, 0, 0);
 	}
 	
 	public void resetToStartPosition () {
@@ -38,7 +62,7 @@ public class BroomerController : MonoBehaviour {
 		this.broomerBody.angularVelocity = new Vector3 (0, 0, 0);
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 		if (this.stoneBody) {
 			this.followStone ();
 		}

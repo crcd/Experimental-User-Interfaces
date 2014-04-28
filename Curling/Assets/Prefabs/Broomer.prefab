@@ -3342,7 +3342,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100086}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 575cb7dc5eb8ea94e8f0ab6fde7e92f2, type: 3}
   m_Name: 
@@ -3366,7 +3366,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100086}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 271509f11e7230745aef7a35e8321bf4, type: 3}
   m_Name: 
@@ -3376,8 +3376,8 @@ MonoBehaviour:
   rotationScaler: 80
   speed: 1.5
   runAdder: 1
-  maxVelocityChange: 20
-  usePSNavigationController: 1
+  maxVelocityChange: 5
+  usePSNavigationController: 0
   PSNaviControllerID: 1
   strafeInsteadTurning: 1
   jumpStrength: 60
