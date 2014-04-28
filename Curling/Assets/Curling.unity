@@ -6950,6 +6950,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1111311896}
+  - 114: {fileID: 1111311897}
   m_Layer: 0
   m_Name: Power
   m_TagString: Untagged
@@ -6970,6 +6971,17 @@ Transform:
   - {fileID: 2107598365}
   - {fileID: 1372865688}
   m_Father: {fileID: 0}
+--- !u!114 &1111311897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1111311895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43d4f36ccf17df45a095ce6f52843b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1123911087
 GameObject:
   m_ObjectHideFlags: 0
@@ -15665,7 +15677,7 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
-    x: -20
+    x: 0
     y: 0
     width: 20
     height: 20
@@ -15680,7 +15692,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107598363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .150000006, y: -.0500000007, z: 1}
+  m_LocalPosition: {x: .125, y: -.0500000007, z: 1}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1111311896}

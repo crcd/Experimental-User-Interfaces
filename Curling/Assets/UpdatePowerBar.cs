@@ -7,7 +7,7 @@ public class UpdatePowerBar : MonoBehaviour {
 	float endPos;
 	// Use this for initialization
 	void Start () {
-		this.startPos = GameObject.Find ("Arrow").transform.position.y;
+		this.startPos = 0.75f;
 		this.currentPos = this.startPos;
 		this.endPos = this.startPos + 0.19f;
 	}
@@ -34,13 +34,12 @@ public class UpdatePowerBar : MonoBehaviour {
 	}
 
 	void UpdateArrowPosition(){
-		if(this.currentPos < this.startPos){
+		if(this.currentPos < this.startPos ){
 			this.currentPos = this.endPos;
 		}
 		if(this.currentPos > this.endPos){
 			this.currentPos = this.startPos;
 		}
-
 		Vector3 pos = GameObject.Find ("Arrow").transform.position;
 		pos.y = this.currentPos;
 		GameObject.Find ("Arrow").transform.position = pos;
