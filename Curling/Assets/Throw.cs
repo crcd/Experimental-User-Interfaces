@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class Throw : MonoBehaviour {
     public Vector3 slidingVelocityFactor;
     public Vector3 releaseVelocityFactor;
+    public Vector3 handlingFactor;
     public float initialDistanceToMove;
     public float distanceToMove;
     protected ThrowerController throwerController;
@@ -12,6 +13,7 @@ public abstract class Throw : MonoBehaviour {
     protected float throwStartTime;
     protected bool footInStartingPosition;
     protected bool initialized;
+    private Vector3 spawnPosition;
 
     void Start () {
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> ();
@@ -32,7 +34,7 @@ public abstract class Throw : MonoBehaviour {
 
     abstract protected Vector3 getControllerPosition ();
 
-    bool isThrowStarted() {
+    bool isThrowStarted () {
         return this.throwStartTime > 0;
     }
 
@@ -49,10 +51,8 @@ public abstract class Throw : MonoBehaviour {
     }
 
     void handleStoneObject () {
-        if (this.initialized) {
-            this.throwerController.setStoneRotation (this.getRotation ());
-            this.throwerController.sawStone (getControllerPosition ());
-        }
+        this.throwerController.setStoneRotation (this.getRotation ());
+        this.throwerController.sawStone (Vector3.Scale (getControllerPosition (), this.handlingFactor));
     }
 
     void handleSpawning () {
@@ -60,7 +60,7 @@ public abstract class Throw : MonoBehaviour {
             this.stoneSpawner.spawnNewStone ();
             this.footInStartingPosition = true;
             this.initialized = false;
-            this.throwerController.sawingStartPosition = getControllerPosition ();
+            this.spawnPosition = getControllerPosition ();
         }
     }
 
@@ -85,10 +85,10 @@ public abstract class Throw : MonoBehaviour {
     }
 
     void handleThrustingVelocity () {
-        if (this.isInitialThrowLineCrossed () && !isThrowStarted())
+        if (this.isInitialThrowLineCrossed () && !isThrowStarted ())
             startThrust ();
         else if (this.isEndlineCrossed ())
-          endThrust ();
+            endThrust ();
     }
 
     void throwStone () {

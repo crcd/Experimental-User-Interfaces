@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ThrowerController : MonoBehaviour {
     public Vector3 stoneOffsetConfig;
-    public Vector3 sawingStartPosition;
+    public float maxDistanceFromBody;
     private Rigidbody stoneBody;
     private Rigidbody throwerBody;
     private Vector3 stoneOffset;
@@ -21,7 +21,11 @@ public class ThrowerController : MonoBehaviour {
 
     public void setStone (Rigidbody stoneBody) {
         this.stoneBody = stoneBody;
-        this.stoneOffset = this.stoneOffsetConfig;
+        this.stoneBody.position = new Vector3 (
+            this.stoneOffsetConfig.x,
+            this.stoneBody.position.y,
+            this.stoneOffsetConfig.z
+        );
         this.ikCtrl.rightHandObj = stoneBody.transform;
         this.ikCtrl.rightIKActive = true;
     }
@@ -67,15 +71,8 @@ public class ThrowerController : MonoBehaviour {
         }
     }
 
-    public void sawStone (Vector3 controllerPosition) {
-        if (this.stoneBody != null && this.sawingStartPosition != null) {
-            Vector3 newPosition = new Vector3 (
-                                      this.sawingStartPosition.x - controllerPosition.x,
-                                      0,
-                                      this.sawingStartPosition.z - controllerPosition.z
-                                  );
-            this.stoneOffset = this.stoneOffsetConfig - newPosition;
-        }
+    public void sawStone (Vector3 offset) {
+        this.stoneOffset = Vector3.ClampMagnitude (offset, this.maxDistanceFromBody);
     }
 
     private void keepStonePositionInHand () {
