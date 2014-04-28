@@ -8,24 +8,23 @@ public class ThrowerController : MonoBehaviour {
     public Vector3 sawingStartPosition;
     public bool isSawingPositionSet = false;
     private Vector3 stoneOffset;
-	private Vector3 throwerStartingPos;
-	private bool throwerSliding;
-	private Vector3 throwerSlidingForce;
+    private Vector3 throwerStartingPos;
+    private bool throwerSliding;
+    private Vector3 throwerSlidingForce;
     private IKCtrl ikCtrl;
-	private BroomController broomController;
-
+    private BroomController broomController;
 
     void Start () {
         this.throwerBody = rigidbody;
-		this.throwerStartingPos = rigidbody.position;
+        this.throwerStartingPos = rigidbody.position;
         this.ikCtrl = GameObject.Find ("baseMaleThrower").GetComponent<IKCtrl> ();
-		this.broomController = GameObject.Find ("Broom").GetComponent<BroomController> ();
+        this.broomController = GameObject.Find ("Broom").GetComponent<BroomController> ();
     }
 
     public void setStone (Rigidbody stoneBody) {
         this.stoneBody = stoneBody;
         this.stoneOffset = this.stoneOffsetConfig;
-		this.ikCtrl.rightHandObj = stoneBody.transform;
+        this.ikCtrl.rightHandObj = stoneBody.transform;
         this.ikCtrl.rightIKActive = true;
     }
 
@@ -35,12 +34,14 @@ public class ThrowerController : MonoBehaviour {
             this.stoneBody.velocity = this.throwerBody.velocity + additionalVelocity;
             this.stoneBody = null;
         }
-		if (throwerSliding) throwerSliding = false;
+        if (throwerSliding)
+            throwerSliding = false;
+        this.throwerSlidingForce = new Vector3 (0, 0, 0);
         // this.ikCtrl.rightHandObj = null; // IKCtrl has animation
-		this.ikCtrl.rightIKActive = false;
+        this.ikCtrl.rightIKActive = false;
 
-		// Just for testing
-		this.broomController.brooming = true;
+        // Just for testing
+        this.broomController.brooming = true;
 
 
     }
@@ -49,22 +50,19 @@ public class ThrowerController : MonoBehaviour {
         if (this.stoneBody) {
             this.stoneBody.angularVelocity = new Vector3 (0, 0, 0);
         }
-        // this.throwerBody.velocity = velocity;
-		this.throwerSliding = true;
-		this.throwerSlidingForce = force;
-        //this.throwerBody.AddForce(this.throwerSlidingForce, ForceMode.Impulse);
-
+        this.throwerSliding = true;
+        this.throwerBody.AddForce (force, ForceMode.VelocityChange);
     }
 
     public void resetToStartPosition () {
-		this.throwerBody.position = this.throwerStartingPos;
+        this.throwerBody.position = this.throwerStartingPos;
         this.throwerBody.velocity = new Vector3 (0, 0, 0);
         this.throwerBody.angularVelocity = new Vector3 (0, 0, 0);
 
-		// Just for testing
-		this.broomController.brooming = false;
+        // Just for testing
+        this.broomController.brooming = false;
 		
-	}
+    }
 
     public void setStoneRotation (float stoneRotation) {
         if (this.stoneBody) {
@@ -93,17 +91,12 @@ public class ThrowerController : MonoBehaviour {
                                   this.stoneBody.position.y,
                                   this.throwerBody.position.z + stoneOffset.z
                               );
-//        this.stoneBody.MovePosition (newPosition);
         this.stoneBody.position = newPosition;
     }
 
     void Update () {
         if (this.stoneBody) {
             this.keepStonePositionInHand ();
-        }
-
-        if (this.throwerBody && this.throwerSliding) {
-        	this.throwerBody.AddForce(this.throwerSlidingForce, ForceMode.Impulse);
         }
     }
 }
