@@ -35,14 +35,11 @@ public class UpdatePowerBar : MonoBehaviour {
 
 	void UpdateArrowPosition(){
 		if(this.currentPos < this.startPos ){
-			this.currentPos = endPos;
+			this.currentPos = this.endPos;
 		}
 		if(this.currentPos > this.endPos){
 			this.currentPos = this.startPos;
 		}
-		Debug.Log (this.startPos);
-		Debug.Log (this.endPos);
-		Debug.Log (this.currentPos);
 		Vector3 pos = GameObject.Find ("Arrow").transform.position;
 		pos.y = this.currentPos;
 		GameObject.Find ("Arrow").transform.position = pos;
