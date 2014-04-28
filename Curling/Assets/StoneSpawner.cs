@@ -12,13 +12,6 @@ public class StoneSpawner : MonoBehaviour {
 	void Start () {
 		this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> (); 
 		this.broomerController = GameObject.Find ("Broomer").GetComponent<BroomerController> (); 
-		//this.spawnNewStone ();
-	}
-	
-	void Update () {
-		if (Input.GetKeyUp ("s")) {
-			this.spawnNewStone ();
-		}
 	}
 	
 	GameObject spawnStone () {
