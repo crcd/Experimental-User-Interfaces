@@ -49,11 +49,8 @@ public abstract class Throw : MonoBehaviour {
     }
 
     void handleStoneObject () {
-        this.throwerController.setStoneRotation (this.getRotation ());
-        if (!this.throwerController.isSawingPositionSet) {
-            this.throwerController.isSawingPositionSet = true;
-            this.throwerController.sawingStartPosition = getControllerPosition ();
-        } else {
+        if (this.initialized) {
+            this.throwerController.setStoneRotation (this.getRotation ());
             this.throwerController.sawStone (getControllerPosition ());
         }
     }
@@ -63,6 +60,7 @@ public abstract class Throw : MonoBehaviour {
             this.stoneSpawner.spawnNewStone ();
             this.footInStartingPosition = true;
             this.initialized = false;
+            this.throwerController.sawingStartPosition = getControllerPosition ();
         }
     }
 

@@ -2,15 +2,13 @@
 using System.Collections;
 
 public class ThrowerController : MonoBehaviour {
-    private Rigidbody stoneBody;
-    private Rigidbody throwerBody;
     public Vector3 stoneOffsetConfig;
     public Vector3 sawingStartPosition;
-    public bool isSawingPositionSet = false;
+    private Rigidbody stoneBody;
+    private Rigidbody throwerBody;
     private Vector3 stoneOffset;
     private Vector3 throwerStartingPos;
     private bool throwerSliding;
-    private Vector3 throwerSlidingForce;
     private IKCtrl ikCtrl;
     private BroomController broomController;
 
@@ -36,7 +34,6 @@ public class ThrowerController : MonoBehaviour {
         }
         if (throwerSliding)
             throwerSliding = false;
-        this.throwerSlidingForce = new Vector3 (0, 0, 0);
         // this.ikCtrl.rightHandObj = null; // IKCtrl has animation
         this.ikCtrl.rightIKActive = false;
 
