@@ -7,6 +7,8 @@ TagManager:
   - CurrentRedStone
   - ThrowedYellowStone
   - ThrowedRedStone
+  - MovingYellowStone
+  - MovingRedStone
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
