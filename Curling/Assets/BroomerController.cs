@@ -9,6 +9,7 @@ public class BroomerController : MonoBehaviour {
 	private Vector3 broomerStartingPos;
 	private bool broomerSliding;
 	private IKCtrl ikCtrl;
+    private BroomController broomController;
 
 //	private Vector3 targetVelocity;
 //	private Vector3 velocity;
@@ -22,6 +23,7 @@ public class BroomerController : MonoBehaviour {
 		this.broomerStartingPos = rigidbody.position;
 		this.ikCtrl = GameObject.Find ("baseMaleBroomer").GetComponent<IKCtrl> ();
 		this.charLocomotion = gameObject.GetComponent<RUISCharacterLocomotion> ();
+        this.broomController = GameObject.Find ("Broom").GetComponent<BroomController> ();
 	}
 	
 	public void setStone (Rigidbody stoneBody) {
@@ -29,13 +31,11 @@ public class BroomerController : MonoBehaviour {
 	}
 	
 	private void followStone () {
-
-		this.charLocomotion.SetFixedTargetVelocity (new Vector3(
-			this.stoneBody.velocity.x,
-			0,
-			this.stoneBody.velocity.z
-		));
-	
+        this.charLocomotion.SetFixedTargetVelocity (new Vector3(
+            this.stoneBody.velocity.x,
+            0,
+            this.stoneBody.velocity.z
+        ));
 
 //		targetVelocity = this.stoneBody.velocity;
 //		velocity = rigidbody.velocity;
@@ -61,10 +61,17 @@ public class BroomerController : MonoBehaviour {
 		this.broomerBody.velocity = new Vector3 (0, 0, 0);
 		this.broomerBody.angularVelocity = new Vector3 (0, 0, 0);
 	}
+
+    bool isStoneMoving() {
+        return Vector3.Distance (this.stoneBody.velocity, new Vector3 (0, 0, 0)) >= 0.05f;
+    }
 	
 	void FixedUpdate () {
 		if (this.stoneBody) {
-			this.followStone ();
+            if (isStoneMoving ())
+                this.followStone ();
+            else
+                this.broomController.brooming = false;
 		}
 	}
 }

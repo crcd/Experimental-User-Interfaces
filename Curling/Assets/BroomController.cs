@@ -37,7 +37,7 @@ public class BroomController : MonoBehaviour {
 
 		gameObject.transform.position = new Vector3 (
 			broomerBody.position.x + offset.x,
-			gameObject.transform.position.y,
+            0,
 			broomerBody.position.z + offset.z
 		);
 

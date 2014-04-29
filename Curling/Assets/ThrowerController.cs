@@ -4,6 +4,7 @@ using System.Collections;
 public class ThrowerController : MonoBehaviour {
     public Vector3 stoneOffsetConfig;
     public float maxDistanceFromBody;
+    private GameObject stone;
     private Rigidbody stoneBody;
     private Rigidbody throwerBody;
     private Vector3 stoneOffset;
@@ -19,8 +20,10 @@ public class ThrowerController : MonoBehaviour {
         this.broomController = GameObject.Find ("Broom").GetComponent<BroomController> ();
     }
 
-    public void setStone (Rigidbody stoneBody) {
-        this.stoneBody = stoneBody;
+    public void setStone (GameObject stone) {
+        this.stone = stone;
+
+        this.stoneBody = stone.rigidbody;
         this.stoneBody.position = new Vector3 (
             this.stoneOffsetConfig.x,
             this.stoneBody.position.y,
@@ -34,6 +37,11 @@ public class ThrowerController : MonoBehaviour {
         if (this.stoneBody) {
             this.stoneBody.angularVelocity = new Vector3 (0, yRotation, 0);
             this.stoneBody.velocity = this.throwerBody.velocity + additionalVelocity;
+            if (this.stone.tag == "CurrentYellowStone")
+                this.stone.tag = "MovingYellowStone";
+            else
+                this.stone.tag = "MovingRedStone";
+            this.stone = null;
             this.stoneBody = null;
         }
         if (throwerSliding)

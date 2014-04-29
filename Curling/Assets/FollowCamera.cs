@@ -22,7 +22,7 @@ public class FollowCamera : MonoBehaviour {
 
 
 		if (objectToFollow == null) {
-			objectToFollow = GameObject.Find ("StoneRed");
+            objectToFollow = GameObject.Find ("Thrower");
 		}
 
 		if (lookAt || !startFromPosition) {

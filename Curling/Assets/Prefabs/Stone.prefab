@@ -16,6 +16,7 @@ GameObject:
   - 136: {fileID: 13600002}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 12
   m_Name: Stone
   m_TagString: Untagged
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f3b06b37d124c8e9a602742d16c130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curve_amount: .300000012
+  curve_amount: .150000006
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +173,17 @@ MonoBehaviour:
   clipStoneCurl: {fileID: 8300000, guid: d835304c692a145f2a430e4d8e442f14, type: 3}
   clipStoneHitWall: {fileID: 8300000, guid: 0b442d479ce0d4340ac8665f564bb2ef, type: 3}
   stationary: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4dba69395ef4eb3bdcb35d0fbf4323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -13,8 +13,8 @@ public class ClosestStone : MonoBehaviour {
     }
 
     string getCloserTeam () {
-        GameObject[] yellowStones = GameObject.FindGameObjectsWithTag ("YellowStone");
-        GameObject[] redStones = GameObject.FindGameObjectsWithTag ("RedStone");
+        GameObject[] yellowStones = GameObject.FindGameObjectsWithTag ("ThrowedYellowStone");
+        GameObject[] redStones = GameObject.FindGameObjectsWithTag ("ThrowedRedStone");
         float redTeamDistance = getClosestDistance (redStones);
         float yellowTeamDistance = getClosestDistance (yellowStones);
         if (redTeamDistance < yellowTeamDistance) {
