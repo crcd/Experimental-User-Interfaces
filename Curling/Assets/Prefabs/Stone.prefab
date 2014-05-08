@@ -13,7 +13,6 @@ GameObject:
   - 95: {fileID: 9500000}
   - 54: {fileID: 5400000}
   - 136: {fileID: 13600002}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
@@ -133,19 +132,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84a0a511492e4690939ac2ea425e080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 3
-  angularVelocity: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

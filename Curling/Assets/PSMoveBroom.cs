@@ -17,6 +17,8 @@ public class PSMoveBroom : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		broomController.rotation = moveWand.localRotation;
+		//broomController.rotation = moveWand.localRotation;
+
+
 	}
 }
