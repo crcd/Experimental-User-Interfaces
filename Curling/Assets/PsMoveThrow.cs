@@ -6,6 +6,7 @@ public class PsMoveThrow : Throw {
     public float rotationFactor;
 
     void Start () {
+        base.Start ();
         this.moveWand = gameObject.GetComponent<RUISPSMoveWand> ();
     }
 

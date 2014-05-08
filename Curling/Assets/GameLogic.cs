@@ -7,11 +7,26 @@ public class GameLogic : MonoBehaviour {
     private bool redTurn = false;
     private UpdateScoreboard scoreBoard;
     private ClosestStone closestStoneCalculator;
+    private int redStonesLeft;
+    private int yellowStonesLeft;
     // Use this for initialization
     void Start () {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
         this.scoreBoard = GameObject.Find ("GameLogic").GetComponent<UpdateScoreboard> ();
         this.closestStoneCalculator = GameObject.Find ("GameLogic").GetComponent<ClosestStone> ();
+    }
+
+    void resetRound () {
+        this.redStonesLeft = 8;
+        this.yellowStonesLeft = 8;
+        this.scoreBoard.ResetScoreboard ();
+    }
+
+    void updateScoreBoard () {
+        this.scoreBoard.SetRedStonesLeft (this.redStonesLeft);
+        this.scoreBoard.SetYellowStonesLeft (this.yellowStonesLeft);
+        this.scoreBoard.UpdateRedTeamScore (this.closestStoneCalculator.getRedTeamPoints ());
+        this.scoreBoard.UpdateBlueTeamScore (this.closestStoneCalculator.getYellowTeamPoints ());
     }
 
     public void startNewThrow () {
@@ -58,11 +73,11 @@ public class GameLogic : MonoBehaviour {
             if (this.redTurn) {
                 stone = this.stoneSpawner.spawnRedStone ();
                 this.redTurn = false;
-                this.scoreBoard.DeleteOneUnusedStoneRedTeam ();
+                this.redStonesLeft--;
             } else {
                 stone = this.stoneSpawner.spawnYellowStone ();
                 this.redTurn = true;
-                this.scoreBoard.DeleteOneUnusedStoneBlueTeam ();
+                this.yellowStonesLeft--;
             }
         }
     }
@@ -75,7 +90,6 @@ public class GameLogic : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        this.scoreBoard.UpdateRedTeamScore(this.closestStoneCalculator.getRedTeamPoints ());
-        this.scoreBoard.UpdateBlueTeamScore(this.closestStoneCalculator.getYellowTeamPoints ());
+        updateScoreBoard ();
     }
 }
