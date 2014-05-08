@@ -9,8 +9,6 @@ public class BroomController : MonoBehaviour {
 	public float speed = 10.0f;
 	public float amplitude = 0.1f;
 
-	public Quaternion rotation;
-
 	private Vector3 targetVelocity;
 	private Vector3 velocity;
 	private Vector3 velocityChange;
@@ -20,7 +18,6 @@ public class BroomController : MonoBehaviour {
 
 		broomerBody = GameObject.Find ("Broomer").GetComponent<Rigidbody> ();
 		gameObject.transform.position = broomerBody.position + bodyOffset;
-		rotation = new Quaternion ();
 	
 	}
 
@@ -41,7 +38,6 @@ public class BroomController : MonoBehaviour {
 			broomerBody.position.z + offset.z
 		);
 
-		gameObject.transform.rotation = rotation;
 
 	}
 }

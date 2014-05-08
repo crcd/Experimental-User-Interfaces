@@ -63,15 +63,20 @@ public class BroomerController : MonoBehaviour {
 	}
 
     bool isStoneMoving() {
-        return Vector3.Distance (this.stoneBody.velocity, new Vector3 (0, 0, 0)) >= 0.05f;
+        //return Vector3.Distance (this.stoneBody.velocity, new Vector3 (0, 0, 0)) >= 0.05f;
+		return this.stoneBody.velocity.magnitude >= 0.05f;
     }
 	
 	void FixedUpdate () {
 		if (this.stoneBody) {
-            if (isStoneMoving ())
+            if (isStoneMoving ()) {
                 this.followStone ();
-            else
+				// Update when PS Move is connected
+				this.broomController.brooming = true;
+			} else {
+				this.charLocomotion.SetFixedTargetVelocity (new Vector3(0,0,0));
                 this.broomController.brooming = false;
+			}
 		}
 	}
 }

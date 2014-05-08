@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class ClosestStone : MonoBehaviour {
     Vector3 centerPosition;
@@ -8,35 +9,49 @@ public class ClosestStone : MonoBehaviour {
         this.centerPosition = GameObject.Find ("CenterPosition").transform.position;
     }
 
-    void Update () {
-        Debug.Log (getCloserTeam ());
-    }
-
-    string getCloserTeam () {
-        GameObject[] yellowStones = GameObject.FindGameObjectsWithTag ("ThrowedYellowStone");
-        GameObject[] redStones = GameObject.FindGameObjectsWithTag ("ThrowedRedStone");
-        float redTeamDistance = getClosestDistance (redStones);
-        float yellowTeamDistance = getClosestDistance (yellowStones);
-        if (redTeamDistance < yellowTeamDistance) {
-            return "Red leads";
+    public int getRedTeamPoints () {
+        int status = getStatus ();
+        if (status > 0) {
+            return status;
         } else {
-            if (float.IsInfinity (yellowTeamDistance)) {
-                return "No stones throwed";
-            } else {
-                return "Yellow leads";
-            }
+            return 0;
         }
     }
 
-    float getClosestDistance (GameObject[] stones) {
-        float smallestDistance = float.PositiveInfinity;
-        foreach (GameObject stone in stones) {
-            float distance = getDistanceFromCenter (stone);
-            if (distance < smallestDistance) {
-                smallestDistance = distance;
+    public int getYellowTeamPoints () {
+        int status = getStatus ();
+        if (status < 0) {
+            return -status;
+        } else {
+            return 0;
+        }
+    }
+
+    int getStatus() {
+        GameObject[] stones = getThrowedStonesSorted ();
+        string winnerTag = "";
+        int winningStones = 0;
+        for (int i = 0; i < stones.Length; i++) {
+            if (i == 0) {
+                winnerTag = stones [i].tag;
+            }
+            if (stones [i].tag == winnerTag) {
+                winningStones++;
+            } else {
+                break;
             }
         }
-        return smallestDistance;
+        if (winnerTag == "ThrowedRedStone") {
+            return winningStones;
+        } else {
+            return -winningStones;
+        }
+    }
+
+    GameObject[] getThrowedStonesSorted () {
+        GameObject[] stones = GameObject.FindGameObjectsWithTag ("ThrowedYellowStone");
+        stones = stones.Concat (GameObject.FindGameObjectsWithTag ("ThrowedRedStone")).ToArray ();
+        return stones.OrderBy (stone => getDistanceFromCenter ((GameObject)stone)).ToArray();
     }
 
     float getDistanceFromCenter (GameObject stone) {

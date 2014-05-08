@@ -53,9 +53,6 @@ public class ThrowerController : MonoBehaviour {
         // this.ikCtrl.rightHandObj = null; // IKCtrl has animation
         this.ikCtrl.rightIKActive = false;
 
-        // Just for testing
-        this.broomController.brooming = true;
-
 
     }
 

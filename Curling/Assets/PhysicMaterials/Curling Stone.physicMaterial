@@ -8,7 +8,7 @@ PhysicMaterial:
   m_Name: Curling Stone
   dynamicFriction: 0
   staticFriction: .0199999996
-  bounciness: .5
+  bounciness: .649999976
   frictionCombine: 1
   bounceCombine: 0
   frictionDirection2: {x: 0, y: 0, z: 0}

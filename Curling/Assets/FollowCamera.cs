@@ -8,6 +8,7 @@ public class FollowCamera : MonoBehaviour {
 	public Vector3 easing = new Vector3(1.0f,1.0f,1.0f);
 	public bool lookAt;
 	public bool startFromPosition;
+	public bool followMovingStone;
 
 
 
@@ -32,11 +33,22 @@ public class FollowCamera : MonoBehaviour {
 		}
 	
 	}
+
+	GameObject findMovingStone() {
+		GameObject movingStone = GameObject.FindGameObjectWithTag ("MovingYellowStone");
+		if (movingStone == null)
+			movingStone = GameObject.FindGameObjectWithTag ("MovingRedStone");
+		return movingStone;
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 	
 		if (!follow) return;
+
+		if (followMovingStone) {
+			objectToFollow = findMovingStone();
+		}
 
 		newPos = objectToFollow.transform.position;
 

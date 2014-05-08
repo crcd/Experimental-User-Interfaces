@@ -6,11 +6,11 @@ public class KeyboardThrow : MonoBehaviour {
     public float rotation;
     private ThrowerController throwerController;
     public CharacterCrouch characterCrouch;
-    private StoneSpawner stoneSpawner;
+    private GameLogic gameLogic;
 
     void Start () {
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> ();
-        this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
+        this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic> ();
     }
 
     bool isPressed () {
@@ -23,7 +23,7 @@ public class KeyboardThrow : MonoBehaviour {
 
     void Update () {
         if (Input.GetKeyUp ("s")) {
-            this.stoneSpawner.spawnNewStone ();
+            this.gameLogic.startNewThrow ();
         }
         if (this.isPressed ()) {
             this.throwerController.startSliding (slidingForce);
