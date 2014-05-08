@@ -14,7 +14,7 @@ PlayerSettings:
   productName: RUIS
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  defaultScreenWidth: 1280
+  defaultScreenWidth: 5376
   defaultScreenHeight: 800
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
