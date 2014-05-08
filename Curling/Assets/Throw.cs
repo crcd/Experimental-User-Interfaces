@@ -15,7 +15,7 @@ public abstract class Throw : MonoBehaviour {
     protected bool initialized;
     private Vector3 spawnPosition;
 
-    void Start () {
+    protected void Start () {
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> ();
         this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic> ();
     }
@@ -52,7 +52,8 @@ public abstract class Throw : MonoBehaviour {
 
     void handleStoneObject () {
         this.throwerController.setStoneRotation (this.getRotation ());
-        this.throwerController.sawStone (Vector3.Scale (getControllerPosition (), this.handlingFactor));
+        Vector3 offset = getControllerPosition () - this.spawnPosition;
+        this.throwerController.sawStone (Vector3.Scale (offset, this.handlingFactor));
     }
 
     void handleSpawning () {
