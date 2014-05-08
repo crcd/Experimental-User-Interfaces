@@ -4,7 +4,9 @@ using System.Collections;
 public class StonePhysics : MonoBehaviour {
 
 	public float friction;
-	public float broomingEffect;
+	public float broomingFactor;
+	public bool brooming;
+	private float tmpfriction;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,7 +18,13 @@ public class StonePhysics : MonoBehaviour {
 		rigidbody.AddForce(
 			new Vector3(rigidbody.angularVelocity.y*curve_amount,0,0)
 			);
-		Vector3 frictionForce = -1*friction*rigidbody.velocity.normalized;
+		if (brooming) {
+			tmpfriction = friction/broomingFactor;
+		}
+		else {
+			tmpfriction = friction;
+		}
+		Vector3 frictionForce = -1*tmpfriction*rigidbody.velocity.normalized;
 		rigidbody.AddForce(
 				frictionForce
 			);
