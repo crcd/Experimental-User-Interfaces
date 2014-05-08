@@ -12,11 +12,11 @@ GameObject:
   - 23: {fileID: 2300000}
   - 95: {fileID: 9500000}
   - 54: {fileID: 5400000}
-  - 114: {fileID: 11400000}
   - 136: {fileID: 13600002}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   m_Layer: 12
   m_Name: Stone
   m_TagString: Untagged
@@ -133,18 +133,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f3b06b37d124c8e9a602742d16c130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curve_amount: .150000006
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +172,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4dba69395ef4eb3bdcb35d0fbf4323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abfa2922dc2b6d4cb831e28cfd17732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friction: 2
+  broomingEffect: 0
+  curve_amount: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

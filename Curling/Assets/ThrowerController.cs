@@ -4,6 +4,10 @@ using System.Collections;
 public class ThrowerController : MonoBehaviour {
     public Vector3 stoneOffsetConfig;
     public float maxDistanceFromBody;
+	public float minOffsetZ;
+	public float maxOffsetZ;
+	public float minOffsetX;
+	public float maxOffsetX;
     private GameObject stone;
     private Rigidbody stoneBody;
     private Rigidbody throwerBody;
@@ -80,7 +84,21 @@ public class ThrowerController : MonoBehaviour {
     }
 
     public void sawStone (Vector3 offset) {
-        this.stoneOffset = Vector3.ClampMagnitude (offset, this.maxDistanceFromBody);
+		if(offset.z > this.maxOffsetZ){
+			offset.z = this.maxOffsetZ;
+		}
+		if(offset.z < this.minOffsetZ){
+			offset.z = this.minOffsetZ;
+		}
+		if(offset.x > this.maxOffsetX){
+			offset.x = this.maxOffsetX;
+		}
+		if(offset.x < this.minOffsetX){
+			offset.x = this.minOffsetX;
+		}
+
+        //this.stoneOffset = Vector3.ClampMagnitude (offset, this.maxDistanceFromBody);
+		this.stoneOffset = offset;
     }
 
     private void keepStonePositionInHand () {
