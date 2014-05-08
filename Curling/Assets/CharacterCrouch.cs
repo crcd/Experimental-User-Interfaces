@@ -25,7 +25,6 @@ public class CharacterCrouch : MonoBehaviour
 
 	public void toggleCrouch(bool newVal) {
 		crouching = newVal;
-		Debug.Log ("Toggling crouch");
 	}
 	
 	void Update () 

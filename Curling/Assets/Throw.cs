@@ -8,7 +8,7 @@ public abstract class Throw : MonoBehaviour {
     public float initialDistanceToMove;
     public float distanceToMove;
     protected ThrowerController throwerController;
-    protected StoneSpawner stoneSpawner;
+    protected GameLogic gameLogic;
     protected Vector3 startingMovePosition;
     protected float throwStartTime;
     protected bool footInStartingPosition;
@@ -17,7 +17,7 @@ public abstract class Throw : MonoBehaviour {
 
     void Start () {
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> ();
-        this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
+        this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic> ();
     }
 
     abstract protected bool wasReleased ();
@@ -57,7 +57,7 @@ public abstract class Throw : MonoBehaviour {
 
     void handleSpawning () {
         if (spawnButtonPressed ()) {
-            this.stoneSpawner.spawnNewStone ();
+            this.gameLogic.startNewThrow ();
             this.footInStartingPosition = true;
             this.initialized = false;
             this.spawnPosition = getControllerPosition ();
@@ -108,7 +108,7 @@ public abstract class Throw : MonoBehaviour {
             handleThrustingVelocity ();
     }
 
-    void Update () {
+    protected void Update () {
         if (this.throwerController) {
             this.handleStoneObject ();
             this.handleSpawning ();

@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class WallHitRemoval : MonoBehaviour {
-    private StoneSpawner stoneSpawner;
+    private GameLogic gameLogic;
 
     void Start () {
-        this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
+        this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic> ();
     }
 
     bool isWallHit (Collision collision) {
         return collision.gameObject.layer == LayerMask.NameToLayer ("Walls");
     }
 
-    bool isMovingStone() {
+    bool isMovingStone () {
         return gameObject.tag == "MovingRedStone" || gameObject.tag == "MovingYellowStone";
     }
 
@@ -21,7 +21,7 @@ public class WallHitRemoval : MonoBehaviour {
             gameObject.rigidbody.velocity = new Vector3 (0, 0, 0);
             if (isMovingStone ()) {
                 gameObject.tag = "";
-                this.stoneSpawner.spawnNewStone ();
+                this.gameLogic.endThrow ();
             }
             Destroy (gameObject, 0.2f);
         }
