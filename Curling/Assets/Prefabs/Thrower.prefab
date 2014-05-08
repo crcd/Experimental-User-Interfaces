@@ -3936,6 +3936,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoneOffsetConfig: {x: .200000003, y: 0, z: .25}
   maxDistanceFromBody: .5
+  minOffsetZ: .150000006
+  maxOffsetZ: .400000006
+  minOffsetX: .150000006
+  maxOffsetX: .25
 --- !u!114 &11400126
 MonoBehaviour:
   m_ObjectHideFlags: 1
