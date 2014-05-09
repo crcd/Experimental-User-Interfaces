@@ -321,10 +321,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522b11fa1a688b6438a5cfc0c17a9ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyOffset: {x: .600000024, y: -1, z: 0}
+  bodyOffset: {x: .748400271, y: -1, z: 0}
   brooming: 0
   speed: 10
   amplitude: .100000001
+  minX: .550000012
+  maxX: .800000012
+  moveToBroomFactor: 0
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

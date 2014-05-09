@@ -22,6 +22,11 @@ public class BroomController : MonoBehaviour {
 	private float currX = 0;
 	private float distX = 0;
 
+	private int dirX = 1;
+	public float minX;
+	public float maxX;
+	public float moveToBroomFactor;
+
 	private float centerFriction = 0.0001f; // prevent division by zero
 
 	private float broomingCoefficient = 1.0f/30.0f;
@@ -52,9 +57,22 @@ public class BroomController : MonoBehaviour {
 	
 		Vector3 offset = bodyOffset;
 
-		if (brooming) {
-			offset.x += Mathf.Abs(Mathf.Sin(Time.time * speed)) * amplitude ;
+//		if (brooming) {
+//			offset.x += Mathf.Abs(Mathf.Sin(Time.time * speed)) * amplitude ;
+//		}
+
+		if (currX > prevX) {
+			dirX = 1;
+		} else {
+			dirX = -1;
 		}
+
+		offset.x += dirX * distX * moveToBroomFactor;
+
+		if (offset.x > maxX) offset.x = maxX;
+		if (offset.x < minX) offset.x = minX;
+
+		bodyOffset = offset;
 
 		//gameObject.transform.position = broomerBody.position + offset;
 
@@ -63,7 +81,7 @@ public class BroomController : MonoBehaviour {
             0,
 			broomerBody.position.z + offset.z
 		);
-		Debug.Log ("PrevX: " + prevX + " CurrX: " + currX + " DistX: " + distX);
+		//Debug.Log ("PrevX: " + prevX + " CurrX: " + currX + " DistX: " + distX);
 
 		var tempBroom = new float[history];
 		tempBroom [0] = distX;
@@ -84,6 +102,6 @@ public class BroomController : MonoBehaviour {
 
 
 
-		Debug.Log ("sum of area: " + sumArea);
+		//Debug.Log ("sum of area: " + sumArea);
 	}
 }
