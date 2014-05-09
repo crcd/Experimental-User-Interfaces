@@ -14,6 +14,7 @@ public class GameLogic : MonoBehaviour {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
         this.scoreBoard = GameObject.Find ("GameLogic").GetComponent<UpdateScoreboard> ();
         this.closestStoneCalculator = GameObject.Find ("GameLogic").GetComponent<ClosestStone> ();
+        this.resetRound ();
     }
 
     void resetRound () {
@@ -80,6 +81,7 @@ public class GameLogic : MonoBehaviour {
                 this.yellowStonesLeft--;
             }
         }
+        updateScoreBoard ();
     }
 
     GameObject findMovingStone () {
@@ -90,6 +92,8 @@ public class GameLogic : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        updateScoreBoard ();
+        if (!isAnyStoneMoving ()) {
+            updateScoreBoard ();
+        }
     }
 }

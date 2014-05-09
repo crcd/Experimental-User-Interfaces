@@ -33,7 +33,7 @@ public class UpdateScoreboard : MonoBehaviour {
     void SetTeamStones(string id, int stones) {
         for(int i = 1 ; i < 9 ; i++){
             string stoneID = id + i.ToString ();
-            if (i < stones)
+            if (i <= stones)
                 GameObject.Find (stoneID).guiTexture.enabled = true;
             else
                 GameObject.Find (stoneID).guiTexture.enabled = false;
