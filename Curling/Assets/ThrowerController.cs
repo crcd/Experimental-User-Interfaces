@@ -3,11 +3,11 @@ using System.Collections;
 
 public class ThrowerController : MonoBehaviour {
     public Vector3 stoneOffsetConfig;
-    public float maxDistanceFromBody;
-	public float minOffsetZ;
-	public float maxOffsetZ;
-	public float minOffsetX;
-	public float maxOffsetX;
+    public Vector3 minOffset;
+    public Vector3 maxOffset;
+    public Vector3 minSlidingSpeed;
+    public Vector3 maxSlidingSpeed;
+    public Vector3 maxThrowingSpeed;
     private GameObject stone;
     private Rigidbody stoneBody;
     private Rigidbody throwerBody;
@@ -40,7 +40,7 @@ public class ThrowerController : MonoBehaviour {
     public void throwStone (Vector3 additionalVelocity, float yRotation) {
         if (this.stoneBody) {
             this.stoneBody.angularVelocity = new Vector3 (0, yRotation, 0);
-            this.stoneBody.velocity = this.throwerBody.velocity + additionalVelocity;
+            this.stoneBody.velocity = this.throwerBody.velocity + this.getLimitedThrowingForce (additionalVelocity);
             if (this.stone.tag == "CurrentYellowStone")
                 this.stone.tag = "MovingYellowStone";
             else
@@ -61,7 +61,19 @@ public class ThrowerController : MonoBehaviour {
             this.stoneBody.angularVelocity = new Vector3 (0, 0, 0);
         }
         this.throwerSliding = true;
-        this.throwerBody.AddForce (force, ForceMode.VelocityChange);
+        this.throwerBody.AddForce (getLimitedSlidingForce (force), ForceMode.VelocityChange);
+    }
+
+    Vector3 getLimitedSlidingForce (Vector3 force) {
+        Vector3 minForce = Vector3.Max (force, this.minSlidingSpeed);
+        Vector3 maxForce = Vector3.Min (minForce, this.maxSlidingSpeed);
+        return maxForce;
+    }
+
+    Vector3 getLimitedThrowingForce (Vector3 force) {
+        Vector3 minForce = Vector3.Max (force, Vector3.zero);
+        Vector3 maxForce = Vector3.Min (minForce, this.maxThrowingSpeed);
+        return maxForce;
     }
 
     public void resetToStartPosition () {
@@ -81,21 +93,9 @@ public class ThrowerController : MonoBehaviour {
     }
 
     public void sawStone (Vector3 offset) {
-		if(offset.z > this.maxOffsetZ){
-			offset.z = this.maxOffsetZ;
-		}
-		if(offset.z < this.minOffsetZ){
-			offset.z = this.minOffsetZ;
-		}
-		if(offset.x > this.maxOffsetX){
-			offset.x = this.maxOffsetX;
-		}
-		if(offset.x < this.minOffsetX){
-			offset.x = this.minOffsetX;
-		}
-
-        //this.stoneOffset = Vector3.ClampMagnitude (offset, this.maxDistanceFromBody);
-		this.stoneOffset = offset;
+        Vector3 minOffset = Vector3.Max (offset, this.minOffset);
+        Vector3 maxOffset = Vector3.Min (minOffset, this.maxOffset);
+        this.stoneOffset = maxOffset;
     }
 
     private void keepStonePositionInHand () {

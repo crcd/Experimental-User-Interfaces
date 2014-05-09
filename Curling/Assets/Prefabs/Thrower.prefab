@@ -3934,11 +3934,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stoneOffsetConfig: {x: .200000003, y: 0, z: .25}
-  maxDistanceFromBody: .5
-  minOffsetZ: .150000006
-  maxOffsetZ: .400000006
-  minOffsetX: .150000006
-  maxOffsetX: .25
+  minOffset: {x: .150000006, y: 0, z: .150000006}
+  maxOffset: {x: .25, y: 0, z: .400000006}
+  minSlidingSpeed: {x: .200000003, y: 0, z: 4}
+  maxSlidingSpeed: {x: .800000012, y: 0, z: 10}
+  maxThrowingSpeed: {x: .200000003, y: 0, z: 2}
 --- !u!114 &11400126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3978,7 +3978,7 @@ MonoBehaviour:
   speed: 1.5
   runAdder: 1
   maxVelocityChange: 1
-  usePSNavigationController: 1
+  usePSNavigationController: 0
   PSNaviControllerID: 1
   strafeInsteadTurning: 1
   jumpStrength: 0
