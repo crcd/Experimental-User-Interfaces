@@ -39,7 +39,7 @@ public class MouseThrow : Throw {
     }
 
     void Update () {
-        base.Update ();
+        base.FixedUpdate ();
         this.previousMousePosition = Input.mousePosition;
     }
 }

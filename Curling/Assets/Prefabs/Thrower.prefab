@@ -2564,7 +2564,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -2917,7 +2917,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2149fbf0fa8596e42bbb95bf7a9c36c9, type: 3}
   m_Name: 
@@ -3278,11 +3278,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5637aaa7f82a84ec58f218bbedfc3cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slidingVelocityFactor: {x: 1, y: 0, z: 5}
+  slidingVelocityFactor: {x: 1, y: 0, z: 8}
   releaseVelocityFactor: {x: 1, y: 0, z: 1}
   handlingFactor: {x: 1, y: 0, z: 1}
   initialDistanceToMove: .0500000007
   distanceToMove: .200000003
+  minControllerThrowVelocity: .150000006
   rotationFactor: .100000001
 --- !u!114 &11400064
 MonoBehaviour:
@@ -3290,7 +3291,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8dfca0476fe54f8181a6f4726923bae, type: 3}
   m_Name: 
@@ -3300,6 +3301,7 @@ MonoBehaviour:
   handlingFactor: {x: .00999999978, y: 0, z: .00999999978}
   initialDistanceToMove: 5
   distanceToMove: 40
+  minControllerThrowVelocity: 0
 --- !u!114 &11400068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3936,8 +3938,8 @@ MonoBehaviour:
   stoneOffsetConfig: {x: .200000003, y: 0, z: .25}
   minOffset: {x: .150000006, y: 0, z: .150000006}
   maxOffset: {x: .25, y: 0, z: .400000006}
-  minSlidingSpeed: {x: .200000003, y: 0, z: 4}
-  maxSlidingSpeed: {x: .800000012, y: 0, z: 10}
+  minSlidingSpeed: {x: 0, y: 0, z: 4}
+  maxSlidingSpeed: {x: .800000012, y: 0, z: 6}
   maxThrowingSpeed: {x: .200000003, y: 0, z: 2}
 --- !u!114 &11400126
 MonoBehaviour:

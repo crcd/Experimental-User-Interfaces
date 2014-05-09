@@ -56,12 +56,34 @@ public class ThrowerController : MonoBehaviour {
 
     }
 
-    public void startSliding (Vector3 force) {
-        if (this.stoneBody) {
-            this.stoneBody.angularVelocity = new Vector3 (0, 0, 0);
-        }
+    public void startAddingSlidingForce () {
         this.throwerSliding = true;
-        this.throwerBody.AddForce (getLimitedSlidingForce (force), ForceMode.VelocityChange);
+    }
+
+    public void startSliding () {
+        Debug.Log (this.throwerBody.velocity);
+        accelerateToMinimumSlidingVelocity ();
+    }
+
+    public void accelerateToMinimumSlidingVelocity () {
+        Vector3 optionalVelocity = Vector3.Max (this.throwerBody.velocity, this.minSlidingSpeed);
+        if (this.throwerBody.velocity.z < this.minSlidingSpeed.z) {
+
+            Vector3 velocityChange = new Vector3 (0, 0, this.minSlidingSpeed.z - this.throwerBody.velocity.z);
+            this.throwerBody.AddForce (velocityChange, ForceMode.VelocityChange);
+        }
+    }
+
+    public void addSlidingForce (Vector3 force) {
+        Vector3 slidingForce = Vector3.Scale (force, new Vector3 (1f, 0, 1f));
+        if (this.throwerBody.velocity.z < this.maxSlidingSpeed.z) {
+
+            this.throwerBody.AddForce (new Vector3 (0, 0, slidingForce.z), ForceMode.Impulse);
+        }
+        if (this.throwerBody.velocity.x < this.maxSlidingSpeed.x) {
+            this.throwerBody.AddForce (new Vector3 (slidingForce.x, 0, 0), ForceMode.Impulse);
+        }
+        //this.throwerBody.AddForce (slidingForce, ForceMode.Impulse);
     }
 
     Vector3 getLimitedSlidingForce (Vector3 force) {

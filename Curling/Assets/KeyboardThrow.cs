@@ -26,7 +26,8 @@ public class KeyboardThrow : MonoBehaviour {
             this.gameLogic.startNewThrow ();
         }
         if (this.isPressed ()) {
-            this.throwerController.startSliding (slidingForce);
+            this.throwerController.startSliding ();
+            this.throwerController.addSlidingForce (slidingForce);
             if (characterCrouch)
                 characterCrouch.toggleCrouch (true);
         } else if (this.isReleased ()) {
