@@ -171,8 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 6
   broomingFactor: 0
-  brooming: 0
-  curve_amount: 0
+  curve_amount: .0799999982
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
