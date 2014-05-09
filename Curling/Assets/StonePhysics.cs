@@ -21,8 +21,8 @@ public class StonePhysics : MonoBehaviour {
             new Vector3(rigidbody.angularVelocity.y*curve_amount,0,0) *
             rigidbody.velocity.magnitude
 		);
-		if (broomingFactor > 0.1) {
-			tmpfriction = friction/this.broomingFactor;
+		if (broomingFactor > 0.1f) {
+			tmpfriction = friction - (0.8f * friction) * this.broomingFactor; // Remove max 80%
 		}
 		else {
 			tmpfriction = friction;

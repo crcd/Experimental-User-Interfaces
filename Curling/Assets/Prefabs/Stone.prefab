@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abfa2922dc2b6d4cb831e28cfd17732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friction: 6
+  friction: 4
   broomingFactor: 0
   curve_amount: .0799999982
 --- !u!135 &13500000
