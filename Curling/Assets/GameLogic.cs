@@ -12,8 +12,8 @@ public class GameLogic : MonoBehaviour {
     // Use this for initialization
     void Start () {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
-        this.scoreBoard = GameObject.Find ("GameLogic").GetComponent<UpdateScoreboard> ();
-        this.closestStoneCalculator = GameObject.Find ("GameLogic").GetComponent<ClosestStone> ();
+        this.scoreBoard = new UpdateScoreboard ();
+        this.closestStoneCalculator = new ClosestStone ();
         this.resetRound ();
     }
 

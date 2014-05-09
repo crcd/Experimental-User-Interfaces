@@ -3,10 +3,10 @@ using System.Collections;
 using System.Linq;
 
 public class ClosestStone : MonoBehaviour {
-    Vector3 centerPosition;
+    private Vector3 centerPosition;
 
     void Start () {
-        this.centerPosition = GameObject.Find ("CenterPosition").transform.position;
+        this.centerPosition = new Vector3 (0, 0, 17.38f);
     }
 
     public int getRedTeamPoints () {
