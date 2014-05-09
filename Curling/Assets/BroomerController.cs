@@ -72,10 +72,10 @@ public class BroomerController : MonoBehaviour {
             if (isStoneMoving ()) {
                 this.followStone ();
 				// Update when PS Move is connected
-				this.broomController.brooming = true;
+				//this.broomController.brooming = true;
 			} else {
 				this.charLocomotion.SetFixedTargetVelocity (new Vector3(0,0,0));
-                this.broomController.brooming = false;
+                //this.broomController.brooming = false;
 			}
 		}
 	}
