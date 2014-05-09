@@ -18,8 +18,9 @@ public class StonePhysics : MonoBehaviour {
 		this.broomingFactor = broomController.getCenterFriction ();
 		Debug.Log ("Brooming factor: " + this.broomingFactor);
 		rigidbody.AddForce(
-			new Vector3(rigidbody.angularVelocity.y*curve_amount,0,0)
-			);
+            new Vector3(rigidbody.angularVelocity.y*curve_amount,0,0) *
+            rigidbody.velocity.magnitude
+		);
 		if (broomingFactor > 0.1) {
 			tmpfriction = friction/this.broomingFactor;
 		}
