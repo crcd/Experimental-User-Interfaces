@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class KeyboardThrow : MonoBehaviour {
-    public Vector3 slidingForce;
+    public Vector3 slidingScale;
     public float rotation;
     private ThrowerController throwerController;
     public CharacterCrouch characterCrouch;
@@ -26,8 +26,7 @@ public class KeyboardThrow : MonoBehaviour {
             this.gameLogic.startNewThrow ();
         }
         if (this.isPressed ()) {
-            this.throwerController.startSliding ();
-            this.throwerController.addSlidingForce (slidingForce);
+            this.throwerController.startSlidingToScale (slidingScale);
             if (characterCrouch)
                 characterCrouch.toggleCrouch (true);
         } else if (this.isReleased ()) {

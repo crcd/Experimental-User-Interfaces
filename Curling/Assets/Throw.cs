@@ -2,17 +2,15 @@
 using System.Collections;
 
 public abstract class Throw : MonoBehaviour {
-    public Vector3 slidingVelocityFactor;
     public Vector3 releaseVelocityFactor;
     public Vector3 handlingFactor;
-    public float initialDistanceToMove;
-    public float distanceToMove;
-    public Time throwTime;
+    public Vector3 minDistance;
+    public Vector3 maxDistance;
     public float minControllerThrowVelocity;
+
     protected ThrowerController throwerController;
     protected GameLogic gameLogic;
     protected Vector3 startingMovePosition;
-    protected float throwStartTime;
     protected bool footInStartingPosition;
     protected bool initialized;
     private Vector3 spawnPosition;
@@ -37,18 +35,6 @@ public abstract class Throw : MonoBehaviour {
 
     abstract protected Vector3 getControllerPosition ();
 
-    bool isThrowStarted () {
-        return this.throwStartTime > 0;
-    }
-
-    bool isInitialThrowLineCrossed () {
-        return getControllerPosition ().z - this.startingMovePosition.z > this.initialDistanceToMove;
-    }
-
-    bool isEndlineCrossed () {
-        return getControllerPosition ().z - this.startingMovePosition.z > this.distanceToMove;
-    }
-
     Vector3 getReleaseVelocity () {
         return Vector3.Scale (this.getControllerVelocity (), this.releaseVelocityFactor);
     }
@@ -72,59 +58,51 @@ public abstract class Throw : MonoBehaviour {
         this.footInStartingPosition = true;
         this.startingMovePosition = getControllerPosition ();
         this.initialized = true;
-        this.throwStartTime = 0;
         this.minVelocityReached = false;
     }
 
-    void startThrust () {
-        this.startingMovePosition = getControllerPosition ();
-        this.throwStartTime = Time.time;
-    }
-
-    void endThrust () {
-        this.footInStartingPosition = false;
-        float timeDelta = Time.time - this.throwStartTime;
-        float xDelta = getControllerPosition ().x - this.startingMovePosition.x;
-        Vector3 vel = new Vector3 (xDelta / timeDelta, 0, distanceToMove / timeDelta);
-        //this.throwerController.startSliding (Vector3.Scale (vel, this.slidingVelocityFactor));
-    }
-
-    void releaseFoot() {
+    void releaseFoot () {
         this.footInStartingPosition = false;
         this.minVelocityReached = false;
-        this.throwerController.startSliding ();
+        this.throwerController.startSlidingToScale (getDistanceScale ());
     }
 
-    bool isControllerOverMinVelocity() {
+    bool isControllerOverMinVelocity () {
         return getControllerVelocity ().z > this.minControllerThrowVelocity;
     }
 
+    Vector3 getTravelledDistance () {
+        return getControllerPosition () - startingMovePosition;
+    }
+
+    Vector3 getDistanceScale () {
+        Vector3 clampedDistance = Vector3.Min (getTravelledDistance (), this.maxDistance) - this.minDistance;
+        Vector3 distanceLimits = this.maxDistance - this.minDistance;
+        return new Vector3 (
+            clampedDistance.x / distanceLimits.x,
+            0,
+            clampedDistance.z / distanceLimits.z
+        );
+    }
+
     void handleThrustingVelocity () {
-        if (!isPressed())
+        if (!isPressed ())
             return;
         if (!this.minVelocityReached) {
-            if (isControllerOverMinVelocity ())
+            if (isControllerOverMinVelocity ()) {
+                startingMovePosition = this.getControllerPosition ();
                 minVelocityReached = true;
+            }
+                
+        } else {
+            if (isControllerOverMinVelocity ()) {
+                this.throwerController.displayPowerPercentage (getDistanceScale ().z * 100f);
+            } else
+                releaseFoot ();
         }
-        else {
-            if (isControllerOverMinVelocity ())
-                this.throwerController.addSlidingForce (
-                    Vector3.Scale(
-                        this.getControllerVelocity(),
-                        this.slidingVelocityFactor
-                    )
-
-                );
-            else
-                releaseFoot();
-        }
-            
     }
 
     void throwStone () {
-        //Handle if foot still in startingpos
-        //if (this.footInStartingPosition)
-        //    endThrust ();
         this.throwerController.throwStone (this.getReleaseVelocity (), this.getAngularVelocity ());
         this.initialized = false;
     }

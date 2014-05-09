@@ -3278,12 +3278,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5637aaa7f82a84ec58f218bbedfc3cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slidingVelocityFactor: {x: 1, y: 0, z: 8}
+  slidingVelocityFactor: {x: 1, y: 0, z: 1000}
   releaseVelocityFactor: {x: 1, y: 0, z: 1}
   handlingFactor: {x: 1, y: 0, z: 1}
-  initialDistanceToMove: .0500000007
-  distanceToMove: .200000003
-  minControllerThrowVelocity: .150000006
+  minDistance: {x: 0, y: 0, z: .100000001}
+  maxDistance: {x: .200000003, y: 0, z: .600000024}
+  minControllerThrowVelocity: .100000001
   rotationFactor: .100000001
 --- !u!114 &11400064
 MonoBehaviour:
@@ -3299,8 +3299,8 @@ MonoBehaviour:
   slidingVelocityFactor: {x: .00400000019, y: 0, z: .00800000038}
   releaseVelocityFactor: {x: 1, y: 0, z: 1}
   handlingFactor: {x: .00999999978, y: 0, z: .00999999978}
-  initialDistanceToMove: 5
-  distanceToMove: 40
+  minDistance: {x: 0, y: 0, z: 0}
+  maxDistance: {x: 0, y: 0, z: 0}
   minControllerThrowVelocity: 0
 --- !u!114 &11400068
 MonoBehaviour:
@@ -3921,7 +3921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a711bf8adc9403582279ec9d0b586c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slidingForce: {x: 0, y: 0, z: 4}
+  slidingScale: {x: 0, y: 0, z: .5}
   rotation: 0
   characterCrouch: {fileID: 11400088}
 --- !u!114 &11400124
@@ -3938,9 +3938,11 @@ MonoBehaviour:
   stoneOffsetConfig: {x: .200000003, y: 0, z: .25}
   minOffset: {x: .150000006, y: 0, z: .150000006}
   maxOffset: {x: .25, y: 0, z: .400000006}
-  minSlidingSpeed: {x: 0, y: 0, z: 4}
+  minSlidingSpeed: {x: 0, y: 0, z: 3}
   maxSlidingSpeed: {x: .800000012, y: 0, z: 6}
   maxThrowingSpeed: {x: .200000003, y: 0, z: 2}
+  slidingForceFactor: {x: .349999994, y: 0, z: .349999994}
+  maxSlidingForceAdder: {x: 20, y: 0, z: 30}
 --- !u!114 &11400126
 MonoBehaviour:
   m_ObjectHideFlags: 1

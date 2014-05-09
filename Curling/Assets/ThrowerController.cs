@@ -8,6 +8,8 @@ public class ThrowerController : MonoBehaviour {
     public Vector3 minSlidingSpeed;
     public Vector3 maxSlidingSpeed;
     public Vector3 maxThrowingSpeed;
+    public Vector3 slidingForceFactor;
+    public Vector3 maxSlidingForceAdder;
     private GameObject stone;
     private Rigidbody stoneBody;
     private Rigidbody throwerBody;
@@ -16,12 +18,14 @@ public class ThrowerController : MonoBehaviour {
     private bool throwerSliding;
     private IKCtrl ikCtrl;
     private BroomController broomController;
+    private UpdatePowerBar powerBarUpdater;
 
     void Start () {
         this.throwerBody = rigidbody;
         this.throwerStartingPos = rigidbody.position;
         this.ikCtrl = GameObject.Find ("baseMaleThrower").GetComponent<IKCtrl> ();
         this.broomController = GameObject.Find ("Broom").GetComponent<BroomController> ();
+        this.powerBarUpdater = new UpdatePowerBar();
     }
 
     public void setStone (GameObject stone) {
@@ -35,6 +39,7 @@ public class ThrowerController : MonoBehaviour {
         );
         this.ikCtrl.rightHandObj = stoneBody.transform;
         this.ikCtrl.rightIKActive = true;
+        this.powerBarUpdater.SetPowerPercentage (0);
     }
 
     public void throwStone (Vector3 additionalVelocity, float yRotation) {
@@ -60,36 +65,41 @@ public class ThrowerController : MonoBehaviour {
         this.throwerSliding = true;
     }
 
-    public void startSliding () {
-        Debug.Log (this.throwerBody.velocity);
-        accelerateToMinimumSlidingVelocity ();
+    public void displayPowerPercentage(float percentage) {
+        this.powerBarUpdater.SetPowerPercentage (percentage);
     }
 
-    public void accelerateToMinimumSlidingVelocity () {
-        Vector3 optionalVelocity = Vector3.Max (this.throwerBody.velocity, this.minSlidingSpeed);
-        if (this.throwerBody.velocity.z < this.minSlidingSpeed.z) {
-
-            Vector3 velocityChange = new Vector3 (0, 0, this.minSlidingSpeed.z - this.throwerBody.velocity.z);
-            this.throwerBody.AddForce (velocityChange, ForceMode.VelocityChange);
-        }
+    public void startSlidingToScale (Vector3 powerScale) {
+        displayPowerPercentage (powerScale.z*100);
+        Vector3 slidingSpeed = Vector3.Scale (
+            this.maxSlidingSpeed - this.minSlidingSpeed,
+            powerScale
+        ) + this.minSlidingSpeed;
+        this.throwerBody.AddForce (slidingSpeed, ForceMode.VelocityChange);
     }
 
     public void addSlidingForce (Vector3 force) {
-        Vector3 slidingForce = Vector3.Scale (force, new Vector3 (1f, 0, 1f));
+        Vector3 slidingForce = Vector3.Min(
+            Vector3.Scale (force, this.slidingForceFactor),
+            this.maxSlidingForceAdder
+        );
         if (this.throwerBody.velocity.z < this.maxSlidingSpeed.z) {
-
             this.throwerBody.AddForce (new Vector3 (0, 0, slidingForce.z), ForceMode.Impulse);
         }
         if (this.throwerBody.velocity.x < this.maxSlidingSpeed.x) {
             this.throwerBody.AddForce (new Vector3 (slidingForce.x, 0, 0), ForceMode.Impulse);
         }
-        //this.throwerBody.AddForce (slidingForce, ForceMode.Impulse);
+        this.powerBarUpdater.SetPowerPercentage (getPowerPercentage ());
     }
 
-    Vector3 getLimitedSlidingForce (Vector3 force) {
-        Vector3 minForce = Vector3.Max (force, this.minSlidingSpeed);
-        Vector3 maxForce = Vector3.Min (minForce, this.maxSlidingSpeed);
-        return maxForce;
+    float getPowerPercentage() {
+        float current = this.throwerBody.velocity.z;
+        float min = this.minSlidingSpeed.z;
+        float max = this.maxSlidingSpeed.z;
+        if (current <= min)
+            return 0;
+        else
+            return (current - min) * 100 / (max - min);
     }
 
     Vector3 getLimitedThrowingForce (Vector3 force) {
