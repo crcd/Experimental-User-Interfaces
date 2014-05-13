@@ -14,7 +14,7 @@ public class StoneSpawner : MonoBehaviour {
     }
 
     GameObject spawnStone () {
-        return Instantiate (stone, new Vector3 (0, 1f, 0), new Quaternion (0, 0, 0, 0)) as GameObject;
+        return Instantiate (stone, new Vector3 (0, 1f, -15f), new Quaternion (0, 0, 0, 0)) as GameObject;
     }
 
     public GameObject spawnYellowStone () {

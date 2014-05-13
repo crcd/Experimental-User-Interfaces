@@ -7,7 +7,6 @@ public abstract class Throw : MonoBehaviour {
     public Vector3 minDistance;
     public Vector3 maxDistance;
     public float minControllerThrowVelocity;
-
     protected ThrowerController throwerController;
     protected GameLogic gameLogic;
     protected Vector3 startingMovePosition;
@@ -110,11 +109,18 @@ public abstract class Throw : MonoBehaviour {
     void handleThrow () {
         if (this.isPressed () && !this.initialized)
             initializeThrow ();
-        else if (this.wasReleased () || (!this.isPressed () && this.initialized))
-            throwStone ();
+        if (initialized) {
+            if (footInStartingPosition)
+                handleThrustingVelocity ();
+            else if (isStoneOverThrowLine() || this.wasReleased () || !this.isPressed ())
+                throwStone ();
+        }
+    }
 
-        if (this.initialized && this.footInStartingPosition)
-            handleThrustingVelocity ();
+    bool isStoneOverThrowLine () {
+        if (throwerController.getStone ())
+            return throwerController.getStone ().transform.position.z > -11f;
+        return false;
     }
 
     protected void FixedUpdate () {

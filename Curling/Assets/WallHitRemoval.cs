@@ -23,7 +23,7 @@ public class WallHitRemoval : MonoBehaviour {
                 gameObject.tag = "";
                 this.gameLogic.endThrow ();
             }
-            Destroy (gameObject, 0.2f);
+            new StoneRemover ().destroyStone (gameObject);
         }
     }
 }
