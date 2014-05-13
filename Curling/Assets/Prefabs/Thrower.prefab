@@ -1974,7 +1974,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.560000002, y: .649999976, z: -21.2182064}
+  m_LocalPosition: {x: -.560000002, y: .649999976, z: -22.0187378}
   m_LocalScale: {x: .899999976, y: .899999976, z: .899999976}
   m_Children:
   - {fileID: 400086}
@@ -3278,12 +3278,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5637aaa7f82a84ec58f218bbedfc3cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slidingVelocityFactor: {x: 1, y: 0, z: 1000}
   releaseVelocityFactor: {x: 1, y: 0, z: 1}
   handlingFactor: {x: 1, y: 0, z: 1}
   minDistance: {x: 0, y: 0, z: .100000001}
   maxDistance: {x: .200000003, y: 0, z: .600000024}
-  minControllerThrowVelocity: .100000001
+  minControllerThrowVelocity: .200000003
   rotationFactor: .100000001
 --- !u!114 &11400064
 MonoBehaviour:
@@ -3296,7 +3295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfca0476fe54f8181a6f4726923bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slidingVelocityFactor: {x: .00400000019, y: 0, z: .00800000038}
   releaseVelocityFactor: {x: 1, y: 0, z: 1}
   handlingFactor: {x: .00999999978, y: 0, z: .00999999978}
   minDistance: {x: 0, y: 0, z: 0}
