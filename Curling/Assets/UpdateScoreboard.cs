@@ -4,11 +4,11 @@ using System.Collections;
 public class UpdateScoreboard : MonoBehaviour {
 	
     public void UpdateBlueTeamScore(int newScore){
-		GameObject.Find ("ScoreBlue").GetComponent<GUIText> ().text = newScore.ToString();
+		GameObject.Find ("ScoreYellow").GetComponent<TextMesh> ().text = newScore.ToString();
 	}
 
     public void UpdateRedTeamScore(int newScore){
-		GameObject.Find ("ScoreRed").GetComponent<GUIText> ().text = newScore.ToString();
+		GameObject.Find ("ScoreRed").GetComponent<TextMesh> ().text = newScore.ToString();
 	}
        
 
@@ -33,6 +33,6 @@ public class UpdateScoreboard : MonoBehaviour {
     }
 
     public void SetCenterText(string text){
-        GameObject.Find ("GUI_Text").GetComponent<GUIText> ().text = text;
+		GameObject.Find ("GUI_Text").GetComponent<TextMesh> ().text = text;
 	}
 }
