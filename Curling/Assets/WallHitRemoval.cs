@@ -3,9 +3,11 @@ using System.Collections;
 
 public class WallHitRemoval : MonoBehaviour {
     private GameLogic gameLogic;
+    private StoneRemover stoneRemover;
 
     void Start () {
         this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic> ();
+        this.stoneRemover = gameObject.AddComponent<StoneRemover> ();
     }
 
     bool isWallHit (Collision collision) {
@@ -23,7 +25,7 @@ public class WallHitRemoval : MonoBehaviour {
                 gameObject.tag = "";
                 this.gameLogic.endThrow ();
             }
-            new StoneRemover ().destroyStone (gameObject);
+            stoneRemover.destroyStone (gameObject);
         }
     }
 }

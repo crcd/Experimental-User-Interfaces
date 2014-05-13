@@ -2,16 +2,6 @@
 using System.Collections;
 
 public class UpdateScoreboard : MonoBehaviour {
-
-	void Start () {
-        this.ResetScoreboard ();
-	}
-
-    public void ResetScoreboard() {
-        this.SetCenterText ("vs");
-        this.SetRedStonesLeft (8);
-        this.SetYellowStonesLeft (8);
-    }
 	
     public void UpdateBlueTeamScore(int newScore){
 		GameObject.Find ("ScoreBlue").GetComponent<GUIText> ().text = newScore.ToString();
@@ -42,7 +32,7 @@ public class UpdateScoreboard : MonoBehaviour {
 		return;
     }
 
-    void SetCenterText(string text){
+    public void SetCenterText(string text){
         GameObject.Find ("GUI_Text").GetComponent<GUIText> ().text = text;
 	}
 }

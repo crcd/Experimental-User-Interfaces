@@ -3,14 +3,15 @@ using System.Collections;
 using System.Linq;
 
 public class GameLogic : MonoBehaviour {
-    private StoneSpawner stoneSpawner;
     private bool redTurn = false;
-    private UpdateScoreboard scoreBoard;
-    private ClosestStone closestStoneCalculator;
     private int redStonesLeft;
     private int yellowStonesLeft;
+    private StoneSpawner stoneSpawner;
+    private UpdateScoreboard scoreBoard;
+    private ClosestStone closestStoneCalculator;
     private StoneRemover stoneRemover;
     private StoneFinder stoneFinder;
+    private bool matchInProgress;
     // Use this for initialization
     void Start () {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
@@ -21,10 +22,15 @@ public class GameLogic : MonoBehaviour {
         this.resetRound ();
     }
 
-    void resetRound () {
-        this.redStonesLeft = 8;
-        this.yellowStonesLeft = 8;
-        this.scoreBoard.ResetScoreboard ();
+    public void resetRound () {
+        GameObject[] stones = stoneFinder.getAllStones ();
+        foreach (GameObject stone in stones) {
+            DestroyImmediate (stone);
+        }
+        this.redStonesLeft = 1;
+        this.yellowStonesLeft = 1;
+        this.matchInProgress = true;
+        this.updateScoreBoard ();
     }
 
     void updateScoreBoard () {
@@ -65,19 +71,30 @@ public class GameLogic : MonoBehaviour {
     }
 
     void spawnNewStone () {
-        if (isItFreeToSpawn ()) {
-            GameObject stone;
+        if (matchInProgress && isItFreeToSpawn ()) {
             if (this.redTurn) {
-                stone = this.stoneSpawner.spawnRedStone ();
+                this.stoneSpawner.spawnRedStone ();
                 this.redTurn = false;
                 this.redStonesLeft--;
+                scoreBoard.SetCenterText ("Red turn");
             } else {
-                stone = this.stoneSpawner.spawnYellowStone ();
+                this.stoneSpawner.spawnYellowStone ();
                 this.redTurn = true;
                 this.yellowStonesLeft--;
+                scoreBoard.SetCenterText ("Yellow turn");
             }
         }
         updateScoreBoard ();
+    }
+
+    void endGame () {
+        this.matchInProgress = false;
+        if (this.closestStoneCalculator.getRedTeamPoints () > this.closestStoneCalculator.getYellowTeamPoints ())
+            scoreBoard.SetCenterText ("Red wins");
+        else if (this.closestStoneCalculator.getRedTeamPoints () == this.closestStoneCalculator.getYellowTeamPoints ())
+            scoreBoard.SetCenterText ("TIE");
+        else
+            scoreBoard.SetCenterText ("Yellow wins");
     }
 
     GameObject findMovingStone () {
@@ -89,8 +106,13 @@ public class GameLogic : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (!isAnyStoneMoving ()) {
-            updateScoreBoard ();
             stoneRemover.removeTooShortStones ();
+            updateScoreBoard ();
+            if (!isThereACurrentStone () && redStonesLeft < 1 && yellowStonesLeft < 1) {
+                endGame ();
+            } else {
+                spawnNewStone ();
+            }
         }
     }
 }

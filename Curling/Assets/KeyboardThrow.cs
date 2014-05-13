@@ -22,6 +22,8 @@ public class KeyboardThrow : MonoBehaviour {
     }
 
     void Update () {
+        if (Input.GetKeyUp ("r"))
+            gameLogic.resetRound ();
         if (Input.GetKeyUp ("s")) {
             this.gameLogic.startNewThrow ();
         }

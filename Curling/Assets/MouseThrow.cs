@@ -38,6 +38,10 @@ public class MouseThrow : Throw {
         return new Vector3 (Input.mousePosition.x, 0, Input.mousePosition.y);
     }
 
+    protected override bool resetRoundButtonPressed () {
+        return Input.GetKeyUp ("R");
+    }
+
     void Update () {
         base.FixedUpdate ();
         this.previousMousePosition = Input.mousePosition;

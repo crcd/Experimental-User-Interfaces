@@ -26,6 +26,8 @@ public abstract class Throw : MonoBehaviour {
 
     abstract protected bool spawnButtonPressed ();
 
+    abstract protected bool resetRoundButtonPressed ();
+
     abstract protected float getAngularVelocity ();
 
     abstract protected float getRotation ();
@@ -124,6 +126,8 @@ public abstract class Throw : MonoBehaviour {
     }
 
     protected void FixedUpdate () {
+        if (this.resetRoundButtonPressed ())
+            this.gameLogic.resetRound ();
         if (this.throwerController) {
             this.handleStoneObject ();
             this.handleSpawning ();

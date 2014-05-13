@@ -5,7 +5,7 @@ public class PsMoveThrow : Throw {
     private RUISPSMoveWand moveWand;
     public float rotationFactor;
 
-    void Start () {
+    new void Start () {
         base.Start ();
         this.moveWand = gameObject.GetComponent<RUISPSMoveWand> ();
     }
@@ -36,5 +36,9 @@ public class PsMoveThrow : Throw {
 
     protected override Vector3 getControllerPosition () {
         return this.moveWand.localPosition;
+    }
+
+    protected override bool resetRoundButtonPressed () {
+        return this.moveWand.startButtonWasPressed;
     }
 }

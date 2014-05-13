@@ -16,7 +16,7 @@ public class StonePhysics : MonoBehaviour {
 	public float curve_amount;
 	public void FixedUpdate() {
 		this.broomingFactor = broomController.getCenterFriction ();
-		Debug.Log ("Brooming factor: " + this.broomingFactor);
+        //Debug.Log ("Brooming factor: " + this.broomingFactor);
 		rigidbody.AddForce(
             new Vector3(rigidbody.angularVelocity.y*curve_amount,0,0) *
             rigidbody.velocity.magnitude
