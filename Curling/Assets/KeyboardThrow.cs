@@ -31,8 +31,14 @@ public class KeyboardThrow : MonoBehaviour {
             this.throwerController.startSlidingToScale (slidingScale);
             if (characterCrouch)
                 characterCrouch.toggleCrouch (true);
-        } else if (this.isReleased ()) {
+        } else if (isStoneOverThrowLine() || this.isReleased ()) {
             this.throwerController.throwStone (new Vector3 (0, 0, 0), rotation);
         }
+    }
+
+    bool isStoneOverThrowLine () {
+        if (throwerController.getStone ())
+            return throwerController.getStone ().transform.position.z > -11f;
+        return false;
     }
 }
