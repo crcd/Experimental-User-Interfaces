@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ns2:ruisInputManager xmlns:ns2="http://ruisystem.net/ruisInputManager">
   <PSMoveSettings>
-    <enabled value="False" />
-    <ip value="127.0.0.1" />
+    <enabled value="True" />
+    <ip value="130.233.46.213" />
     <port value="7899" />
     <autoConnect value="True" />
     <enableInGameCalibration value="False" />

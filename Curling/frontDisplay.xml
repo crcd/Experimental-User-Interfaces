@@ -12,15 +12,15 @@
     <bottomLeft x="0" y="0" />
   </centerKeystone>
   <leftKeystone>
-    <topLeft x="0" y="1" />
-    <topRight x="1" y="1" />
-    <bottomRight x="1" y="0" />
-    <bottomLeft x="0" y="0" />
+    <topLeft x="0.1425781" y="0.9620974" />
+    <topRight x="0.9384766" y="0.9660184" />
+    <bottomRight x="0.9160156" y="0.04459429" />
+    <bottomLeft x="0.1865234" y="0.05374318" />
   </leftKeystone>
   <rightKeystone>
-    <topLeft x="0" y="1" />
-    <topRight x="1" y="1" />
-    <bottomRight x="1" y="0" />
-    <bottomLeft x="0" y="0" />
+    <topLeft x="0.1679688" y="0.9647114" />
+    <topRight x="0.9589844" y="0.9660184" />
+    <bottomRight x="0.9296875" y="0.06289207" />
+    <bottomLeft x="0.2109375" y="0.07465494" />
   </rightKeystone>
 </ns2:ruisDisplay>

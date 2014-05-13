@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ns2:m2k xmlns:ns2="http://ruisystem.net/m2k">
-  <translate x="0" y="0" z="0" />
-  <rotate r00="1" r01="0" r02="0" r10="0" r11="1" r12="0" r20="0" r21="0" r22="1" />
-  <kinectFloorNormal x="0" y="0" z="0" />
-  <kinectDistanceFromFloor value="0" />
+  <translate x="1.606092" y="1.583543" z="-0.5706282" />
+  <rotate r00="0.8803601" r01="0.06121277" r02="0.446978" r10="-0.008795684" r11="0.9308953" r12="0.009900225" r20="-0.5103813" r21="-0.009073554" r22="0.939366" />
+  <kinectFloorNormal x="0.02685464" y="0.9979987" z="-0.0572504" />
+  <kinectDistanceFromFloor value="1.256497" />
 </ns2:m2k>

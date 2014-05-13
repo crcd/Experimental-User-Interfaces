@@ -28,8 +28,8 @@ public class StonePhysics : MonoBehaviour {
 			tmpfriction = friction;
 		}
 		Vector3 frictionForce = -1*tmpfriction*rigidbody.velocity.normalized;
-		rigidbody.AddForce(
-				frictionForce
-			);
+//		rigidbody.AddForce(
+//				frictionForce
+//			);
 	}
 }
