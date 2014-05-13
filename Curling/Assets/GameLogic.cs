@@ -9,11 +9,15 @@ public class GameLogic : MonoBehaviour {
     private ClosestStone closestStoneCalculator;
     private int redStonesLeft;
     private int yellowStonesLeft;
+    private StoneRemover stoneRemover;
+    private StoneFinder stoneFinder;
     // Use this for initialization
     void Start () {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
-        this.scoreBoard = new UpdateScoreboard ();
-        this.closestStoneCalculator = new ClosestStone ();
+        this.scoreBoard = gameObject.AddComponent<UpdateScoreboard> ();
+        this.closestStoneCalculator = gameObject.AddComponent<ClosestStone> ();
+        this.stoneRemover = gameObject.AddComponent<StoneRemover> ();
+        this.stoneFinder = gameObject.AddComponent<StoneFinder> ();
         this.resetRound ();
     }
 
@@ -40,21 +44,13 @@ public class GameLogic : MonoBehaviour {
     }
 
     bool isAnyStoneMoving () {
-        GameObject[] stones = getAllStones ();
+        GameObject[] stones = stoneFinder.getAllStones ();
         foreach (GameObject stone in stones) {
             if (Vector3.Distance (stone.rigidbody.velocity, Vector3.zero) > 0.05) {
                 return true;
             }
         }
         return false;
-    }
-
-    GameObject[] getAllStones () {
-        GameObject[] stones = GameObject.FindGameObjectsWithTag ("MovingRedStone");
-        stones = stones.Concat (GameObject.FindGameObjectsWithTag ("MovingYellowStone")).ToArray ();
-        stones = stones.Concat (GameObject.FindGameObjectsWithTag ("ThrowedRedStone")).ToArray ();
-        stones = stones.Concat (GameObject.FindGameObjectsWithTag ("ThrowedYellowStone")).ToArray ();
-        return stones;
     }
 
     bool isThereACurrentStone () {
@@ -94,6 +90,7 @@ public class GameLogic : MonoBehaviour {
     void Update () {
         if (!isAnyStoneMoving ()) {
             updateScoreBoard ();
+            stoneRemover.removeTooShortStones ();
         }
     }
 }
