@@ -34,7 +34,8 @@ public class BroomController : MonoBehaviour {
 	public float offsetCenterZ;
 	public float offsetAmplitudeX; //2.5
 	public float offsetAmplitudeZ;
-	public float rotationAmount;
+	public float rotationAmountX;
+	public float rotationAmountZ;
 	public float moveToBroomFactor;
 	private float minX;
 	private float maxX;
@@ -141,8 +142,8 @@ public class BroomController : MonoBehaviour {
 		
 		bodyOffset = offset;
 		
-		float rotX = ((tempX - offsetCenterX) / offsetAmplitudeX) * -rotationAmount;
-		float rotZ = ((tempZ - offsetCenterZ) / offsetAmplitudeZ) * -rotationAmount;
+		float rotX = ((tempX - offsetCenterX) / offsetAmplitudeX) * rotationAmountX;
+		float rotZ = ((tempZ - offsetCenterZ) / offsetAmplitudeZ) * rotationAmountZ;
 		
 		//gameObject.transform.position = broomerBody.position + offset;
 		
@@ -164,7 +165,7 @@ public class BroomController : MonoBehaviour {
 		
 		//Debug.Log (rotX);
 		
-		gameObject.transform.eulerAngles = new Vector3 (-rotX, -90, rotZ);
+		gameObject.transform.eulerAngles = new Vector3 (rotX, -90, rotZ);
 		
 		//Debug.Log ("PrevX: " + prevX + " CurrX: " + currX + " DistX: " + distX);
 
