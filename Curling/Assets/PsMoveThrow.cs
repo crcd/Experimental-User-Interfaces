@@ -18,8 +18,16 @@ public class PsMoveThrow : Throw {
         return this.moveWand.triggerValue > 0.9f;
     }
 
+    protected override bool leftMovePressed () {
+        return this.moveWand.squareButtonDown;
+    }
+
+    protected override bool rightMovePressed () {
+        return this.moveWand.triangleButtonDown;
+    }
+
     protected override bool spawnButtonPressed () {
-        return this.moveWand.triangleButtonWasPressed;
+        return this.moveWand.moveButtonDown;
     }
 
     protected override float getAngularVelocity () {

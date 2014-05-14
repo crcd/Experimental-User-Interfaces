@@ -14,10 +14,12 @@ public abstract class Throw : MonoBehaviour {
     protected bool initialized;
     private Vector3 spawnPosition;
     private bool minVelocityReached;
+    private RUISCharacterLocomotion ruisCharacter;
 
     protected void Start () {
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> ();
         this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic> ();
+        this.ruisCharacter = GameObject.Find ("Thrower").GetComponent<RUISCharacterLocomotion> ();
     }
 
     abstract protected bool wasReleased ();
@@ -35,6 +37,10 @@ public abstract class Throw : MonoBehaviour {
     abstract protected Vector3 getControllerVelocity ();
 
     abstract protected Vector3 getControllerPosition ();
+
+    abstract protected bool leftMovePressed ();
+
+    abstract protected bool rightMovePressed ();
 
     Vector3 getReleaseVelocity () {
         return Vector3.Scale (this.getControllerVelocity (), this.releaseVelocityFactor);
@@ -124,6 +130,17 @@ public abstract class Throw : MonoBehaviour {
         }
     }
 
+    void handleStartingPosition () {
+        if (footInStartingPosition) {
+            if (this.leftMovePressed ())
+                ruisCharacter.SetFixedTargetVelocity (new Vector3 (-0.4f, 0, 0));
+            else if (this.rightMovePressed ())
+                ruisCharacter.SetFixedTargetVelocity (new Vector3 (0.4f, 0, 0));
+            else
+                ruisCharacter.SetFixedTargetVelocity (Vector3.zero);
+        }
+    }
+
     bool isStoneOverThrowLine () {
         if (throwerController.getStone ())
             return throwerController.getStone ().transform.position.z > -11f;
@@ -131,10 +148,10 @@ public abstract class Throw : MonoBehaviour {
     }
 
     protected void Update () {
-
         if (this.resetRoundButtonPressed ())
             this.gameLogic.resetRound ();
         if (this.throwerController) {
+            this.handleStartingPosition ();
             this.handleStoneObject ();
             this.handleSpawning ();
             this.handleThrow ();

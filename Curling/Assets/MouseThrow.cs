@@ -12,6 +12,14 @@ public class MouseThrow : Throw {
         return Input.GetMouseButton (0);
     }
 
+    protected override bool leftMovePressed () {
+        return Input.GetKeyDown("k");
+    }
+
+    protected override bool rightMovePressed () {
+        return Input.GetKeyDown("l");
+    }
+
     protected override bool spawnButtonPressed () {
         return Input.GetMouseButtonDown (1);
     }
