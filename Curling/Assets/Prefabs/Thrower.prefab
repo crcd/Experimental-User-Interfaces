@@ -102,7 +102,7 @@ GameObject:
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400062}
   m_Layer: 0
-  m_Name: PSMoveWand
+  m_Name: ThrowerPSWand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3279,11 +3279,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   releaseVelocityFactor: {x: 1, y: 0, z: 1}
-  handlingFactor: {x: .300000012, y: 0, z: .300000012}
+  handlingFactor: {x: 1, y: 0, z: 1}
   minDistance: {x: 0, y: 0, z: .100000001}
   maxDistance: {x: .200000003, y: 0, z: .600000024}
   minControllerThrowVelocity: .200000003
-  rotationFactor: .100000001
+  rotationFactor: .0500000007
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3566,7 +3566,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05aba9f308687b5488803eaabdcca968, type: 3}
   m_Name: 
@@ -3933,12 +3933,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10fb4db1c84344b869df93a2ecb4e6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoneOffsetConfig: {x: .200000003, y: 0, z: .25}
-  minOffset: {x: .150000006, y: 0, z: .150000006}
-  maxOffset: {x: .25, y: 0, z: .400000006}
+  stoneOffsetConfig: {x: .100000001, y: 0, z: .600000024}
+  minOffset: {x: -.200000003, y: 0, z: 0}
+  maxOffset: {x: .5, y: 0, z: .5}
   minSlidingSpeed: {x: 0, y: 0, z: 3}
-  maxSlidingSpeed: {x: .800000012, y: 0, z: 6}
-  maxThrowingSpeed: {x: .200000003, y: 0, z: 2}
+  maxSlidingSpeed: {x: .400000006, y: 0, z: 6}
+  maxThrowingSpeed: {x: .400000006, y: 0, z: 2}
   slidingForceFactor: {x: .349999994, y: 0, z: .349999994}
   maxSlidingForceAdder: {x: 20, y: 0, z: 30}
 --- !u!114 &11400126

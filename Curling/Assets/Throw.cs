@@ -22,7 +22,7 @@ public abstract class Throw : MonoBehaviour {
 
     abstract protected bool wasReleased ();
 
-    abstract protected bool isPressed ();
+    abstract public bool isPressed ();
 
     abstract protected bool spawnButtonPressed ();
 
@@ -65,6 +65,7 @@ public abstract class Throw : MonoBehaviour {
     void releaseFoot () {
         this.footInStartingPosition = false;
         this.minVelocityReached = false;
+        Debug.Log (getDistanceScale ());
         this.throwerController.startSlidingToScale (getDistanceScale ());
     }
 
@@ -87,8 +88,10 @@ public abstract class Throw : MonoBehaviour {
     }
 
     void handleThrustingVelocity () {
-        if (!isPressed ())
+        if (!isPressed ()) {
             return;
+        }
+            
         if (!this.minVelocityReached) {
             if (isControllerOverMinVelocity ()) {
                 startingMovePosition = this.getControllerPosition ();
@@ -109,12 +112,14 @@ public abstract class Throw : MonoBehaviour {
     }
 
     void handleThrow () {
-        if (this.isPressed () && !this.initialized)
+        if (this.isPressed () && !this.initialized) {
             initializeThrow ();
+        }
+            
         if (initialized) {
             if (footInStartingPosition)
                 handleThrustingVelocity ();
-            else if (isStoneOverThrowLine() || this.wasReleased () || !this.isPressed ())
+            else if (isStoneOverThrowLine () || !this.isPressed ())
                 throwStone ();
         }
     }
@@ -125,7 +130,8 @@ public abstract class Throw : MonoBehaviour {
         return false;
     }
 
-    protected void FixedUpdate () {
+    protected void Update () {
+
         if (this.resetRoundButtonPressed ())
             this.gameLogic.resetRound ();
         if (this.throwerController) {
