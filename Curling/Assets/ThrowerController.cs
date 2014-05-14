@@ -42,7 +42,7 @@ public class ThrowerController : MonoBehaviour {
         this.powerBarUpdater.SetPowerPercentage (0);
     }
 
-    public GameObject getStone() {
+    public GameObject getStone () {
         return this.stone;
     }
 
@@ -129,7 +129,8 @@ public class ThrowerController : MonoBehaviour {
     }
 
     public void sawStone (Vector3 offset) {
-        Vector3 minOffset = Vector3.Max (offset, this.minOffset);
+        Vector3 defaultOffset = this.stoneOffsetConfig + offset;
+        Vector3 minOffset = Vector3.Max (defaultOffset, this.minOffset);
         Vector3 maxOffset = Vector3.Min (minOffset, this.maxOffset);
         this.stoneOffset = maxOffset;
     }
@@ -140,10 +141,10 @@ public class ThrowerController : MonoBehaviour {
             this.stoneBody.velocity = this.throwerBody.velocity;
         }
         Vector3 newPosition = new Vector3 (
-                                  this.throwerBody.position.x + stoneOffset.x,
-                                  this.stoneBody.position.y,
-                                  this.throwerBody.position.z + stoneOffset.z
-                              );
+            this.throwerBody.position.x + stoneOffset.x,
+            this.stoneBody.position.y,
+            this.throwerBody.position.z + stoneOffset.z
+        );
         this.stoneBody.position = newPosition;
     }
 

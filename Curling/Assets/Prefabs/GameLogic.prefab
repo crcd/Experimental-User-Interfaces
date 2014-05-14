@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12866bea29b3410dba578c8972440fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stone: {fileID: 100000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
+  stoneObject: {fileID: 100000, guid: a015d48613e415a4290649db741c9e3e, type: 2}
   yellowMesh: {fileID: 4300000, guid: 4270d7436bdb7e648834fdd2a250c6d6, type: 3}
   redMesh: {fileID: 4300000, guid: d05c4bf54b4cf2746b14b9ed96991a4d, type: 3}
 --- !u!114 &11400006

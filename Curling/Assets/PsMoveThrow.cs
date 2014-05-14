@@ -14,7 +14,7 @@ public class PsMoveThrow : Throw {
         return this.moveWand.triggerButtonWasReleased;
     }
 
-    protected override bool isPressed () {
+    public override bool isPressed () {
         return this.moveWand.triggerValue > 0.9f;
     }
 
