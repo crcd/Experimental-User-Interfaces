@@ -143,6 +143,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400016}
   - 95: {fileID: 9500000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Stadium
   m_TagString: Untagged
@@ -1574,6 +1575,23 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80685657a905b4b9cb7c12145627d3a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipAmbience1: {fileID: 8300000, guid: 59cabbc183b484609b2b1968ef3e636a, type: 3}
+  clipLaugh: {fileID: 8300000, guid: 83a61218cef5345fd8a126109cd17aea, type: 3}
+  clipLaugh2: {fileID: 8300000, guid: b734ed9ac28214ba0900f2ea8e77b9a3, type: 3}
+  clipApplause1: {fileID: 8300000, guid: 8367fde59f8f84a60bb90dacbe88462c, type: 3}
+  clipApplause2: {fileID: 8300000, guid: 375d42bd25fe8497c86af54a21f18222, type: 3}
+  applauding: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

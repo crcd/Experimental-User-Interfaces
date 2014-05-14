@@ -19,7 +19,7 @@ public class GameLogic : MonoBehaviour {
         this.closestStoneCalculator = gameObject.AddComponent<ClosestStone> ();
         this.stoneRemover = gameObject.AddComponent<StoneRemover> ();
         this.stoneFinder = gameObject.AddComponent<StoneFinder> ();
-        this.resetRound ();
+		this.resetRound ();
     }
 
     public void resetRound () {
@@ -42,7 +42,8 @@ public class GameLogic : MonoBehaviour {
 
     public void startNewThrow () {
         this.spawnNewStone ();
-        //spawn
+		GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
+		//spawn
     }
 
     public void endThrow () {
@@ -52,7 +53,7 @@ public class GameLogic : MonoBehaviour {
     bool isAnyStoneMoving () {
         GameObject[] stones = stoneFinder.getAllStones ();
         foreach (GameObject stone in stones) {
-            if (Vector3.Distance (stone.rigidbody.velocity, Vector3.zero) > 0.05) {
+			if (Vector3.Distance (stone.rigidbody.velocity, Vector3.zero) > 0.05) {
                 return true;
             }
         }
@@ -72,6 +73,7 @@ public class GameLogic : MonoBehaviour {
 
     void spawnNewStone () {
         if (matchInProgress && isItFreeToSpawn ()) {
+			GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
             if (this.redTurn) {
                 this.stoneSpawner.spawnRedStone ();
                 this.redTurn = false;
@@ -95,7 +97,8 @@ public class GameLogic : MonoBehaviour {
             scoreBoard.SetCenterText ("TIE");
         else
             scoreBoard.SetCenterText ("Yellow wins");
-    }
+		GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
+	}
 
     GameObject findMovingStone () {
         GameObject movingStone = GameObject.FindGameObjectWithTag ("MovingYellowStone");

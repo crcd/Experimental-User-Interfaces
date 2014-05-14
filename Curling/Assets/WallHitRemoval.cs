@@ -20,6 +20,7 @@ public class WallHitRemoval : MonoBehaviour {
 
     void OnCollisionEnter (Collision collision) {
         if (isWallHit (collision)) {
+			GameObject.Find ("Stadium").GetComponent<crowdSoundController>().playLaugh();
             gameObject.rigidbody.velocity = new Vector3 (0, 0, 0);
             if (isMovingStone ()) {
                 gameObject.tag = "";

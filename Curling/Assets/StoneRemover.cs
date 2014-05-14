@@ -10,11 +10,16 @@ public class StoneRemover : MonoBehaviour {
 
     public void removeTooShortStones () {
         GameObject[] stones = stoneFinder.getAllStones ();
-        foreach (GameObject stone in stones) {
+		bool destroyed = false;
+		foreach (GameObject stone in stones) {
             if (isStoneTooShort (stone)) {
                 destroyStone (stone);
-            }
+				destroyed = true;
+			}
         }
+		if (destroyed) {
+			GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playLaugh ();
+		}
     }
 
     public void destroyStone (GameObject stone) {
@@ -22,9 +27,10 @@ public class StoneRemover : MonoBehaviour {
     }
 
     bool isStoneTooShort (GameObject stone) {
-        if (stone.transform.position.z <= 11f)
+        if (stone.transform.position.z <= 11f) {
             return true;
-        else
+		} else {
             return false;
+		}
     }
 }
