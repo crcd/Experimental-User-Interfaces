@@ -25,14 +25,14 @@ public class UpdateScoreboard : MonoBehaviour {
         for(int i = 1 ; i < 9 ; i++){
             string stoneID = id + i.ToString ();
             if (i <= stones)
-                GameObject.Find (stoneID).guiTexture.enabled = true;
+                GameObject.Find (stoneID).renderer.enabled = true;
             else
-                GameObject.Find (stoneID).guiTexture.enabled = false;
+                GameObject.Find (stoneID).renderer.enabled = false;
         }
 		return;
     }
 
     public void SetCenterText(string text){
-		GameObject.Find ("GUI_Text").GetComponent<TextMesh> ().text = text;
+		GameObject.Find ("GUI_TEXT").GetComponent<TextMesh> ().text = text;
 	}
 }
