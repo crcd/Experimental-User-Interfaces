@@ -8,6 +8,7 @@ public class UpdatePowerBar : MonoBehaviour {
     public void SetPowerPercentage (float percentage) {
 
 		GameObject arrow = GameObject.Find ("Arrow");
+		if (arrow == null) return;
 		Vector3 pos = arrow.transform.localPosition;
 
 		arrow.transform.localPosition = new Vector3 (

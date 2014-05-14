@@ -2981,6 +2981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stoneOffset: {x: -1, y: 0, z: .5}
+  velocityFactor: 30
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3132,6 +3133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   follow: 1
   offset: {x: 0, y: 2, z: -4.98999977}
+  stoneOffset: {x: 0, y: 0, z: 0}
   easing: {x: .200000003, y: .0199999996, z: .200000003}
   lookAt: 0
   startFromPosition: 1
@@ -3448,7 +3450,7 @@ MonoBehaviour:
   offsetCenterX: 6
   offsetCenterZ: -27
   offsetAmplitudeX: 2.5
-  offsetAmplitudeZ: 1.5
+  offsetAmplitudeZ: .5
   rotationAmountX: 18
   rotationAmountZ: 9
   moveToBroomFactor: .180000007
@@ -3687,11 +3689,11 @@ MonoBehaviour:
   usePSNavigationController: 0
   PSNaviControllerID: 1
   strafeInsteadTurning: 1
-  jumpStrength: 60
+  jumpStrength: 0
   jumpSpeedEffect: 0
-  aerialAcceleration: 20
-  aerialMobility: 1.5
-  aerialDrag: 4
+  aerialAcceleration: 0
+  aerialMobility: 0
+  aerialDrag: 0
   desiredVelocity: {x: 0, y: 0, z: 0}
   useRazerHydra: 0
   razerHydraID: 2
@@ -4624,7 +4626,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a691b8dad8ffb2443a5f68557b1e86d9, type: 2}
+  - {fileID: 2100000, guid: 3d7a7d4419911614c96bdcd72b393143, type: 2}
+  - {fileID: 2100000, guid: 677492ed24fea4d4ab00bf90b4a8b94b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
