@@ -14,15 +14,17 @@ public abstract class Throw : MonoBehaviour {
     protected bool initialized;
     private Vector3 spawnPosition;
     private bool minVelocityReached;
+    private RUISCharacterLocomotion ruisCharacter;
 
     protected void Start () {
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> ();
         this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic> ();
+        this.ruisCharacter = GameObject.Find ("Thrower").GetComponent<RUISCharacterLocomotion> ();
     }
 
     abstract protected bool wasReleased ();
 
-    abstract protected bool isPressed ();
+    abstract public bool isPressed ();
 
     abstract protected bool spawnButtonPressed ();
 
@@ -35,6 +37,10 @@ public abstract class Throw : MonoBehaviour {
     abstract protected Vector3 getControllerVelocity ();
 
     abstract protected Vector3 getControllerPosition ();
+
+    abstract protected bool leftMovePressed ();
+
+    abstract protected bool rightMovePressed ();
 
     Vector3 getReleaseVelocity () {
         return Vector3.Scale (this.getControllerVelocity (), this.releaseVelocityFactor);
@@ -65,6 +71,7 @@ public abstract class Throw : MonoBehaviour {
     void releaseFoot () {
         this.footInStartingPosition = false;
         this.minVelocityReached = false;
+        Debug.Log (getDistanceScale ());
         this.throwerController.startSlidingToScale (getDistanceScale ());
     }
 
@@ -87,8 +94,10 @@ public abstract class Throw : MonoBehaviour {
     }
 
     void handleThrustingVelocity () {
-        if (!isPressed ())
+        if (!isPressed ()) {
             return;
+        }
+            
         if (!this.minVelocityReached) {
             if (isControllerOverMinVelocity ()) {
                 startingMovePosition = this.getControllerPosition ();
@@ -109,13 +118,26 @@ public abstract class Throw : MonoBehaviour {
     }
 
     void handleThrow () {
-        if (this.isPressed () && !this.initialized)
+        if (this.isPressed () && !this.initialized) {
             initializeThrow ();
+        }
+            
         if (initialized) {
             if (footInStartingPosition)
                 handleThrustingVelocity ();
-            else if (isStoneOverThrowLine() || this.wasReleased () || !this.isPressed ())
+            else if (isStoneOverThrowLine () || !this.isPressed ())
                 throwStone ();
+        }
+    }
+
+    void handleStartingPosition () {
+        if (footInStartingPosition) {
+            if (this.leftMovePressed ())
+                ruisCharacter.SetFixedTargetVelocity (new Vector3 (-0.4f, 0, 0));
+            else if (this.rightMovePressed ())
+                ruisCharacter.SetFixedTargetVelocity (new Vector3 (0.4f, 0, 0));
+            else
+                ruisCharacter.SetFixedTargetVelocity (Vector3.zero);
         }
     }
 
@@ -125,10 +147,11 @@ public abstract class Throw : MonoBehaviour {
         return false;
     }
 
-    protected void FixedUpdate () {
+    protected void Update () {
         if (this.resetRoundButtonPressed ())
             this.gameLogic.resetRound ();
         if (this.throwerController) {
+            this.handleStartingPosition ();
             this.handleStoneObject ();
             this.handleSpawning ();
             this.handleThrow ();

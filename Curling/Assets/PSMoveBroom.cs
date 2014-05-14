@@ -10,6 +10,7 @@ public class PSMoveBroom : MonoBehaviour {
 	private float prevX = 0;
 	private float currX = 0;
 	private float distX = 0;
+	private float currZ = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,8 @@ public class PSMoveBroom : MonoBehaviour {
 		currX = moveWand.localPosition.x * 10;
 		distX = Mathf.Abs (currX - prevX);
 
-		broomController.updateBroom (prevX, currX, distX);
+		currZ = moveWand.localPosition.z * 10;
+
+		broomController.updateBroom (prevX, currX, distX, currZ);
 	}
 }

@@ -8,8 +8,16 @@ public class MouseThrow : Throw {
         return Input.GetMouseButtonUp (0);
     }
 
-    protected override bool isPressed () {
-        return Input.GetMouseButtonDown (0);
+    public override bool isPressed () {
+        return Input.GetMouseButton (0);
+    }
+
+    protected override bool leftMovePressed () {
+        return Input.GetKeyDown("k");
+    }
+
+    protected override bool rightMovePressed () {
+        return Input.GetKeyDown("l");
     }
 
     protected override bool spawnButtonPressed () {
@@ -39,11 +47,11 @@ public class MouseThrow : Throw {
     }
 
     protected override bool resetRoundButtonPressed () {
-        return Input.GetKeyUp ("R");
+        return Input.GetKeyUp ("r");
     }
 
     void Update () {
-        base.FixedUpdate ();
+        base.Update ();
         this.previousMousePosition = Input.mousePosition;
     }
 }

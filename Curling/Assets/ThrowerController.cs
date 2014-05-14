@@ -42,7 +42,7 @@ public class ThrowerController : MonoBehaviour {
         this.powerBarUpdater.SetPowerPercentage (0);
     }
 
-    public GameObject getStone() {
+    public GameObject getStone () {
         return this.stone;
     }
 
@@ -76,24 +76,37 @@ public class ThrowerController : MonoBehaviour {
     public void startSlidingToScale (Vector3 powerScale) {
         displayPowerPercentage (powerScale.z * 100);
         Vector3 slidingSpeed = Vector3.Scale (
-                                   this.maxSlidingSpeed - this.minSlidingSpeed,
-                                   powerScale
-                               ) + this.minSlidingSpeed;
+            this.maxSlidingSpeed - this.minSlidingSpeed,
+            powerScale
+        ) + this.minSlidingSpeed;
+        slidingSpeed.z = getForceFromScale (powerScale.z * 100);
+        Debug.Log (slidingSpeed);
         this.throwerBody.AddForce (slidingSpeed, ForceMode.VelocityChange);
     }
 
-    public void addSlidingForce (Vector3 force) {
-        Vector3 slidingForce = Vector3.Min (
-                                   Vector3.Scale (force, this.slidingForceFactor),
-                                   this.maxSlidingForceAdder
-                               );
-        if (this.throwerBody.velocity.z < this.maxSlidingSpeed.z) {
-            this.throwerBody.AddForce (new Vector3 (0, 0, slidingForce.z), ForceMode.Impulse);
+    float getForceFromScale (float powerScale) {
+        /*0: 4
+        50: 4.5
+        80: 5
+        90: 6
+        100: 7*/
+        float k = 0;
+        float power = 0;
+        if (powerScale >= 0 && powerScale <= 50f) {
+            k = (4.5f - 4.0f) / (50f - 0);
+            power = 4.0f + powerScale * k;
+        } else if (powerScale > 50f && powerScale <= 80f) {
+            k = (5.0f - 4.5f) / (80f - 50f);
+            power = 4.5f + (powerScale - 50) * k;
+        } else if (powerScale > 80 && powerScale <= 90f) {
+            k = (6f - 5f) / (90f - 80f);
+            power = 5.0f + (powerScale - 80f) * k;
+        } else if (powerScale > 90) {
+            k = (7f - 6f) / (100f - 90f);
+            power = 6.0f + (powerScale - 90f) * k;
         }
-        if (this.throwerBody.velocity.x < this.maxSlidingSpeed.x) {
-            this.throwerBody.AddForce (new Vector3 (slidingForce.x, 0, 0), ForceMode.Impulse);
-        }
-        this.powerBarUpdater.SetPowerPercentage (getPowerPercentage ());
+        return power;
+
     }
 
     float getPowerPercentage () {
@@ -129,7 +142,8 @@ public class ThrowerController : MonoBehaviour {
     }
 
     public void sawStone (Vector3 offset) {
-        Vector3 minOffset = Vector3.Max (offset, this.minOffset);
+        Vector3 defaultOffset = this.stoneOffsetConfig + offset;
+        Vector3 minOffset = Vector3.Max (defaultOffset, this.minOffset);
         Vector3 maxOffset = Vector3.Min (minOffset, this.maxOffset);
         this.stoneOffset = maxOffset;
     }
@@ -140,10 +154,10 @@ public class ThrowerController : MonoBehaviour {
             this.stoneBody.velocity = this.throwerBody.velocity;
         }
         Vector3 newPosition = new Vector3 (
-                                  this.throwerBody.position.x + stoneOffset.x,
-                                  this.stoneBody.position.y,
-                                  this.throwerBody.position.z + stoneOffset.z
-                              );
+            this.throwerBody.position.x + stoneOffset.x,
+            this.stoneBody.position.y,
+            this.throwerBody.position.z + stoneOffset.z
+        );
         this.stoneBody.position = newPosition;
     }
 

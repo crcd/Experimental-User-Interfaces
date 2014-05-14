@@ -697,10 +697,10 @@ MonoBehaviour:
   - {fileID: 0}
   stereoCamera: {fileID: 0}
   monoCamera: {fileID: 0}
-  totalResolutionX: 5248
-  totalResolutionY: 1080
-  totalRawResolutionX: 7296
-  totalRawResolutionY: 1080
+  totalResolutionX: 3328
+  totalResolutionY: 800
+  totalRawResolutionX: 5376
+  totalRawResolutionY: 800
   allowResolutionDialog: 0
 --- !u!114 &11400020
 MonoBehaviour:

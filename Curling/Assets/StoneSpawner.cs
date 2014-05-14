@@ -2,19 +2,21 @@
 using System.Collections;
 
 public class StoneSpawner : MonoBehaviour {
-    public GameObject stone;
+    public GameObject stoneObject;
     private ThrowerController throwerController;
     private BroomerController broomerController;
+    private GameObject thrower;
     public Mesh yellowMesh;
     public Mesh redMesh;
 
     void Start () {
+        this.thrower = GameObject.Find ("Thrower");
         this.throwerController = GameObject.Find ("Thrower").GetComponent<ThrowerController> (); 
         this.broomerController = GameObject.Find ("Broomer").GetComponent<BroomerController> (); 
     }
 
     GameObject spawnStone () {
-        return Instantiate (stone, new Vector3 (0, 1f, -15f), new Quaternion (0, 0, 0, 0)) as GameObject;
+        return Instantiate (this.stoneObject, this.thrower.transform.position, new Quaternion (0, 0, 0, 0)) as GameObject;
     }
 
     public GameObject spawnYellowStone () {
@@ -53,7 +55,7 @@ public class StoneSpawner : MonoBehaviour {
             if (Vector3.Distance (stone.rigidbody.velocity, new Vector3 (0, 0, 0)) < 0.05) {
                 if (stone.tag == "MovingRedStone")
                     stone.tag = "ThrowedRedStone";
-                else
+                else if (stone.tag == "MovingYellowStone")
                     stone.tag = "ThrowedYellowStone";
             }
         }

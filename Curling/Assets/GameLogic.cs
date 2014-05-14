@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Linq;
 
@@ -12,6 +12,7 @@ public class GameLogic : MonoBehaviour {
     private StoneRemover stoneRemover;
     private StoneFinder stoneFinder;
     private bool matchInProgress;
+    private Throw throwControl;
     // Use this for initialization
     void Start () {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
@@ -19,7 +20,9 @@ public class GameLogic : MonoBehaviour {
         this.closestStoneCalculator = gameObject.AddComponent<ClosestStone> ();
         this.stoneRemover = gameObject.AddComponent<StoneRemover> ();
         this.stoneFinder = gameObject.AddComponent<StoneFinder> ();
-		this.resetRound ();
+        if (GameObject.Find ("ThrowerPSWand"))
+            this.throwControl = GameObject.Find ("ThrowerPSWand").GetComponent<PsMoveThrow> ();
+        this.resetRound ();
     }
 
     public void resetRound () {
@@ -68,6 +71,10 @@ public class GameLogic : MonoBehaviour {
     }
 
     bool isItFreeToSpawn () {
+        if (throwControl) {
+            if (throwControl.isPressed ())
+                return false;
+        }
         return !isThereACurrentStone () && !isAnyStoneMoving ();
     }
 
@@ -113,8 +120,6 @@ public class GameLogic : MonoBehaviour {
             updateScoreBoard ();
             if (!isThereACurrentStone () && redStonesLeft < 1 && yellowStonesLeft < 1) {
                 endGame ();
-            } else {
-                spawnNewStone ();
             }
         }
     }
