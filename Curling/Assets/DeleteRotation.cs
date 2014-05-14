@@ -10,7 +10,7 @@ public class DeleteRotation : MonoBehaviour {
 		rotater = GameObject.Find ("RotationHelper");
 	}
 
-	void FixedUpdate () {
+	void Update () {
 		if (rotater != null) {
 			yrot = rotater.transform.parent.rotation.y;
 			rotater.transform.rotation = Quaternion.Euler(0, -1.0f * yrot, 0);

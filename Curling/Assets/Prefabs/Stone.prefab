@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -481,7 +481,6 @@ MonoBehaviour:
   clipStoneHitStone: {fileID: 8300000, guid: 0b442d479ce0d4340ac8665f564bb2ef, type: 3}
   clipStoneCurl: {fileID: 8300000, guid: d835304c692a145f2a430e4d8e442f14, type: 3}
   clipStoneHitWall: {fileID: 8300000, guid: 0b442d479ce0d4340ac8665f564bb2ef, type: 3}
-  clipCrowdLaugh: {fileID: 8300000, guid: 3ab97b1ba249947f99d6cdd1632254f0, type: 3}
   stationary: 0
 --- !u!114 &11400006
 MonoBehaviour:

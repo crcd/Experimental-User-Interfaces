@@ -16,12 +16,6 @@ public class BroomerController : MonoBehaviour {
 
 	public float velocityFactor;
 
-	private bool redPants;
-	private GameLogic gameLogic;
-
-	private SkinnedMeshRenderer meshRenderer;
-
-
 //	private Vector3 targetVelocity;
 //	private Vector3 velocity;
 //	private Vector3 velocityChange;
@@ -30,10 +24,6 @@ public class BroomerController : MonoBehaviour {
 	
 	
 	void Start () {
-
-		this.meshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-		this.redPants = false;
-		this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic>();
 		this.broomerBody = rigidbody;
 		this.broomerStartingPos = rigidbody.position;
 		this.ikCtrl = GameObject.Find ("baseMaleBroomer").GetComponent<IKCtrl> ();
@@ -91,18 +81,6 @@ public class BroomerController : MonoBehaviour {
     }
 
 	void FixedUpdate () {
-
-		if (this.gameLogic.isRedTurn ()) {
-			if (this.redPants) {
-				meshRenderer.material = meshRenderer.materials[1];
-				this.redPants = false;
-			} 
-		} else {
-			if (!this.redPants) {
-				meshRenderer.material = meshRenderer.materials[0];
-				this.redPants = true;
-			}
-		}
 
 		if (this.stoneBody) {
 

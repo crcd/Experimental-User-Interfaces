@@ -135,14 +135,15 @@ public class ThrowerController : MonoBehaviour {
     private void keepStonePositionInHand () {
         //A bit of a workaround to give stone velocity for the sound
         if (this.throwerBody.velocity.z > 0.01) {
-            this.stoneBody.velocity = this.throwerBody.velocity;
-        }
-        Vector3 newPosition = new Vector3 (
-            this.throwerBody.position.x + stoneOffset.x,
-            this.stoneBody.position.y,
-            this.throwerBody.position.z + stoneOffset.z
-        );
-        this.stoneBody.position = newPosition;
+			this.stoneBody.velocity = this.throwerBody.velocity;
+		} else {
+			Vector3 newPosition = new Vector3 (
+				this.throwerBody.position.x + stoneOffset.x,
+				this.stoneBody.position.y,
+				this.throwerBody.position.z + stoneOffset.z
+			);
+			this.stoneBody.position = newPosition;
+		}
     }
 
     void Update () {

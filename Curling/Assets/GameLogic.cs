@@ -27,7 +27,7 @@ public class GameLogic : MonoBehaviour {
     }
 
 	public bool isRedTurn() {
-		return this.redTurn;
+		return !this.redTurn; // redTurn indicates next turn
 	}
 
     public void resetRound () {
