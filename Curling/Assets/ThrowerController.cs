@@ -89,7 +89,6 @@ public class ThrowerController : MonoBehaviour {
         100: 7*/
         float k = 0;
         float power = 0;
-        Debug.Log (powerScale);
         if (powerScale >= 0 && powerScale <= 70f) {
             k = (4.5f - 3.5f) / (70f - 0);
             power = 3.5f + powerScale * k;
@@ -100,7 +99,6 @@ public class ThrowerController : MonoBehaviour {
             k = (7f - 6f) / (100f - 90f);
             power = 6.0f + (powerScale - 90f) * k;
         }
-        Debug.Log (power);
         return power;
 
     }
