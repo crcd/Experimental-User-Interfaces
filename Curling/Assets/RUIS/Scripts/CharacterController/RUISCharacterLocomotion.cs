@@ -78,8 +78,13 @@ public class RUISCharacterLocomotion : MonoBehaviour
 	// Additional stuff
 	public void SetFixedTargetVelocity(Vector3 targetVel)
 	{
-		fixedTargetVelocity = targetVel;
-		useFixedTargetVelocity = true;
+		if (targetVel != Vector3.zero) {
+			fixedTargetVelocity = targetVel;
+			useFixedTargetVelocity = true;
+		} else {
+			useFixedTargetVelocity = false;
+		}
+
 	}
 	
 	void Awake()
@@ -324,6 +329,7 @@ public class RUISCharacterLocomotion : MonoBehaviour
 			targetVelocity = fixedTargetVelocity;
 			desiredVelocity = Vector3.ClampMagnitude (targetVelocity, 2);
 			desiredVelocity = (-1) * characterController.TransformDirection (desiredVelocity);
+//			desiredVelocity = characterController.TransformDirection (desiredVelocity);
 		} else {
 			targetVelocity = characterController.TransformDirection (targetVelocity);
 			targetVelocity *= speed;

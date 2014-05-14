@@ -9,10 +9,15 @@ public class CharacterCrouch : MonoBehaviour
 	
 	void Awake()
 	{
-		if(!animator)
-			Debug.LogError(typeof(Animator).Name + " is not attached to " + this.name + " script!");
-		animator.SetBool("Crouching", false);
-		crouching = false;
+//		if(!animator)
+//			Debug.LogError(typeof(Animator).Name + " is not attached to " + this.name + " script!");
+//		animator.SetBool("Crouching", false);
+//		crouching = false;
+
+	}
+
+	void Start() {
+		animator.SetBool("Crouching", true);
 	}
 	
 	bool keyDown () {
@@ -39,7 +44,7 @@ public class CharacterCrouch : MonoBehaviour
 //			crouching = !crouching;
 //			animator.SetBool("Crouching", true);
 //		}
-		animator.SetBool("Crouching", true);
+		//animator.SetBool("Crouching", true);
 		
 		
 	}
