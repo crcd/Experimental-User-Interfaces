@@ -22,7 +22,7 @@ public class PantsColor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Debug.Log (this.redPants);
+		//Debug.Log (this.redPants);
 
 		if (this.gameLogic.isRedTurn ()) {
 			if (!this.redPants) {

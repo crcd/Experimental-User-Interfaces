@@ -133,7 +133,7 @@ public class ThrowerController : MonoBehaviour {
     }
 
     private void keepStonePositionInHand () {
-        //A bit of a workaround to give stone velocity for the sound
+        // Set velocity if the thrower is moving
         if (this.throwerBody.velocity.z > 0.01) {
 			this.stoneBody.velocity = this.throwerBody.velocity;
 		} else {
