@@ -13,6 +13,9 @@ public class GameLogic : MonoBehaviour {
     private StoneFinder stoneFinder;
     private bool matchInProgress;
     private Throw throwControl;
+
+	public int stoneCount;
+
     // Use this for initialization
     void Start () {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
@@ -30,8 +33,8 @@ public class GameLogic : MonoBehaviour {
         foreach (GameObject stone in stones) {
             DestroyImmediate (stone);
         }
-        this.redStonesLeft = 1;
-        this.yellowStonesLeft = 1;
+        this.redStonesLeft = stoneCount;
+		this.yellowStonesLeft = stoneCount;
         this.matchInProgress = true;
         this.updateScoreBoard ();
     }

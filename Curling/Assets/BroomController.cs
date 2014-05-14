@@ -147,7 +147,7 @@ public class BroomController : MonoBehaviour {
 		
 		//gameObject.transform.position = broomerBody.position + offset;
 		
-		Debug.Log (offset);
+		//Debug.Log (offset);
 		
 		gameObject.transform.localPosition = startPosition + offset;
 		

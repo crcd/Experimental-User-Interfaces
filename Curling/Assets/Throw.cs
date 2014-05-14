@@ -133,9 +133,9 @@ public abstract class Throw : MonoBehaviour {
     void handleStartingPosition () {
         if (footInStartingPosition) {
             if (this.leftMovePressed ())
-                ruisCharacter.SetFixedTargetVelocity (new Vector3 (-0.4f, 0, 0));
-            else if (this.rightMovePressed ())
                 ruisCharacter.SetFixedTargetVelocity (new Vector3 (0.4f, 0, 0));
+            else if (this.rightMovePressed ())
+                ruisCharacter.SetFixedTargetVelocity (new Vector3 (-0.4f, 0, 0));
             else
                 ruisCharacter.SetFixedTargetVelocity (Vector3.zero);
         }
