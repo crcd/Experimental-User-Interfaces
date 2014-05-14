@@ -18,4 +18,11 @@ public class StoneFinder : MonoBehaviour {
 		return movingStone;
 	}
 
+    public GameObject findCurrentStone() {
+        GameObject currentStone = GameObject.FindGameObjectWithTag ("CurrentYellowStone");
+        if (currentStone == null)
+            currentStone = GameObject.FindGameObjectWithTag ("CurrentRedStone");
+        return currentStone;
+    }
+
 }

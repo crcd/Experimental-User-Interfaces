@@ -79,12 +79,14 @@ public class crowdSoundController : MonoBehaviour {
 	}
 
 	public void playLaugh() {
-		float rnd = Random.Range (-10.0f, 10.0f);
-		if (rnd <= 2.0f) {
-			audioLaugh2.Play ();
-		} else {
-			audioLaugh.Play();
-		}
+        if (audioLaugh.isPlaying == false && audioLaugh2 == false) {
+            float rnd = Random.Range (-10.0f, 10.0f);
+            if (rnd <= 2.0f) {
+                audioLaugh2.Play ();
+            } else {
+                audioLaugh.Play ();
+            }
+        }
 	}
 
 	// Update is called once per frame

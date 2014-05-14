@@ -50,6 +50,12 @@ public class MouseThrow : Throw {
         return Input.GetKeyUp ("r");
     }
 
+    protected override void activateRumble () {
+    }
+
+    protected override void disableRumble () {
+    }
+
     void Update () {
         base.Update ();
         this.previousMousePosition = Input.mousePosition;

@@ -13,9 +13,7 @@ public class GameLogic : MonoBehaviour {
     private StoneFinder stoneFinder;
     private bool matchInProgress;
     private Throw throwControl;
-
-	public int stoneCount;
-
+    public int stoneCount;
     // Use this for initialization
     void Start () {
         this.stoneSpawner = GameObject.Find ("GameLogic").GetComponent<StoneSpawner> ();
@@ -33,8 +31,10 @@ public class GameLogic : MonoBehaviour {
         foreach (GameObject stone in stones) {
             DestroyImmediate (stone);
         }
+        if (stoneFinder.findCurrentStone ())
+            DestroyImmediate (stoneFinder.findCurrentStone ());
         this.redStonesLeft = stoneCount;
-		this.yellowStonesLeft = stoneCount;
+        this.yellowStonesLeft = stoneCount;
         this.matchInProgress = true;
         this.updateScoreBoard ();
     }
@@ -48,8 +48,7 @@ public class GameLogic : MonoBehaviour {
 
     public void startNewThrow () {
         this.spawnNewStone ();
-		GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
-		//spawn
+        GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
     }
 
     public void endThrow () {
@@ -59,7 +58,7 @@ public class GameLogic : MonoBehaviour {
     bool isAnyStoneMoving () {
         GameObject[] stones = stoneFinder.getAllStones ();
         foreach (GameObject stone in stones) {
-			if (Vector3.Distance (stone.rigidbody.velocity, Vector3.zero) > 0.05) {
+            if (Vector3.Distance (stone.rigidbody.velocity, Vector3.zero) > 0.05) {
                 return true;
             }
         }
@@ -67,10 +66,7 @@ public class GameLogic : MonoBehaviour {
     }
 
     bool isThereACurrentStone () {
-        return (
-            GameObject.FindGameObjectsWithTag ("CurrentYellowStone").Length > 0
-            || GameObject.FindGameObjectsWithTag ("CurrentRedStone").Length > 0
-        );
+        return (this.stoneFinder.findCurrentStone () != null);
     }
 
     bool isItFreeToSpawn () {
@@ -83,7 +79,7 @@ public class GameLogic : MonoBehaviour {
 
     void spawnNewStone () {
         if (matchInProgress && isItFreeToSpawn ()) {
-			GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
+            GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
             if (this.redTurn) {
                 this.stoneSpawner.spawnRedStone ();
                 this.redTurn = false;
@@ -107,8 +103,8 @@ public class GameLogic : MonoBehaviour {
             scoreBoard.SetCenterText ("TIE");
         else
             scoreBoard.SetCenterText ("Yellow wins");
-		GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
-	}
+        GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
+    }
 
     GameObject findMovingStone () {
         GameObject movingStone = GameObject.FindGameObjectWithTag ("MovingYellowStone");

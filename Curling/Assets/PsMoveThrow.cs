@@ -49,4 +49,12 @@ public class PsMoveThrow : Throw {
     protected override bool resetRoundButtonPressed () {
         return this.moveWand.startButtonWasPressed;
     }
+
+    protected override void activateRumble () {
+        this.moveWand.RumbleOn (15);
+    }
+
+    protected override void disableRumble () {
+        this.moveWand.RumbleOff ();
+    }
 }

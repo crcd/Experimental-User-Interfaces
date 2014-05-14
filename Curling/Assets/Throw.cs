@@ -42,6 +42,10 @@ public abstract class Throw : MonoBehaviour {
 
     abstract protected bool rightMovePressed ();
 
+    abstract protected void activateRumble ();
+
+    abstract protected void disableRumble ();
+
     Vector3 getReleaseVelocity () {
         return Vector3.Scale (this.getControllerVelocity (), this.releaseVelocityFactor);
     }
@@ -72,6 +76,7 @@ public abstract class Throw : MonoBehaviour {
         this.footInStartingPosition = false;
         this.minVelocityReached = false;
         this.throwerController.startSlidingToScale (getDistanceScale ());
+        this.activateRumble ();
     }
 
     bool isControllerOverMinVelocity () {
@@ -116,6 +121,7 @@ public abstract class Throw : MonoBehaviour {
     void throwStone () {
         this.throwerController.throwStone (this.getReleaseVelocity (), this.getAngularVelocity ());
         this.initialized = false;
+        this.disableRumble ();
     }
 
     void handleThrow () {
