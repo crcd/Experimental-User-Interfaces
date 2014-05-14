@@ -16,6 +16,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/RUIS/Examples/PhysicsScene/PhysicsScene.unity
   - enabled: 1
-    path: Assets/RUIS/Scenes/calibration.unity
+    path: Assets/Curling.unity
   - enabled: 1
+    path: Assets/RUIS/Scenes/calibration.unity
+  - enabled: 0
     path: Assets/RUIS/Examples/OculusRiftExample/OculusRiftExample.unity
