@@ -71,7 +71,6 @@ public abstract class Throw : MonoBehaviour {
     void releaseFoot () {
         this.footInStartingPosition = false;
         this.minVelocityReached = false;
-        Debug.Log (getDistanceScale ());
         this.throwerController.startSlidingToScale (getDistanceScale ());
     }
 
