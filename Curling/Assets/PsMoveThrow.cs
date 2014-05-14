@@ -51,7 +51,7 @@ public class PsMoveThrow : Throw {
     }
 
     protected override void activateRumble () {
-        this.moveWand.RumbleOn (15);
+        this.moveWand.RumbleOn (10);
     }
 
     protected override void disableRumble () {

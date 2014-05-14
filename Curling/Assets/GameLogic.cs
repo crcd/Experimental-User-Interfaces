@@ -48,7 +48,6 @@ public class GameLogic : MonoBehaviour {
 
     public void startNewThrow () {
         this.spawnNewStone ();
-        GameObject.Find ("Stadium").GetComponent<crowdSoundController> ().playApplause ();
     }
 
     public void endThrow () {

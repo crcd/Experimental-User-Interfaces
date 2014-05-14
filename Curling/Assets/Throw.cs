@@ -111,10 +111,12 @@ public abstract class Throw : MonoBehaviour {
         } else {
             if (isControllerOverMinVelocity ())
                 this.throwerController.displayPowerPercentage (getDistanceScale ().z * 100f);
-            else if (isControllerOverMinVelocity () && getDistanceScale ().z < 0)
-                minVelocityReached = false;
-            else
-                releaseFoot ();
+            else {
+                if (getDistanceScale ().z < 0)
+                    initializeThrow ();
+                else
+                    releaseFoot ();
+            }
         }
     }
 
@@ -140,9 +142,9 @@ public abstract class Throw : MonoBehaviour {
     void handleStartingPosition () {
         if (footInStartingPosition) {
             if (this.leftMovePressed ())
-                ruisCharacter.SetFixedTargetVelocity (new Vector3 (0.4f, 0, 0));
-            else if (this.rightMovePressed ())
                 ruisCharacter.SetFixedTargetVelocity (new Vector3 (-0.4f, 0, 0));
+            else if (this.rightMovePressed ())
+                ruisCharacter.SetFixedTargetVelocity (new Vector3 (0.4f, 0, 0));
             else
                 ruisCharacter.SetFixedTargetVelocity (Vector3.zero);
         }
