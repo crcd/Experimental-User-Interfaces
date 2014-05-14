@@ -4,11 +4,13 @@ using System.Collections;
 public class UpdateScoreboard : MonoBehaviour {
 	
     public void UpdateBlueTeamScore(int newScore){
-		GameObject.Find ("ScoreYellow").GetComponent<TextMesh> ().text = newScore.ToString();
+		GameObject scoreYellow = GameObject.Find ("ScoreYellow");
+		if (scoreYellow) scoreYellow.GetComponent<TextMesh> ().text = newScore.ToString();
 	}
 
     public void UpdateRedTeamScore(int newScore){
-		GameObject.Find ("ScoreRed").GetComponent<TextMesh> ().text = newScore.ToString();
+		GameObject scoreRed = GameObject.Find ("ScoreRed");
+		if (scoreRed) scoreRed.GetComponent<TextMesh> ().text = newScore.ToString();
 	}
        
 
@@ -24,15 +26,19 @@ public class UpdateScoreboard : MonoBehaviour {
 		
         for(int i = 1 ; i < 9 ; i++){
             string stoneID = id + i.ToString ();
-            if (i <= stones)
-                GameObject.Find (stoneID).renderer.enabled = true;
-            else
-                GameObject.Find (stoneID).renderer.enabled = false;
+			GameObject yellowBall = GameObject.Find (stoneID);
+            if (i <= stones) {
+
+				if (yellowBall) yellowBall.renderer.enabled = true;
+			} else {
+				if (yellowBall) yellowBall.renderer.enabled = false;
+			}
         }
 		return;
     }
 
     public void SetCenterText(string text){
-		GameObject.Find ("GUI_TEXT").GetComponent<TextMesh> ().text = text;
+		GameObject guiText = GameObject.Find ("GUI_TEXT");
+		if (guiText) guiText.GetComponent<TextMesh> ().text = text;
 	}
 }

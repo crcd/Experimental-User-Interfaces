@@ -26,6 +26,10 @@ public class GameLogic : MonoBehaviour {
         this.resetRound ();
     }
 
+	public bool isRedTurn() {
+		return this.redTurn;
+	}
+
     public void resetRound () {
         GameObject[] stones = stoneFinder.getAllStones ();
         foreach (GameObject stone in stones) {

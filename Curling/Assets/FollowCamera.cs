@@ -4,7 +4,8 @@ using System.Collections;
 public class FollowCamera : MonoBehaviour {
 
 	public bool follow = true;
-	public Vector3 offset = new Vector3(0.0f,0.0f,0.0f);
+	public Vector3 offset = new Vector3(0.4f,0.0f,0.0f);
+	public Vector3 stoneOffset = new Vector3(0.0f,0.0f,0.0f);
 	public Vector3 easing = new Vector3(1.0f,1.0f,1.0f);
 	public bool lookAt;
 	public bool startFromPosition;
@@ -48,6 +49,9 @@ public class FollowCamera : MonoBehaviour {
 
 		if (followMovingStone) {
 			objectToFollow = findMovingStone();
+			if (objectToFollow == null) {
+				objectToFollow = GameObject.Find ("Thrower");
+			}
 		}
 
 		newPos = objectToFollow.transform.position;

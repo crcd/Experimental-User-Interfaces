@@ -2747,7 +2747,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 86994308a67bea84d8b74c29b09ab821, type: 3}
   m_Controller: {fileID: 9100000, guid: bacabe3161d27334ab4fe4c2c6569cb9, type: 2}
   m_CullingMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
 --- !u!114 &11400000
@@ -2923,7 +2923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionButton: 0
-  controllerId: 2
+  controllerId: 1
   whereToCopyColor: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
@@ -3290,7 +3290,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8dfca0476fe54f8181a6f4726923bae, type: 3}
   m_Name: 
@@ -3630,7 +3630,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100088}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b084b3639de80d34780b29bf6ce7d6ee, type: 3}
   m_Name: 
@@ -4460,7 +4460,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a691b8dad8ffb2443a5f68557b1e86d9, type: 2}
+  - {fileID: 2100000, guid: 3d7a7d4419911614c96bdcd72b393143, type: 2}
+  - {fileID: 2100000, guid: 677492ed24fea4d4ab00bf90b4a8b94b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

@@ -11,6 +11,17 @@ public class BroomerController : MonoBehaviour {
 	private IKCtrl ikCtrl;
     private BroomController broomController;
 
+	private Vector3 lastStonePos;
+	private Vector3 stoneVelocity;
+
+	public float velocityFactor;
+
+	private bool redPants;
+	private GameLogic gameLogic;
+
+	private SkinnedMeshRenderer meshRenderer;
+
+
 //	private Vector3 targetVelocity;
 //	private Vector3 velocity;
 //	private Vector3 velocityChange;
@@ -19,6 +30,10 @@ public class BroomerController : MonoBehaviour {
 	
 	
 	void Start () {
+
+		this.meshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+		this.redPants = false;
+		this.gameLogic = GameObject.Find ("GameLogic").GetComponent<GameLogic>();
 		this.broomerBody = rigidbody;
 		this.broomerStartingPos = rigidbody.position;
 		this.ikCtrl = GameObject.Find ("baseMaleBroomer").GetComponent<IKCtrl> ();
@@ -31,10 +46,11 @@ public class BroomerController : MonoBehaviour {
 	}
 	
 	private void followStone () {
+
         this.charLocomotion.SetFixedTargetVelocity (new Vector3(
-            this.stoneBody.velocity.x,
+            this.stoneVelocity.x,
             0,
-            this.stoneBody.velocity.z
+			this.stoneVelocity.z
         ));
 
 //		targetVelocity = this.stoneBody.velocity;
@@ -57,6 +73,7 @@ public class BroomerController : MonoBehaviour {
 	}
 	
 	public void resetToStartPosition () {
+		this.charLocomotion.SetFixedTargetVelocity (Vector3.zero);
 		this.broomerBody.position = this.broomerStartingPos;
 		this.broomerBody.velocity = new Vector3 (0, 0, 0);
 		this.broomerBody.angularVelocity = new Vector3 (0, 0, 0);
@@ -64,19 +81,53 @@ public class BroomerController : MonoBehaviour {
 
     bool isStoneMoving() {
         //return Vector3.Distance (this.stoneBody.velocity, new Vector3 (0, 0, 0)) >= 0.05f;
-		return this.stoneBody.velocity.magnitude >= 0.05f;
+
+		if (this.stoneBody == null) return false;
+
+		if (this.stoneVelocity.magnitude >= 0.05f) return true;
+
+		return false;
+
     }
-	
+
 	void FixedUpdate () {
+
+		if (this.gameLogic.isRedTurn ()) {
+			if (this.redPants) {
+				meshRenderer.material = meshRenderer.materials[1];
+				this.redPants = false;
+			} 
+		} else {
+			if (!this.redPants) {
+				meshRenderer.material = meshRenderer.materials[0];
+				this.redPants = true;
+			}
+		}
+
 		if (this.stoneBody) {
+
+			if (this.stoneBody.velocity.magnitude < 0.05f && this.lastStonePos != null) {
+				this.stoneVelocity = this.stoneBody.position - lastStonePos;
+				this.stoneVelocity *= velocityFactor;
+			} else {
+				this.stoneVelocity = this.stoneBody.velocity;
+			}
+			//Debug.Log (this.stoneVelocity);
+
+		
             if (isStoneMoving ()) {
                 this.followStone ();
 				// Update when PS Move is connected
 				//this.broomController.brooming = true;
 			} else {
-				this.charLocomotion.SetFixedTargetVelocity (new Vector3(0,0,0));
+
+				this.charLocomotion.SetFixedTargetVelocity (Vector3.zero);
                 //this.broomController.brooming = false;
 			}
+
+			this.lastStonePos = this.stoneBody.position;
+		} else {
+			this.stoneVelocity = Vector3.zero;
 		}
 	}
 }
