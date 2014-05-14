@@ -24,7 +24,9 @@ public class BroomIndicator : MonoBehaviour {
 
 	void FixedUpdate () {
 
-		if (visible) {
+		if (arrow == null)
+			Start ();
+		else if (visible) {
 			if ((Time.time - blinkTime) > blinkSpeed) {
 				blinkTime = Time.time;
 				if (arrow.renderer.enabled)
@@ -32,8 +34,11 @@ public class BroomIndicator : MonoBehaviour {
 				else 
 					arrow.renderer.enabled = true;
 			}
+
 		}
+
 	}
+
 
 	void ShowArrow(float speed) {
 		if (speed == 0)

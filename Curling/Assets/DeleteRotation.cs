@@ -11,7 +11,9 @@ public class DeleteRotation : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		yrot = rotater.transform.parent.rotation.y;
-		rotater.transform.rotation = Quaternion.Euler(0, -1.0f * yrot, 0);
+		if (rotater != null) {
+			yrot = rotater.transform.parent.rotation.y;
+			rotater.transform.rotation = Quaternion.Euler(0, -1.0f * yrot, 0);
+		}
 	}
 }
