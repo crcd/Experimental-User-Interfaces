@@ -80,7 +80,6 @@ public class ThrowerController : MonoBehaviour {
             powerScale
         ) + this.minSlidingSpeed;
         slidingSpeed.z = getForceFromScale (powerScale.z * 100);
-        Debug.Log (slidingSpeed);
         this.throwerBody.AddForce (slidingSpeed, ForceMode.VelocityChange);
     }
 

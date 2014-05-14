@@ -7,15 +7,6 @@ public class UpdatePowerBar : MonoBehaviour {
 
     public void SetPowerPercentage (float percentage) {
 
-		Debug.Log (percentage);
-//        GUITexture arrowTexture = GameObject.Find ("Arrow").guiTexture;
-//        Rect newInset = new Rect(
-//            arrowTexture.pixelInset.x,
-//            minPosition + (this.maxPosition - this.minPosition) * percentage / 100.0f,
-//            arrowTexture.pixelInset.width,
-//            arrowTexture.pixelInset.height
-//        );
-//        arrowTexture.pixelInset = newInset;
 		GameObject arrow = GameObject.Find ("Arrow");
 		Vector3 pos = arrow.transform.localPosition;
 
