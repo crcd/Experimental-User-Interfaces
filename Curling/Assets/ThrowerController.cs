@@ -61,8 +61,6 @@ public class ThrowerController : MonoBehaviour {
             throwerSliding = false;
         // this.ikCtrl.rightHandObj = null; // IKCtrl has animation
         this.ikCtrl.rightIKActive = false;
-
-
     }
 
     public void startAddingSlidingForce () {
@@ -106,16 +104,6 @@ public class ThrowerController : MonoBehaviour {
         }
         return power;
 
-    }
-
-    float getPowerPercentage () {
-        float current = this.throwerBody.velocity.z;
-        float min = this.minSlidingSpeed.z;
-        float max = this.maxSlidingSpeed.z;
-        if (current <= min)
-            return 0;
-        else
-            return (current - min) * 100 / (max - min);
     }
 
     Vector3 getLimitedThrowingForce (Vector3 force) {
