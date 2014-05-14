@@ -104,9 +104,11 @@ public abstract class Throw : MonoBehaviour {
             }
                 
         } else {
-            if (isControllerOverMinVelocity ()) {
+            if (isControllerOverMinVelocity ())
                 this.throwerController.displayPowerPercentage (getDistanceScale ().z * 100f);
-            } else
+            else if (isControllerOverMinVelocity () && getDistanceScale ().z < 0)
+                minVelocityReached = false;
+            else
                 releaseFoot ();
         }
     }
