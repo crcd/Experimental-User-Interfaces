@@ -222,6 +222,7 @@ GameObject:
   - 4: {fileID: 400022}
   - 137: {fileID: 13700000}
   - 65: {fileID: 6500002}
+  - 114: {fileID: 11400066}
   m_Layer: 0
   m_Name: baseMale
   m_TagString: Untagged
@@ -3300,6 +3301,19 @@ MonoBehaviour:
   minDistance: {x: 0, y: 0, z: 0}
   maxDistance: {x: 0, y: 0, z: 0}
   minControllerThrowVelocity: 0
+--- !u!114 &11400066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd895714e35c5f459c27be624996afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yellowMaterial: {fileID: 2100000, guid: 677492ed24fea4d4ab00bf90b4a8b94b, type: 2}
+  redMaterial: {fileID: 2100000, guid: 3d7a7d4419911614c96bdcd72b393143, type: 2}
 --- !u!114 &11400068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4461,7 +4475,6 @@ SkinnedMeshRenderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: 3d7a7d4419911614c96bdcd72b393143, type: 2}
-  - {fileID: 2100000, guid: 677492ed24fea4d4ab00bf90b4a8b94b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

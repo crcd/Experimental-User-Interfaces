@@ -1114,7 +1114,7 @@ Camera:
     height: 1
   near clip plane: .100000001
   far clip plane: 1000
-  field of view: 90
+  field of view: 30
   orthographic: 0
   orthographic size: 100
   m_Depth: 0
@@ -1143,7 +1143,7 @@ Camera:
     height: 1
   near clip plane: .100000001
   far clip plane: 1000
-  field of view: 90
+  field of view: 30
   orthographic: 0
   orthographic size: 100
   m_Depth: 0
@@ -2338,7 +2338,7 @@ MonoBehaviour:
   follow: 1
   offset: {x: -.469999999, y: .400000006, z: -2.70000005}
   stoneOffset: {x: 0, y: 0, z: 0}
-  easing: {x: .0299999993, y: .0299999993, z: .0299999993}
+  easing: {x: .0599999987, y: .0299999993, z: .0599999987}
   lookAt: 0
   startFromPosition: 1
   followMovingStone: 0
