@@ -9,6 +9,7 @@ public class StonePhysics : MonoBehaviour {
 	private BroomController broomController;
 
 	public float angularVelocityFactor = 0.05f;
+	public float angularVelocityThreshold = 0.01f;
 
 	private GameObject movingStone;
 	private StoneFinder stoneFinder;
@@ -54,6 +55,15 @@ public class StonePhysics : MonoBehaviour {
 		} else {
 			Vector3 frictionForce = -1 * friction * rigidbody.velocity.normalized;
 			rigidbody.AddForce (frictionForce);
+		}
+
+		// Kill angular velocity at low speed
+		if (rigidbody.velocity.magnitude < angularVelocityThreshold) {
+			rigidbody.angularVelocity = new Vector3 (
+				0,
+				rigidbody.angularVelocity.y * 0.5f,
+				0
+			);
 		}
 
 		rigidbody.AddForce(

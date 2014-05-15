@@ -52,6 +52,8 @@ public class BroomController : MonoBehaviour {
 	
 	private float broomingCoefficient = 1.0f/30.0f;
 
+	public float blinkingFactor;
+
 	private StoneFinder stoneFinder;
 	private BroomIndicator broomIndicator;
 	
@@ -176,6 +178,14 @@ public class BroomController : MonoBehaviour {
 
 		GameObject movingStone = stoneFinder.findMovingStone ();
 
+		float blinkSpeed = distX*blinkingFactor;
+
+		if (blinkSpeed < 1.0f) {
+			blinkSpeed = 0.0f;
+		} else if (blinkSpeed > 10.0f) {
+			blinkSpeed = 10.0f;
+		}
+
 		if (movingStone) {
 			broomIndicator = movingStone.GetComponentInChildren<BroomIndicator>();
 		} else {
@@ -188,7 +198,9 @@ public class BroomController : MonoBehaviour {
 			tempCenterBroom[0] = 0.0f;
 			tempRightBroom[0] = distX;
 
-			if (broomIndicator && distX > 0.01f) broomIndicator.ShowRight(distX);
+			if (broomIndicator) {
+				broomIndicator.ShowRight(blinkSpeed);
+			}
 
 		} else if (offset.z >= 0.3*(-0.5) && offset.z < 0.3*0.5) {
 			// Center area
@@ -196,7 +208,9 @@ public class BroomController : MonoBehaviour {
 			tempCenterBroom[0] = distX;
 			tempRightBroom[0] = 0.0f;
 
-			if (broomIndicator && distX > 0.01f) broomIndicator.ShowForward(distX);
+			if (broomIndicator) {
+				broomIndicator.ShowForward(blinkSpeed);
+			}
 
 		} else {
 			// Right area
@@ -204,7 +218,9 @@ public class BroomController : MonoBehaviour {
 			tempCenterBroom[0] = 0.0f;
 			tempRightBroom[0] = 0.0f;
 
-			if (broomIndicator && distX > 0.01f) broomIndicator.ShowLeft(distX);
+			if (broomIndicator) {
+				broomIndicator.ShowLeft(blinkSpeed);
+			}
 
 		}
 
@@ -235,7 +251,11 @@ public class BroomController : MonoBehaviour {
 		leftFriction = sumAreaLeft * broomingCoefficient;
 		centerFriction = sumAreaCenter * broomingCoefficient;
 		rightFriction = sumAreaRight * broomingCoefficient;
-		
+
+
+		// Testing broomIndicator
+		// if (broomIndicator) broomIndicator.ShowRight(10.0f);
+
 		//Debug.Log ("sum of area: " + sumArea);
 	}
 }

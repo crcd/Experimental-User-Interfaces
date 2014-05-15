@@ -24,7 +24,7 @@ public class BroomIndicator : MonoBehaviour {
 		arrowLeft.renderer.enabled = false;
 		arrowRight.renderer.enabled = false;
 		arrow = arrowForward;
-		visible = true;
+		visible = false;
 	}
 
 	void Update () {
