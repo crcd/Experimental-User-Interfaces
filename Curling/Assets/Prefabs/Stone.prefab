@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -507,6 +507,7 @@ MonoBehaviour:
   friction: 4
   broomingFactor: 0
   angularVelocityFactor: .0500000007
+  angularVelocityThreshold: .00999999978
   curveAmount: .0799999982
 --- !u!135 &13500000
 SphereCollider:

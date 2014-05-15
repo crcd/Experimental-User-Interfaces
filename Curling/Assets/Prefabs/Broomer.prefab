@@ -3456,6 +3456,7 @@ MonoBehaviour:
   rotationAmountZ: 7
   moveToBroomFactor: .180000007
   distThreshold: .5
+  blinkingFactor: 0
 --- !u!114 &11400052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4435,7 +4436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionButton: 0
-  controllerId: 1
+  controllerId: 3
   whereToCopyColor: {fileID: 0}
 --- !u!114 &11400138
 MonoBehaviour:

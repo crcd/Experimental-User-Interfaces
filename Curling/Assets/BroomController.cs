@@ -254,7 +254,7 @@ public class BroomController : MonoBehaviour {
 
 
 		// Testing broomIndicator
-		// if (broomIndicator) broomIndicator.ShowRight(10.0f);
+		//if (broomIndicator) broomIndicator.ShowRight(10.0f);
 
 		//Debug.Log ("sum of area: " + sumArea);
 	}

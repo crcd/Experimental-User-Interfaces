@@ -7,7 +7,8 @@ public class DeleteRotation : MonoBehaviour {
 	private float yrot;
 	
 	void Start () {
-		rotater = GameObject.Find ("RotationHelper");
+//		rotater = GameObject.Find ("RotationHelper");
+		rotater = gameObject.transform.GetChild(1).gameObject;
 	}
 
 	void Update () {
