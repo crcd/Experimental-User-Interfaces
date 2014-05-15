@@ -182,14 +182,13 @@ public class BroomController : MonoBehaviour {
 			broomIndicator = null;
 		}
 
-
 		if (offset.z >= -0.5 && offset.z < 0.3*(-0.5)) {
 			// Left area
 			tempLeftBroom[0] = 0.0f;
 			tempCenterBroom[0] = 0.0f;
 			tempRightBroom[0] = distX;
 
-			if (broomIndicator) broomIndicator.ShowLeft(distX); // Show opposite arrow
+			if (broomIndicator && distX > 0.01f) broomIndicator.ShowRight(distX);
 
 		} else if (offset.z >= 0.3*(-0.5) && offset.z < 0.3*0.5) {
 			// Center area
@@ -197,7 +196,7 @@ public class BroomController : MonoBehaviour {
 			tempCenterBroom[0] = distX;
 			tempRightBroom[0] = 0.0f;
 
-			if (broomIndicator) broomIndicator.ShowForward(distX);
+			if (broomIndicator && distX > 0.01f) broomIndicator.ShowForward(distX);
 
 		} else {
 			// Right area
@@ -205,7 +204,7 @@ public class BroomController : MonoBehaviour {
 			tempCenterBroom[0] = 0.0f;
 			tempRightBroom[0] = 0.0f;
 
-			if (broomIndicator) broomIndicator.ShowRight(distX);
+			if (broomIndicator && distX > 0.01f) broomIndicator.ShowLeft(distX);
 
 		}
 
@@ -236,7 +235,6 @@ public class BroomController : MonoBehaviour {
 		leftFriction = sumAreaLeft * broomingCoefficient;
 		centerFriction = sumAreaCenter * broomingCoefficient;
 		rightFriction = sumAreaRight * broomingCoefficient;
-		
 		
 		//Debug.Log ("sum of area: " + sumArea);
 	}

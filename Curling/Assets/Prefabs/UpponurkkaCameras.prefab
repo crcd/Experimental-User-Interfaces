@@ -1120,7 +1120,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294901759
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
@@ -1149,7 +1149,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294901759
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
@@ -2165,7 +2165,7 @@ MonoBehaviour:
   verticalFOV: 30
   cullingMask:
     serializedVersion: 2
-    m_Bits: 16777215
+    m_Bits: 16711679
   near: .100000001
   far: 500
 --- !u!114 &11400002
@@ -2336,12 +2336,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: 1
-  offset: {x: .400000006, y: 2, z: -2}
+  offset: {x: -.469999999, y: .400000006, z: -2.70000005}
   stoneOffset: {x: 0, y: 0, z: 0}
   easing: {x: .0299999993, y: .0299999993, z: .0299999993}
   lookAt: 0
   startFromPosition: 1
-  followMovingStone: 1
+  followMovingStone: 0
   objectToFollow: {fileID: 0}
 --- !u!124 &12400000
 Behaviour:
