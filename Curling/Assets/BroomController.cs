@@ -51,6 +51,9 @@ public class BroomController : MonoBehaviour {
 	private float rightFriction = 0.0001f; // prevent division by zero
 	
 	private float broomingCoefficient = 1.0f/30.0f;
+
+	private StoneFinder stoneFinder;
+	private BroomIndicator broomIndicator;
 	
 	// Use this for initialization
 	void Start () {
@@ -67,6 +70,8 @@ public class BroomController : MonoBehaviour {
 		tempLeftBroom = new float[history];
 		tempRightBroom = new float[history];
 		tempCenterBroom = new float[history];
+
+		stoneFinder = gameObject.AddComponent<StoneFinder> ();
 		
 	}
 	
@@ -169,24 +174,38 @@ public class BroomController : MonoBehaviour {
 		
 		//Debug.Log ("PrevX: " + prevX + " CurrX: " + currX + " DistX: " + distX);
 
+		GameObject movingStone = stoneFinder.findMovingStone ();
 
-
+		if (movingStone) {
+			broomIndicator = movingStone.GetComponentInChildren<BroomIndicator>();
+		} else {
+			broomIndicator = null;
+		}
 
 		if (offset.z >= -0.5 && offset.z < 0.3*(-0.5)) {
 			// Left area
-			tempLeftBroom[0] = distX;
+			tempLeftBroom[0] = 0.0f;
 			tempCenterBroom[0] = 0.0f;
-			tempRightBroom[0] = 0.0f;
+			tempRightBroom[0] = distX;
+
+			if (broomIndicator && distX > 0.01f) broomIndicator.ShowRight(distX);
+
 		} else if (offset.z >= 0.3*(-0.5) && offset.z < 0.3*0.5) {
 			// Center area
 			tempLeftBroom[0] = 0.0f;
 			tempCenterBroom[0] = distX;
 			tempRightBroom[0] = 0.0f;
+
+			if (broomIndicator && distX > 0.01f) broomIndicator.ShowForward(distX);
+
 		} else {
 			// Right area
-			tempLeftBroom[0] = 0.0f;
+			tempLeftBroom[0] = distX;
 			tempCenterBroom[0] = 0.0f;
-			tempRightBroom[0] = distX;
+			tempRightBroom[0] = 0.0f;
+
+			if (broomIndicator && distX > 0.01f) broomIndicator.ShowLeft(distX);
+
 		}
 
 		for ( int i = 1; i < history; i++ ) {
@@ -216,7 +235,6 @@ public class BroomController : MonoBehaviour {
 		leftFriction = sumAreaLeft * broomingCoefficient;
 		centerFriction = sumAreaCenter * broomingCoefficient;
 		rightFriction = sumAreaRight * broomingCoefficient;
-		
 		
 		//Debug.Log ("sum of area: " + sumArea);
 	}

@@ -89,15 +89,12 @@ public class ThrowerController : MonoBehaviour {
         100: 7*/
         float k = 0;
         float power = 0;
-        if (powerScale >= 0 && powerScale <= 50f) {
-            k = (4.5f - 4.0f) / (50f - 0);
-            power = 4.0f + powerScale * k;
-        } else if (powerScale > 50f && powerScale <= 80f) {
-            k = (5.0f - 4.5f) / (80f - 50f);
-            power = 4.5f + (powerScale - 50) * k;
-        } else if (powerScale > 80 && powerScale <= 90f) {
-            k = (6f - 5f) / (90f - 80f);
-            power = 5.0f + (powerScale - 80f) * k;
+        if (powerScale >= 0 && powerScale <= 70f) {
+            k = (4.5f - 3.5f) / (70f - 0);
+            power = 3.5f + powerScale * k;
+        } else if (powerScale > 70 && powerScale <= 90f) {
+            k = (6f - 4.5f) / (90f - 70f);
+            power = 4.5f + (powerScale - 70f) * k;
         } else if (powerScale > 90) {
             k = (7f - 6f) / (100f - 90f);
             power = 6.0f + (powerScale - 90f) * k;
@@ -136,16 +133,17 @@ public class ThrowerController : MonoBehaviour {
     }
 
     private void keepStonePositionInHand () {
-        //A bit of a workaround to give stone velocity for the sound
+        // Set velocity if the thrower is moving
         if (this.throwerBody.velocity.z > 0.01) {
-            this.stoneBody.velocity = this.throwerBody.velocity;
-        }
-        Vector3 newPosition = new Vector3 (
-            this.throwerBody.position.x + stoneOffset.x,
-            this.stoneBody.position.y,
-            this.throwerBody.position.z + stoneOffset.z
-        );
-        this.stoneBody.position = newPosition;
+			this.stoneBody.velocity = this.throwerBody.velocity;
+		} else {
+			Vector3 newPosition = new Vector3 (
+				this.throwerBody.position.x + stoneOffset.x,
+				this.stoneBody.position.y,
+				this.throwerBody.position.z + stoneOffset.z
+			);
+			this.stoneBody.position = newPosition;
+		}
     }
 
     void Update () {

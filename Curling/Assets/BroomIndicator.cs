@@ -12,9 +12,14 @@ public class BroomIndicator : MonoBehaviour {
 	private float blinkSpeed = 0.4f;
 
 	void Start () {
-		arrowForward = GameObject.Find ("ArrowForward");
-		arrowLeft = GameObject.Find ("ArrowLeft");
-		arrowRight = GameObject.Find ("ArrowRight");
+//		arrowForward = GameObject.Find ("ArrowForward");
+//		arrowLeft = GameObject.Find ("ArrowLeft");
+//		arrowRight = GameObject.Find ("ArrowRight");
+		arrowForward = gameObject.transform.GetChild(0).gameObject;
+		arrowLeft = gameObject.transform.GetChild(1).gameObject;
+		arrowRight = gameObject.transform.GetChild(2).gameObject;
+
+
 		arrowForward.renderer.enabled = false;
 		arrowLeft.renderer.enabled = false;
 		arrowRight.renderer.enabled = false;
@@ -22,7 +27,7 @@ public class BroomIndicator : MonoBehaviour {
 		visible = true;
 	}
 
-	void FixedUpdate () {
+	void Update () {
 
 		if (arrow == null)
 			Start ();

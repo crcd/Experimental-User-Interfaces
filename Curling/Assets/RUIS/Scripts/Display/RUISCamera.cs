@@ -67,7 +67,12 @@ public class RUISCamera : MonoBehaviour {
 		leftCamera = transform.FindChild("CameraLeft").GetComponent<Camera>();
 		rightCamera = transform.FindChild("CameraRight").GetComponent<Camera>();
 
+<<<<<<< HEAD
 		centerCamera.cullingMask = cullingMask;
+=======
+		//centerCamera.cullingMask = cullingMask;
+		cullingMask = centerCamera.cullingMask;
+>>>>>>> 8a712846c52d27b1fc69f053af0f944e0bcf08d4
 
 		try
 		{
