@@ -1,5 +1,7 @@
 Curling in Virtual Reality
 ==========================
+![curling](http://blog.ruisystem.net/wp-content/uploads/2014/12/VirtualCurling.jpg)
+
 This is a  2-4 player Curling game that's been built atop Unity and [RUIS](http://ruisystem.net/). The game has two sterescopic projections, and one display for Oculus Rift ( broomer's view ). Stereoscopic projections view the game scene from the stone thrower's viewpoint and from the goal area.
 
 
